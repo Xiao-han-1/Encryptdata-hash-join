@@ -10,7 +10,6 @@
 #include "MurmurHash3.hh"
 #include "child_table.hh"
 using namespace CryptoPP;
-using namespace std;
 
 
 std::string bytesToHexString(byte* bytes,int length) 

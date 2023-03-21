@@ -5,7 +5,7 @@
 #include <cryptopp/filters.h>
 #include <cryptopp/files.h>
 #include <cryptopp/osrng.h>
-
+#include <stdint.h>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -13,8 +13,9 @@
 #include "child_table.hh"
 using namespace CryptoPP;
 using namespace std;
-
+#undef byte
 typedef long long ll;
+typedef unsigned char byte;
 typedef struct Enc_table
 {
     int max_frequency;

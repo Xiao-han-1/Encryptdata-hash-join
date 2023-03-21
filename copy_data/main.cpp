@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <climits>
 #include <string>
+#include <sstream>
+#include <fstream>
 #include <vector>
 #include <unordered_map>
 #include <math.h>
@@ -10,9 +12,21 @@
 #include "Hash_Encrypt.hh"
 #include "pg_copy.hh"
 using namespace std;
-map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
+string mapToString(const unordered_map<string, vector<string>>& map)
 {
-  map<string,vector<string>>table_name_map;
+    stringstream ss;
+    for (auto& [key, values] : map) {
+        ss << key << ":";
+        for (auto& value : values) {
+            ss << value << ",";
+        }
+        ss << ";";
+    }
+    return ss.str();
+}
+unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
+{
+  unordered_map<string,vector<string>>table_name_map;
   int len=Aes_Table.size();
   for(int i=0;i<len;i++)
   {
@@ -55,8 +69,11 @@ int main()
     delete et;
     delete ae;
     child_table.clear();
-     map<string,vector<string>> table_name_map;
+    unordered_map<string,vector<string>> table_name_map;
     table_name_map=Mapping_name(table,Aes_Table,Hash_child_table);
+    ofstream ofs("table_name_map.txt");
+    ofs << mapToString(table_name_map);
+    ofs.close();
     table.~table();
     pg* p=new pg();
     p->copy_child_database(Aes_Table,Hash_child_table);
