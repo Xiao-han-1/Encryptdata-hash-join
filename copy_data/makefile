@@ -1,26 +1,28 @@
-CC = g++ 
-CPPFLAGS = -Wall -std=c++17 
-LDFLAGS =  -lpq -lcryptopp
+CC = g++
+CXXFLAGS = -std=c++14 -Wall
+LDFLAGS =  -L/opt/pgsql/lib -L/usr/lib/x86_64-linux-gnu
+LIBS = -lpq -lcrypto++
 
-#Source files
-SRC = main.cpp pg_copy.cpp Hash_Encrypt.cpp child_table.cpp extend_table.cpp MurmurHash3.cpp
+SRCDIR = src
+INCDIR = -I/root/pakages/copy/HashJoinOverEncryptedData/copy_data
+OBJDIR = obj
+BINDIR = bin
 
-#Object files
-OBJ = $(SRC:.cpp=.o)
-CPPFLAGS +=-I/root/pakages/copy/HashJoinOverEncryptedData/client 
-            # -I/usr/include/cryptopp 
-#Header files
-DEPS = pg_copy.hh Hash_Encrypt.hh child_table.hh extend_table.hh MurmurHash3.hh
+SOURCES = $(wildcard *.cpp)
+HEADERS = $(wildcard *.hh)
+OBJECTS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SOURCES))
+Target = main
 
-TARGET = main
-.PHONY:all clean
-all: $(TARGET)
+.PHONY: all clean
 
-$(TARGET): $(OBJ) 
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $^ -o $@
+all: $(Target)
 
-%.o: %.cpp $(DEPS) 
-	$(CC) $(CPPFLAGS) -c -o $@ $<
+$(OBJDIR)/%.o:%.cpp
+	$(CXX) $(CXXFLAGS) $(INCDIR) -c $< -o $@
+
+$(Target): $(OBJECTS)
+	$(CXX)  $^ -o $@  $(LDFLAGS) $(LIBS)
+
 
 clean:
-	rm -f $(TARGET) $(OBJ)
+	$(RM) *.o $(Target)

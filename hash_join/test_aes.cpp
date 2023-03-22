@@ -3,6 +3,7 @@
 #include <cryptopp/aes.h>
 #include <cryptopp/modes.h>
 #include <cryptopp/filters.h>
+#include <cryptopp/config.h>
 
 using namespace std;
 using namespace CryptoPP;

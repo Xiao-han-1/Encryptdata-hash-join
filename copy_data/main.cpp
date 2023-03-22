@@ -7,6 +7,7 @@
 #include <vector>
 #include <unordered_map>
 #include <math.h>
+#include "AES_Encrypt.hh"
 #include "child_table.hh"
 #include "extend_table.hh"
 #include "Hash_Encrypt.hh"

@@ -5,41 +5,31 @@
 #include <climits>
 #include <string>
 #include <vector>
+#include <regex>
 #include <unordered_map>
 #include <math.h>
+#include "execute_query.hh"
 using namespace std;
-unordered_map<string, vector<string>> stringToMap(const string& str)
-{
-    unordered_map<string, vector<string>> map;
-    stringstream ss(str);
-    string kvStr;
-    while (getline(ss, kvStr, ';')) {
-        stringstream kvss(kvStr);
-        string key;
-        getline(kvss, key, ':');
-        vector<string> values;
-        string value;
-        while (getline(kvss, value, ',')) {
-            values.push_back(value);
-        }
-        map[key] = values;
-    }
-    return map;
-}
 int main()
 {
-    ifstream ifs("data.txt");
-    string str;
-    getline(ifs, str);
-    unordered_map<string, vector<string>> table_name_map = stringToMap(str);
-    ifs.close();
-    string query;
-    while(cout<<"#cryptdb:")
-    {
-        cin>>query;
-        if(query=="\\q")
-        break;
-        else handle(query);
-    }
+    // ifstream ifs("data.txt");
+    // string str;
+    // getline(ifs, str);
+    // unordered_map<string, vector<string>> table_name_map = stringToMap(str);
+    // ifs.close();
+    string query="select * from stu1 join stu2 on stu1.score==stu2.grade";
+    execute_query* eq=new execute_query();
+    eq->handle(query);
+    // while(cout<<"#cryptdb:")
+    // {
+    //     cin>>query;
+    //     if(query=="\\q")
+    //     {
+    //         cout<<"GoodBye!!!"<<endl;
+    //         break;
+    //     }
+        
+    //     else handle(query);
+    // }
     
 }

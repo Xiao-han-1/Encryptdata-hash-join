@@ -34,6 +34,29 @@ typedef struct table
         row_flag.clear();
     }
 }Table;
+// typedef unsigned char byte;
+typedef struct Enc_table
+{
+    int max_frequency;
+    int Join_col_id;
+    string aes_table_name;
+	string hash_table_name;
+    vector<string>name;
+    vector<string>type;
+    unordered_map<int,string>row_flag;
+    vector<vector<string>>value;
+	~Enc_table()
+    {
+        max_frequency=0; 
+        Join_col_id=0; 
+        aes_table_name="";
+		hash_table_name="";
+        name.clear();
+        type.clear();
+        value.clear();
+        row_flag.clear();
+    }
+} Enc_Table;
 typedef struct ls
 {
 int label;

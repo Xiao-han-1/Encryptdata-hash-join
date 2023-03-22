@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
-#include <libpq-fe.h>
+#include "/usr/include/postgresql/libpq-fe.h"
 
 using namespace std;
 
