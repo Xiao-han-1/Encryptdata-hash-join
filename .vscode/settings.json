@@ -58,7 +58,9 @@
         "sstream": "cpp",
         "system_error": "cpp",
         "climits": "cpp",
-        "gsl_byte": "cpp"
+        "gsl_byte": "cpp",
+        "regex": "cpp",
+        "iomanip": "cpp"
     },
     "C_Cpp.dimInactiveRegions": false
 }

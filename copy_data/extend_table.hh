@@ -15,7 +15,7 @@ class extend_table
     public:
     extend_table();
     vector<Table>  Smooth_Frequency(vector<Table> child_table);
-    Table Table_extend(Table &table);
-    Table Add_dummy_row(Table &table,int k,int v);
+    Table Table_extend(Table table);
+    Table Add_dummy_row(Table table,int k,int v);
 
 };

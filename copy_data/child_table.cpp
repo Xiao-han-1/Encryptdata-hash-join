@@ -147,6 +147,7 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
         t.name=table.name;
         t.table_name=table.table_name;
         t.type=table.type;
+        t.Join_col_id=table.Join_col_id;
         vector<vector<int>> ve;
         for(auto &l:K_table)
         {

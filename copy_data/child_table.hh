@@ -24,7 +24,7 @@ typedef struct table
     {
         max_frequency=0; 
         Join_col_id=0; 
-        table_name="";
+        table_name.clear();
         name.clear();
         name.shrink_to_fit();
         type.clear();
@@ -43,7 +43,7 @@ typedef struct Enc_table
 	string hash_table_name;
     vector<string>name;
     vector<string>type;
-    unordered_map<int,string>row_flag;
+    unordered_map<int,int>row_flag;
     vector<vector<string>>value;
 	~Enc_table()
     {

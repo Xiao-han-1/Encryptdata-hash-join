@@ -6,7 +6,7 @@
 // algorithms are optimized for their respective platforms. You can still
 // compile and run any of them on any platform, but your performance with the
 // non-native version will be less than optimal.
-
+#include <string>
 #include "MurmurHash3.hh"
 
 //-----------------------------------------------------------------------------
@@ -330,5 +330,15 @@ void MurmurHash3_x64_128 ( const void * key, const int len,
   ((uint64_t*)out)[0] = h1;
   ((uint64_t*)out)[1] = h2;
 }
+// #include <iostream>
+// using namespace std;
+// int main ()
+// {
+//     std::string hash_output;
+//     int data=45;
+//     MurmurHash3_x86_32(&data, sizeof(data), 0, &hash_output);
+//     std::cout<<hash_output<<"\n";
+// };
 
 //-----------------------------------------------------------------------------
+

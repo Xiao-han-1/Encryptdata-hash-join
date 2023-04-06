@@ -4,8 +4,9 @@
 using namespace std;
 
 extend_table::extend_table(){}
-Table extend_table::Add_dummy_row(Table &table,int k,int v)
+Table extend_table::Add_dummy_row(Table table,int k,int v)
 {
+  Table dummy_table=table;
   int num=table.max_frequency-v;
   for(int i=0;i<num;i++)
   {
@@ -22,12 +23,14 @@ Table extend_table::Add_dummy_row(Table &table,int k,int v)
              dummy_row.push_back(val);
         }
     }
-    table.value.push_back(dummy_row);
-    int dummy_location=table.value.size()-1;
-    table.row_flag[dummy_location]=0;
+    dummy_table.value.push_back(dummy_row);
+    int dummy_location=dummy_table.value.size()-1;
+    dummy_table.row_flag[dummy_location]=0;
+    dummy_row.clear();
   }
+  return dummy_table;
 }
-Table extend_table::Table_extend(Table &table)
+Table extend_table::Table_extend(Table table)
 {
    unordered_map<int,int>mp;
    vector<vector<int>> val;
@@ -38,13 +41,15 @@ Table extend_table::Table_extend(Table &table)
     table.row_flag[i]=1;
     mp[val[i][col_id]]++;
    }
+   Table new_table=table;
    for(auto&[k,v]: mp)
    {
      if(v<table.max_frequency)
      {
-        Add_dummy_row(table,k,v);
+        new_table=Add_dummy_row(new_table,k,v);
      }
    }
+   return new_table;
 }
 vector<Table> extend_table::Smooth_Frequency(vector<Table> child_table)
 {
@@ -52,8 +57,8 @@ vector<Table> extend_table::Smooth_Frequency(vector<Table> child_table)
   int Length=child_table.size();
   for(int i=0;i<Length;i++)
   {
-    Table table;
-    Table_extend(table);
+    Table table=child_table[i];
+    table=Table_extend(table);
     extend_child_table.push_back(table);
   }
   return extend_child_table;

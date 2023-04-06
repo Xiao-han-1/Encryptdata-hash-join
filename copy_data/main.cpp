@@ -42,9 +42,8 @@ unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> 
 }
 int main()
 {
-  int n;
-  cin>>n;
-
+    int n;
+    cin>>n;
     vector<int>Columns={2,2,3,3,3,1,6,6,6,6,6};
     Table table;
     vector<string>name;

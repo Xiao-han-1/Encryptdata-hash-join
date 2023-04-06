@@ -1,28 +1,30 @@
 CC = g++
-CXXFLAGS = -std=c++14 -Wall
+CXXFLAGS = -g -O0  -fno-omit-frame-pointer -Wall -std=c++14 
 LDFLAGS =  -L/opt/pgsql/lib -L/usr/lib/x86_64-linux-gnu
-LIBS = -lpq -lcrypto++
+LIBS = -lpq -lcrypto++ -lssl -lcrypto
 
+CUR_PATH := $(CURDIR)
 SRCDIR = src
-INCDIR = -I/root/pakages/copy/HashJoinOverEncryptedData/copy_data
+INCDIR = -I$(CUR_PATH)
 OBJDIR = obj
 BINDIR = bin
 
 SOURCES = $(wildcard *.cpp)
 HEADERS = $(wildcard *.hh)
 OBJECTS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SOURCES))
-Target = main
+Target = Copy_data
 
 .PHONY: all clean
 
 all: $(Target)
 
-$(OBJDIR)/%.o:%.cpp
-	$(CXX) $(CXXFLAGS) $(INCDIR) -c $< -o $@
+
 
 $(Target): $(OBJECTS)
-	$(CXX)  $^ -o $@  $(LDFLAGS) $(LIBS)
+	$(CXX)   $(CXXFLAGS) $^ -o $@  $(LDFLAGS) $(LIBS)
 
+$(OBJDIR)/%.o:%.cpp
+	$(CXX)  $(INCDIR) $(CXXFLAGS) $(LIBS) -c $< -o $@ 
 
 clean:
-	$(RM) *.o $(Target)
+	$(RM) $(OBJDIR)/*.o $(Target)
