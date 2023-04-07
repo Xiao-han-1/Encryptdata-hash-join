@@ -211,7 +211,7 @@ string AES_Encrypt::Decrypt(string & cipher)
 // 					new FileSink(recoverFilename.c_str())));
 // 	return true;
 // }
-vector<string> AES_Encrypt::Encrypt_row(int flag,vector<int>row)
+vector<string> AES_Encrypt::Encrypt_row(int flag,vector<string>row)
 {
     vector<string> En_row;
 	string t=to_string(flag);
@@ -220,8 +220,7 @@ vector<string> AES_Encrypt::Encrypt_row(int flag,vector<int>row)
     int len=row.size();
     for(int i=0;i<len;i++)
     {
-
-        string t=to_string(row[i]);
+        string t=row[i];
         string tmp=Encrypt(t);
         En_row.push_back(tmp);
     }
@@ -278,10 +277,10 @@ Enc_Table  AES_Encrypt::Encrypt_table(Table table)
 	type_name.clear();
 	vector<vector<string>> Enc_val;
 	vector<string>Enc_row;
-	vector<vector<int>> val=table.value;
+	vector<vector<string>> val=table.value;
 	for(int i=0;i<val.size();i++)
 	{
-      vector<int> row=val[i];
+      vector<string> row=val[i];
 	  vector<string> Enc_row=Encrypt_row(table.row_flag[i] ,row);
 	  Enc_val.push_back(Enc_row);
 	  row.clear();

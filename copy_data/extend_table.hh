@@ -16,6 +16,6 @@ class extend_table
     extend_table();
     vector<Table>  Smooth_Frequency(vector<Table> child_table);
     Table Table_extend(Table table);
-    Table Add_dummy_row(Table table,int k,int v);
+    Table Add_dummy_row(Table table,string k,int v);
 
 };

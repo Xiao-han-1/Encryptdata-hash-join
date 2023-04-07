@@ -19,7 +19,7 @@ typedef struct table
     vector<string>name;
     vector<string>type;
     unordered_map<int,int>row_flag;
-    vector<vector<int>>value;
+    vector<vector<string>>value;
     ~table()
     {
         max_frequency=0; 
@@ -78,11 +78,11 @@ public:
     child_table();
     int ElbowMethod(vector<int> data, int n);
     void K_means(vector<Ls> &data,int k);
-    void get_frequency(vector<int>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num);
+    void get_frequency(vector<string>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num);
     void Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre_num,unordered_map<string,vector<int>> local_num);
-    void trans_col_to_row(vector<vector<int>>vue,unordered_map<int,vector<int>>&local_row);
+    // void trans_col_to_row(vector<vector<int>>vue,unordered_map<int,vector<int>>&local_row);
     vector<vector<int>> trans_row_to_col(vector<vector<int>>vue);
     void Devide_table(vector<Ls> K_table,Table table,vector<Table> &child_table);
-    vector<Table> Table_divide(vector<int>Columns,Table table);
+    vector<Table> Table_divide(vector<string>Columns,Table table);
 };
 #endif

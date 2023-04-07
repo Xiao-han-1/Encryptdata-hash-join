@@ -74,11 +74,11 @@ for(Ls &l : data)
 //  cout << "label=" <<l.label << endl; 
 }
 }
-void child_table::get_frequency(vector<int>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num)
+void child_table::get_frequency(vector<string>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num)
 {
     for(int i=0;i<table.size();i++)
     {
-        string tmp=to_string(table[i]);
+        string tmp=table[i];
         fre_num[tmp]++;
         vector<int> t_ve;
         t_ve=local_num[tmp];
@@ -98,22 +98,22 @@ void child_table::Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre
      K_table.push_back(tmp);
   }
 }
-void child_table::trans_col_to_row(vector<vector<int>>vue,unordered_map<int,vector<int>>&local_row)
-{
-    int len=vue.size();
-    vector<int>tmp;
-    if(len>0) tmp=vue[0];   
-    else return ;
-    for(int j=0;j<tmp.size();j++)
-    {
-        vector<int>te;
-        for(int i=0;i<len;i++)
-        {
-          te.push_back(vue[i][j]);
-        }
-        local_row[j]=te;
-    }
-}
+// void child_table::trans_col_to_row(vector<vector<string>>vue,unordered_map<int,vector<string>>&local_row)
+// {
+//     int len=vue.size();
+//     vector<string>tmp;
+//     if(len>0) tmp=vue[0];   
+//     else return ;
+//     for(int j=0;j<tmp.size();j++)
+//     {
+//         vector<int>te;
+//         for(int i=0;i<len;i++)
+//         {
+//           te.push_back(vue[i][j]);
+//         }
+//         local_row[j]=te;
+//     }
+// }
 vector<vector<int>> child_table::trans_row_to_col(vector<vector<int>> vue)
 {
     vector<vector<int>>re;
@@ -134,9 +134,9 @@ vector<vector<int>> child_table::trans_row_to_col(vector<vector<int>> vue)
 }
 void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &child_table)
 {
-    unordered_map<int,vector<int>>local_row;
-    vector<vector<int>>vue=table.value;
-    trans_col_to_row(vue,local_row);//将原本按列存的数据转为按行存
+    // unordered_map<int,vector<string>>local_row;
+    vector<vector<string>>vue=table.value;
+    //  trans_col_to_row(vue,local_row);//将原本按列存的数据转为按行存
     int len=K_table.size();
     Ls tmp=K_table[len-1];
     int n=tmp.label+1;
@@ -148,7 +148,7 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
         t.table_name=table.table_name;
         t.type=table.type;
         t.Join_col_id=table.Join_col_id;
-        vector<vector<int>> ve;
+        vector<vector<string>> ve;
         for(auto &l:K_table)
         {
           if(l.label==i)
@@ -158,8 +158,8 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
             Frequency_max=max(Frequency_max,tmp_len);
             for(auto &id:tmp)
             {
-                vector<int>row;
-                row=local_row[id];
+                vector<string>row;
+                row=vue[id];
                 ve.push_back(row);
             }
           }
@@ -172,7 +172,7 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
     }
 }
 
-vector<Table> child_table::Table_divide(vector<int>Columns,Table table)
+vector<Table> child_table::Table_divide(vector<string>Columns,Table table)
 {
     // vector<int>Columns={2,2,3,3,3,1,6,6,6,6,6};
     // Table table;
@@ -194,7 +194,7 @@ vector<Table> child_table::Table_divide(vector<int>Columns,Table table)
     Full_K_table(K_table,fre_num,local_num);
     // int k=ElbowMethod(table,table.size());
     // cout<<k<<endl;
-    K_means(K_table,2);
+    K_means(K_table,4);
     //unordered_map<string,vector<string>>name_map;
     vector<Table>child_table;
     Devide_table(K_table,table,child_table);

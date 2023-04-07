@@ -40,23 +40,60 @@ unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> 
   }
   return table_name_map;
 }
+Table store_data()
+{
+  Table table;
+  table.table_name="supplier";
+  // vector<string>name{"L_ORDERKEY ","L_PARTKEY","L_SUPPKEY","L_LINENUMBER","L_QUANTITY","L_EXTENDEDPRICE","L_DISCOUNT",
+  // "L_TAX","L_RETURNFLAG","L_LINESTATUS","L_SHIPDATE","L_COMMITDATE","L_RECEIPTDATE","L_SHIPINSTRUCT","L_SHIPMODE","L_COMMENT"};
+  // vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
+  vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
+  vector<string>type{"int","string","string","int","string","double","string"};
+  table.name=name;
+  table.type=type;  
+  string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/supplier.tbl";   // 文件名
+  vector<vector<string>> data;      // 二维向量存储数据
+  ifstream file(filename);          // 打开文件
+  if (file) {                       // 如果文件存在
+      string line;
+      while (getline(file, line)) {  // 逐行读取文件
+          stringstream ss(line);    // 将每行数据转换为stringstream
+          vector<string> row;
+          string field;
+          while (getline(ss, field, '|')) {  // 以'|'为分隔符，逐个读取字段
+              row.push_back(field);          // 将每个字段添加到一行数据中
+          }
+          data.push_back(row);               // 将一行数据添加到二维向量中
+      }
+      file.close();                          // 关闭文件
+   }
+  else {
+      cout << "Error: could not open file " << filename << endl;
+  }  
+  table.value=data;
+  data.clear();
+  table.Join_col_id=0;
+  return table;
+
+}
 int main()
 {
-    int n;
-    cin>>n;
-    vector<int>Columns={2,2,3,3,3,1,6,6,6,6,6};
-    Table table;
-    vector<string>name;
-    vector<string>type;
-    vector<vector<int>>value;
-    table.table_name="stu";
-    name.push_back("score");
-    type.push_back("int");
-    value.push_back(Columns);
-    table.name=name;
-    table.type=type;  
-    table.Join_col_id=0;
-    table.value=value;
+  int n;
+  cin>>n;
+
+    vector<string>Columns;
+    Table table=store_data();
+    vector<vector<string>> data=table.value;
+    int id=table.Join_col_id;
+      for(int i=0;i<data.size();i++)
+    {
+      Columns.push_back(data[i][id]);
+    }
+    // vector<string>name;
+    // vector<string>type;
+    // vector<vector<int>>value;
+    // value.push_back(Columns);
+    
     child_table* de = new child_table();
     extend_table* et = new extend_table();
     AES_Encrypt* ae=new AES_Encrypt();
@@ -71,9 +108,20 @@ int main()
     child_table.clear();
     unordered_map<string,vector<string>> table_name_map;
     table_name_map=Mapping_name(table,Aes_Table,Hash_child_table);
-    ofstream ofs("table_name_map.txt");
-    ofs << mapToString(table_name_map);
-    ofs.close();
+    std::ofstream outfile("table_name_map.txt", std::ios::app);
+    if (!outfile.is_open()) {
+        std::cerr << "Error: Unable to open file for writing." << std::endl;
+        return 1;
+    }
+    for (const auto& [key, value] : table_name_map) {
+        outfile << key << ",";
+        for (const auto& name : value) {
+            outfile << name << ",";
+        }
+        outfile << std::endl;
+    }
+
+    outfile.close();
     table.~table();
     pg* p=new pg();
     p->copy_child_database(Aes_Table,Hash_child_table);

@@ -79,7 +79,7 @@ Enc_Table Hash_Table::Hash_Enc_Table(Table table,Enc_Table &aes_table)
 	unordered_map<string,vector<string>>invert_index;
 	for(int i=0;i<Row_num;i++)
 	{
-		string tmp=to_string(table.value[i][col]);
+		string tmp=table.value[i][col];
 		invert_index[tmp].push_back(to_string(i));
 	}
 	vector<vector<string>>hash_res;
@@ -110,8 +110,6 @@ Enc_Table Hash_Table::Hash_Enc_Table(Table table,Enc_Table &aes_table)
 	h_table.value=hash_res;
 	hash_res.clear();
 	return h_table;
-
-	
 }
 vector<Enc_Table> Hash_Table::GetHash_table(vector<Table> child_table,vector<Enc_Table> &Aes_child_Table)
 {

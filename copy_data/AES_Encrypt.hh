@@ -45,7 +45,7 @@ class AES_Encrypt
 	// void GenerateKey();
 	// void SetKey(byte * key, byte * iv, int length);
 	// vector<Enc_Table> Encrypt_child_table(vector<Table> childtable);
-	vector<string> Encrypt_row(int flag,vector<int>row);
+	vector<string> Encrypt_row(int flag,vector<string>row);
 	Enc_Table  Encrypt_table(Table table);
 	vector<Enc_Table>  Encrypt_child_table(vector<table> child_table);
 };

@@ -10,16 +10,14 @@
 using namespace std;
 
 pg::pg(){
-    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=Hash_join user=postgres password=letmien"); 
+    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=postgres password=letmien"); 
     if (PQstatus(conn) == CONNECTION_BAD)
      { cout << "Connection to database failed \n"; PQfinish(conn); }
 }
 void pg::execute(string query,PGresult *res)
 {
     res = PQexec(conn, query.c_str());
-    if (PQresultStatus(res) == PGRES_COMMAND_OK)
-        cout <<query<<" Query successfully \n";
-    else
+    if (PQresultStatus(res) != PGRES_COMMAND_OK)
     {
        cout <<query<<" Query failed \n";
         // cout <<PQresultStatus(res)<<"\n";
@@ -55,6 +53,7 @@ void  pg::hash_copy_database(Enc_Table Enc_Table)
     query=query+"'"+vue[i][length-1]+"')";
     pg::execute(query);
   }
+  cout<<"Copy_Hash_DATA successful!"<<endl;
 }
 void  pg::aes_copy_database(Enc_Table Enc_Table)
 {
@@ -80,6 +79,7 @@ void  pg::aes_copy_database(Enc_Table Enc_Table)
     query=query+"'"+vue[i][length-1]+"')";
     pg::execute(query);
   }
+    cout<<"Copy_AES_DATA successful!"<<endl;
 
 }
 void  pg::copy_child_database(vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
