@@ -1,4 +1,5 @@
-
+#ifndef CHILD_TABLE_HH
+#define CHILD_TABLE_HH
 #include<iostream>
 #include<algorithm>
 #include<climits>
@@ -9,8 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
-#ifndef CHILD_TABLE_HH
-#define CHILD_TABLE_HH
+
 typedef struct table
 {
     int max_frequency;

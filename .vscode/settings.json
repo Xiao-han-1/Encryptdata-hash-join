@@ -60,7 +60,8 @@
         "climits": "cpp",
         "gsl_byte": "cpp",
         "regex": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "shared_mutex": "cpp"
     },
     "C_Cpp.dimInactiveRegions": false
 }

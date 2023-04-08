@@ -1,15 +1,4 @@
-//============================================================================
-// Name        : MyAES.cpp
-// Author      : hust
-// Version     :
-// Copyright   : 1.0
-// Description : 本类将AES的加密，解密函数封装，直接调用即可对string进行加密or解密
-//				 另外，构造MyAES类的时候，传入参数key, iv, key_length
-//				 待解决：编写一个生成密钥的函数，即需要 KeyGenerate(Random random);
-// reference   : http://www.codeproject.com/Articles/21877/Applied-Crypto-Block-Ciphers
-//============================================================================
-
-#include "MyAES.h"
+#include "MyAES.hh"
 #include <time.h>
 MyAES::MyAES()
 {
@@ -142,66 +131,66 @@ bool MyAES::DecryptFile(const string & decFilename,
 
 
 
- int main() {
+//  int main() {
 
-	 //	byte key[]	= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,	0x01,0x02, 0x03,0x04,0x05,0x06,0x07,0x08};
-	 //	//AES::DEFAULT_KEYLENGTH
-	 //	byte iv[]	= {0x01,0x02,0x03,0x03,0x03,0x03,0x03,0x03,	0x03,0x03, 0x01,0x02,0x03,0x03,0x03,0x03};
-	 //	int keysize = 16;
-
-
-	 // generate the key
-	 AutoSeededRandomPool rnd;
-	 byte key[AES::DEFAULT_KEYLENGTH];
-	 rnd.GenerateBlock( key, AES::DEFAULT_KEYLENGTH);
-
-	 // Generate a random IV
-	 byte iv[AES::BLOCKSIZE];
-	 rnd.GenerateBlock(iv, AES::BLOCKSIZE);
-
-	 int keysize = 16;
-
-	 string plainText = "Hello World!";
-
-	 clock_t start , finish;
-	 double duration;
-	 start = clock();
-
-	 MyAES aes(key, iv, keysize);
-
-	 cout << "AES parameters: " << endl;
-	 cout << "The algorithm name is : " << AES::StaticAlgorithmName() << endl;
-	 cout << "The iv is : " << aes.iv << endl;
-	 cout << "The key is : " << aes.key << endl;
-	 cout << "The key length is : " << aes.key_length << endl;
-
-	 string cipher = aes.Encrypt(plainText);
-	 cout << "The cipher is : " << cipher << endl;
-
-	 string recover = aes.Decrypt(cipher);
-	 cout << "The recover is : " << recover << endl;
-
-	 cout << "=====================" << endl;
-
-	 // encrypt the file and decrypt it
-	 string inFilename = "aesTest";
-	 string outFilename = "aesEncrypt";
-	 string recoverFilename = "aesRecover";
-
-	 if(aes.EncryptFile(inFilename, outFilename)){
-	 cout << "*__*" << endl << "Encrypt succeed!" << endl;
-	 if(aes.DecryptFile(outFilename, recoverFilename)){
-	 cout << "*__*" << endl << "Recover succeed!" << endl;
-	 } else
-	 cout << ")__(" << endl << "Recover failed!" << endl;
-	 } else
-	 cout << ")__(" << endl << "Encrypt failed!" << endl;
+// 	 //	byte key[]	= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,	0x01,0x02, 0x03,0x04,0x05,0x06,0x07,0x08};
+// 	 //	//AES::DEFAULT_KEYLENGTH
+// 	 //	byte iv[]	= {0x01,0x02,0x03,0x03,0x03,0x03,0x03,0x03,	0x03,0x03, 0x01,0x02,0x03,0x03,0x03,0x03};
+// 	 //	int keysize = 16;
 
 
+// 	 // generate the key
+// 	 AutoSeededRandomPool rnd;
+// 	 byte key[AES::DEFAULT_KEYLENGTH];
+// 	 rnd.GenerateBlock( key, AES::DEFAULT_KEYLENGTH);
 
-	 finish = clock();
-	 duration = (double)(finish - start) / CLOCKS_PER_SEC;
-	 cout << "the cost is : " << duration << endl;
+// 	 // Generate a random IV
+// 	 byte iv[AES::BLOCKSIZE];
+// 	 rnd.GenerateBlock(iv, AES::BLOCKSIZE);
 
-	 return 0;
- }
+// 	 int keysize = 16;
+
+// 	 string plainText = "Hello World!";
+
+// 	 clock_t start , finish;
+// 	 double duration;
+// 	 start = clock();
+
+// 	 MyAES aes(key, iv, keysize);
+
+// 	 cout << "AES parameters: " << endl;
+// 	 cout << "The algorithm name is : " << AES::StaticAlgorithmName() << endl;
+// 	 cout << "The iv is : " << aes.iv << endl;
+// 	 cout << "The key is : " << aes.key << endl;
+// 	 cout << "The key length is : " << aes.key_length << endl;
+
+// 	 string cipher = aes.Encrypt(plainText);
+// 	 cout << "The cipher is : " << cipher << endl;
+
+// 	 string recover = aes.Decrypt(cipher);
+// 	 cout << "The recover is : " << recover << endl;
+
+// 	 cout << "=====================" << endl;
+
+// 	 // encrypt the file and decrypt it
+// 	 string inFilename = "aesTest";
+// 	 string outFilename = "aesEncrypt";
+// 	 string recoverFilename = "aesRecover";
+
+// 	 if(aes.EncryptFile(inFilename, outFilename)){
+// 	 cout << "*__*" << endl << "Encrypt succeed!" << endl;
+// 	 if(aes.DecryptFile(outFilename, recoverFilename)){
+// 	 cout << "*__*" << endl << "Recover succeed!" << endl;
+// 	 } else
+// 	 cout << ")__(" << endl << "Recover failed!" << endl;
+// 	 } else
+// 	 cout << ")__(" << endl << "Encrypt failed!" << endl;
+
+
+
+// 	 finish = clock();
+// 	 duration = (double)(finish - start) / CLOCKS_PER_SEC;
+// 	 cout << "the cost is : " << duration << endl;
+
+// 	 return 0;
+//  }

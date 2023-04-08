@@ -72,7 +72,7 @@ Table store_data()
   }  
   table.value=data;
   data.clear();
-  table.Join_col_id=0;
+  table.Join_col_id=3;
   return table;
 
 }
