@@ -10,24 +10,24 @@
 using namespace std;
 
 AES_Encrypt::AES_Encrypt(){
-  string key="86b8b998e3ab261cdbe6d66089c89835";
-  string iv="5ea6105d3f28d0470314730ad42ec19d";
-  int key_size=16;
-  byte b_key[AES::DEFAULT_KEYLENGTH];
-  byte b_iv[AES::DEFAULT_KEYLENGTH];
-  hexToBytes(key,b_key);
-  hexToBytes(iv,b_iv);
-  this->key = b_key;
-  this->iv = b_iv;
-  this->key_length = 16;
+//   string key="86b8b998e3ab261cdbe6d66089c89835";
+//   string iv="5ea6105d3f28d0470314730ad42ec19d";
+//   int key_size=16;
+//   byte b_key[AES::DEFAULT_KEYLENGTH];
+//   byte b_iv[AES::DEFAULT_KEYLENGTH];
+//   hexToBytes(key,b_key);
+//   hexToBytes(iv,b_iv);
+//   this->key = b_key;
+//   this->iv = b_iv;
+//   this->key_length = 16;
 
 }
 
 
 AES_Encrypt::~AES_Encrypt(){
-	this->iv=NULL;
-	this->iv = NULL;
-    this->key_length = 0;
+	// this->iv=NULL;
+	// this->iv = NULL;
+    // this->key_length = 0;
 }
 // void AES_Encrypt::GenerateKey()
 // {

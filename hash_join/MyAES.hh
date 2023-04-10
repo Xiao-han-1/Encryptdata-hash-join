@@ -17,25 +17,22 @@ using namespace std;
 class MyAES
 {
 public:
-	byte * key;
-	byte * iv;
-	int key_length;
-
+    const char *keystr="86b8b998e3ab261cdbe6d66089c89835";
+    const char *ivstr="5ea6105d3f28d0470314730ad42ec19d";
+	const byte  *key=reinterpret_cast<const byte *>(keystr);
+	const byte *iv=reinterpret_cast<const byte *>(ivstr);
+	int key_length=16;
+    int hash_block_len=5;
 	MyAES();
-	MyAES(byte * key, byte *iv, int length);
+	// AES_Encrypt(byte * key, byte *iv, int length);
 	~MyAES();
-
+	string bytesToHexString(byte* bytes,int length) ;
+	void hexToBytes(std::string& hex,byte* bytes) ;
+	string test_Decrypt(string & cipher);
 	//use the key to encrypt the plainText and return the cipher
-	string Encrypt(const string &plainText);
+	string Encrypt(string &plainText);
 	//use the same key to decrypt the cipher and return the recover
-	string Decrypt(const string &cipher);
-	//use the key to encrypt the file
-	bool EncryptFile(const string & inFilename, const string & outFilename);
-	//use the key to decyrpt the file
-	bool DecryptFile(const string & DecFilename,
-			const string & recoverFilename);
-	void GenerateKey();
-	void SetKey(byte * key, byte * iv, int length);
+	string Decrypt(string &cipher);
 };
 
 #endif /* MYAES_H_ */

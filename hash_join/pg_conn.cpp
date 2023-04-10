@@ -14,20 +14,26 @@ pg::pg(){
     if (PQstatus(conn) == CONNECTION_BAD)
      { cout << "Connection to database failed \n"; PQfinish(conn); }
 }
+pg::~pg(){
+    PQfinish(this->conn);
+}
 void pg::execute(string query,PGresult *res)
 {
-    res = PQexec(conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_COMMAND_OK)
-    {
-       cout <<query<<" Query failed \n";
-        // cout <<PQresultStatus(res)<<"\n";
+    PGresult * re=PQexec(conn, query.c_str());
+    if (PQresultStatus(re) != PGRES_TUPLES_OK) {
+        cerr << "查询数据失败: " << PQerrorMessage(conn) << endl;
+        PQclear(res);
+        PQfinish(conn);
     }
+    res=re;
+    PQclear(re);
        
 }
 void pg::execute(string query)
 {
     PGresult *res;
     pg::execute(query,res);
+    PQclear(res);
 }
 // void  pg::hash_copy_database(Enc_Table Enc_Table)
 // {

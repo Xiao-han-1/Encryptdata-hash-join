@@ -14,6 +14,7 @@ class pg
     public:
     PGconn *conn;
     pg();
+    ~pg();
     void execute(string query,PGresult *res);
     void execute(string query);
     // void  aes_copy_database(Enc_Table Aes_Table);

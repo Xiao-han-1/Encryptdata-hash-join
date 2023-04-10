@@ -49,6 +49,8 @@ Table store_data()
   // vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
   vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
   vector<string>type{"int","string","string","int","string","double","string"};
+  // vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
+  // vector<string>type{"string","string","string","string"};
   table.name=name;
   table.type=type;  
   string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/supplier.tbl";   // 文件名
@@ -80,7 +82,6 @@ int main()
 {
   int n;
   cin>>n;
-
     vector<string>Columns;
     Table table=store_data();
     vector<vector<string>> data=table.value;

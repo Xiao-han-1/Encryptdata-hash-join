@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <math.h>    
 #include "Execute_hash_query.hh"
+# include<ctime>
 using namespace std;
 int main()
 {
@@ -17,19 +18,15 @@ int main()
     // getline(ifs, str);
     // unordered_map<string, vector<string>> table_name_map = stringToMap(str);
     // ifs.close();
-    string query="select * from supplier join nation on s_nationkey = n_nationkey";
+    
+    // MyAES* aes=new MyAES();
+    // string s="5";
+    // s=aes->Decrypt(s);
+    // cout<<s<<endl;
+    
+    string query="select * from supplier join nation on supplier.s_nationkey = nation.n_nationkey";
     Execute_hash_query* eq=new Execute_hash_query();
+    eq->start = clock();
     eq->handle(query);
-    // while(cout<<"#cryptdb:")
-    // {
-    //     cin>>query;
-    //     if(query=="\\q")
-    //     {
-    //         cout<<"GoodBye!!!"<<endl;
-    //         break;
-    //     }
-        
-    //     else handle(query);
-    // }
     
 }

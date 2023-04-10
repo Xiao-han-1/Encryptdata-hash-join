@@ -23,9 +23,11 @@ typedef unsigned char byte;
 class AES_Encrypt
 {
    public:
-	byte * key;
-	byte * iv;
-	int key_length;
+	const char *keystr="86b8b998e3ab261cdbe6d66089c89835";
+    const char *ivstr="5ea6105d3f28d0470314730ad42ec19d";
+	const byte  *key=reinterpret_cast<const byte *>(keystr);
+	const byte *iv=reinterpret_cast<const byte *>(ivstr);
+	int key_length=16;
     int hash_block_len=5;
 	AES_Encrypt();
 	// AES_Encrypt(byte * key, byte *iv, int length);
