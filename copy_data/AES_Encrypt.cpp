@@ -254,41 +254,38 @@ string Encrypt_name(string name)
     }
     return table_name;
 }
-Enc_Table  AES_Encrypt::Encrypt_table(Table table)
+void  AES_Encrypt::Encrypt_table(Table* table,Enc_Table* Enc_table)
 {
 
-    Enc_Table Enc_table;
-    int length=table.name.size();
-	Enc_table.aes_table_name=Encrypt_table_name(table.table_name);
-    Enc_table.Join_col_id=table.Join_col_id;
-    Enc_table.max_frequency=table.max_frequency;
-    Enc_table.row_flag=table.row_flag;
+    int length=table->name.size();
+	Enc_table->aes_table_name=Encrypt_table_name(table->table_name);
+    Enc_table->Join_col_id=table->Join_col_id;
+    Enc_table->max_frequency=table->max_frequency;
+    Enc_table->row_flag=table->row_flag;
 	vector<string>Enc_name;
 	vector<string>type_name;
     for(int i=0;i<length;i++)
     {
-      string tmp=Encrypt_name(table.name[i]);
+      string tmp=Encrypt_name(table->name[i]);
 	  Enc_name.push_back(tmp);
 	  type_name.push_back("string");
     }
-	Enc_table.name=Enc_name;
-	Enc_table.type=type_name;
+	Enc_table->name=Enc_name;
+	Enc_table->type=type_name;
 	Enc_name.clear();
 	type_name.clear();
-	vector<vector<string>> Enc_val;
+	// vector<vector<string>> Enc_val;
 	vector<string>Enc_row;
-	vector<vector<string>> val=table.value;
-	for(int i=0;i<val.size();i++)
+	// vector<vector<string>> val=table.value;
+	for(int i=0;i<table->value.size();i++)
 	{
-      vector<string> row=val[i];
-	  vector<string> Enc_row=Encrypt_row(table.row_flag[i] ,row);
-	  Enc_val.push_back(Enc_row);
-	  row.clear();
-	  Enc_row.clear();
+    //   vector<string> row=table->value[i];
+	  vector<string> Enc_row=Encrypt_row(table->row_flag[i] ,table->value[i]);
+	  Enc_table->value.push_back(Enc_row);
 	}
-	Enc_table.value=Enc_val;
-    Enc_val.clear();
-    return Enc_table;
+    table->value.clear();
+	// Enc_table.value=Enc_val;
+    // Enc_val.clear();
 }
 vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
 {
@@ -298,7 +295,9 @@ vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
     int length=child_table.size();
     for(int i=0;i<length;i++)
 	{
-	  Enc_Table Atable=Encrypt_table(child_table[i]);
+        cout<<i<<endl;
+	  Enc_Table Atable;
+      Encrypt_table(&child_table[i],&Atable);
 	  Aes_child_table.push_back(Atable);
     }
 	

@@ -159,7 +159,7 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
             for(auto &id:tmp)
             {
                 vector<string>row;
-                row=vue[id];
+                row=table.value[id];
                 ve.push_back(row);
             }
           }
@@ -194,7 +194,7 @@ vector<Table> child_table::Table_divide(vector<string>Columns,Table table)
     Full_K_table(K_table,fre_num,local_num);
     // int k=ElbowMethod(table,table.size());
     // cout<<k<<endl;
-    K_means(K_table,4);
+    K_means(K_table,20);
     //unordered_map<string,vector<string>>name_map;
     vector<Table>child_table;
     Devide_table(K_table,table,child_table);

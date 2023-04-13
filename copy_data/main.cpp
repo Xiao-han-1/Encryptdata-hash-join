@@ -43,17 +43,17 @@ unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> 
 Table store_data()
 {
   Table table;
-  table.table_name="supplier";
-  // vector<string>name{"L_ORDERKEY ","L_PARTKEY","L_SUPPKEY","L_LINENUMBER","L_QUANTITY","L_EXTENDEDPRICE","L_DISCOUNT",
-  // "L_TAX","L_RETURNFLAG","L_LINESTATUS","L_SHIPDATE","L_COMMITDATE","L_RECEIPTDATE","L_SHIPINSTRUCT","L_SHIPMODE","L_COMMENT"};
-  // vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
-  vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
-  vector<string>type{"int","string","string","int","string","double","string"};
+  table.table_name="lineitem";
+  vector<string>name{"L_ORDERKEY ","L_PARTKEY","L_SUPPKEY","L_LINENUMBER","L_QUANTITY","L_EXTENDEDPRICE","L_DISCOUNT",
+  "L_TAX","L_RETURNFLAG","L_LINESTATUS","L_SHIPDATE","L_COMMITDATE","L_RECEIPTDATE","L_SHIPINSTRUCT","L_SHIPMODE","L_COMMENT"};
+  vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
+  // vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
+  // vector<string>type{"int","string","string","int","string","double","string"};
   // vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
   // vector<string>type{"string","string","string","string"};
   table.name=name;
   table.type=type;  
-  string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/supplier.tbl";   // 文件名
+  string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/lineitem.tbl";   // 文件名
   vector<vector<string>> data;      // 二维向量存储数据
   ifstream file(filename);          // 打开文件
   if (file) {                       // 如果文件存在
@@ -74,14 +74,14 @@ Table store_data()
   }  
   table.value=data;
   data.clear();
-  table.Join_col_id=3;
+  table.Join_col_id=2;
   return table;
 
 }
 int main()
 {
-  int n;
-  cin>>n;
+    int n;
+    cin>>n;
     vector<string>Columns;
     Table table=store_data();
     vector<vector<string>> data=table.value;
@@ -102,7 +102,7 @@ int main()
     vector<Table>child_table=de->Table_divide(Columns,table);
     child_table=et->Smooth_Frequency(child_table);
     vector<Enc_Table> Aes_Table=ae->Encrypt_child_table(child_table);
-    vector<Enc_Table> Hash_child_table=ht->GetHash_table(child_table,Aes_Table);
+    vector<Enc_Table> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns);
     delete de;
     delete et;
     delete ae;

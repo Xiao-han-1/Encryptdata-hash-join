@@ -19,14 +19,12 @@ pg::~pg(){
 }
 void pg::execute(string query,PGresult *res)
 {
-    PGresult * re=PQexec(conn, query.c_str());
-    if (PQresultStatus(re) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(conn) << endl;
-        PQclear(res);
-        PQfinish(conn);
+    res = PQexec(conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_COMMAND_OK)
+    {
+       cout <<query<<" Query failed \n";
+        // cout <<PQresultStatus(res)<<"\n";
     }
-    res=re;
-    PQclear(re);
        
 }
 void pg::execute(string query)

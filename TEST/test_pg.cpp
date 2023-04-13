@@ -1,45 +1,63 @@
 #include <iostream>
-#include <map>
-#include "/usr/include/postgresql/libpq-fe.h"
+#include <string>
+#include <vector>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <postgresql/libpq-fe.h>
 
 using namespace std;
 
-int main() {
-    int n;
-    cin>>n;
-    // 连接到数据库
-    PGconn* conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=postgres password=letmien"); 
-    if (PQstatus(conn) != CONNECTION_OK) {
-        cerr << "连接到数据库失败: " << PQerrorMessage(conn) << endl;
-        PQfinish(conn);
-        return 1;
+class ConnectionPool {
+public:
+    ConnectionPool(const string& conninfo, int pool_size) : conninfo_(conninfo), pool_size_(pool_size) {
+        for (int i = 0; i < pool_size_; ++i) {
+            connections_.push_back(make_shared<PGconn*>(PQconnectdb(conninfo_.c_str())));
+        }
     }
 
-    // 从map_table中查询数据
-    PGresult* res = PQexec(conn, "SELECT * FROM map_table");
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(conn) << endl;
-        PQclear(res);
-        PQfinish(conn);
-        return 1;
+    shared_ptr<PGconn*> getConnection() {
+        unique_lock<mutex> lock(mutex_);
+        while (connections_.empty()) {
+            cv_.wait(lock);
+        }
+        auto conn = connections_.back();
+        connections_.pop_back();
+        return conn;
     }
 
-    // 将查询结果存储到map<string,string>中
-    map<string,string> mymap;
+    void releaseConnection(shared_ptr<PGconn*> conn) {
+        unique_lock<mutex> lock(mutex_);
+        connections_.push_back(conn);
+        cv_.notify_one();
+    }
+
+private:
+    string conninfo_;
+    int pool_size_;
+    vector<shared_ptr<PGconn*>> connections_;
+    mutex mutex_;
+    condition_variable cv_;
+};
+
+void query(ConnectionPool& pool, int id) {
+    auto conn = pool.getConnection();
+    PGresult* res = PQexec(*conn, "SELECT * FROM mytable");
     int rows = PQntuples(res);
-    for (int i = 0; i < rows; i++) {
-        const char* key = PQgetvalue(res, i, 0);
-        const char* value = PQgetvalue(res, i, 1);
-        mymap[key] = value;
-    }
-
-    // 输出map中的数据
-    for (const auto& kv : mymap) {
-        cout << kv.first << " = " << kv.second << endl;
-    }
-
-    // 释放资源
+    cout << "Thread " << id << " got " << rows << " rows" << endl;
     PQclear(res);
-    PQfinish(conn);
+    pool.releaseConnection(conn);
+    PQfinish(*conn);
+}
+
+int main() {
+    ConnectionPool pool("dbname=mydb user=myuser password=mypassword hostaddr=127.0.0.1 port=5432", 10);
+    vector<thread> threads;
+    for (int i = 0; i < 100; ++i) {
+        threads.emplace_back(query, ref(pool), i);
+    }
+    for (auto& t : threads) {
+        t.join();
+    }
     return 0;
 }

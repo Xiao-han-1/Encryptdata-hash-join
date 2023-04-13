@@ -16,8 +16,8 @@ class pg
     pg();
     void execute(string query,PGresult *res);
     void execute(string query);
-    void  aes_copy_database(Enc_Table Aes_Table);
-    void  hash_copy_database(Enc_Table Aes_Table);
+    void  aes_copy_database(Enc_Table* Aes_Table);
+    void  hash_copy_database(Enc_Table* Aes_Table);
     void  copy_child_database(vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table);
     
 };

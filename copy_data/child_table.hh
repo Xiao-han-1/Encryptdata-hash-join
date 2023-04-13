@@ -26,11 +26,8 @@ typedef struct table
         Join_col_id=0; 
         table_name.clear();
         name.clear();
-        name.shrink_to_fit();
         type.clear();
-        type.shrink_to_fit();
         value.clear();
-        value.shrink_to_fit();
         row_flag.clear();
     }
 }Table;

@@ -18,62 +18,61 @@ string generate_num()
     }
     return table_name;
 }
-Table extend_table::Add_dummy_row(Table table,string k,int v)
+void extend_table::Add_dummy_row(Table* table,string k,int v)
 {
-  Table dummy_table=table;
-  int num=table.max_frequency-v;
+  // Table dummy_table=table;
+  int num=table->max_frequency-v;
   for(int i=0;i<num;i++)
   {
     vector<string>dummy_row;
-    for(int j=0;j<table.type.size();j++)
+    for(int j=0;j<table->type.size();j++)
     {
-        if(j==table.Join_col_id)
+        if(j==table->Join_col_id)
         {
             dummy_row.push_back(k);
         }
         else
         {
-             string val=generate_num();//取一个0~2k随机数，保证同一列数据偏差不是很大
+             string val=generate_num();
              dummy_row.push_back(val);
         }
     }
-    dummy_table.value.push_back(dummy_row);
-    int dummy_location=dummy_table.value.size()-1;
-    dummy_table.row_flag[dummy_location]=0;
+    table->value.push_back(dummy_row);
+    int dummy_location=table->value.size()-1;
+    table->row_flag[dummy_location]=0;
     dummy_row.clear();
   }
-  return dummy_table;
+
 }
-Table extend_table::Table_extend(Table table)
+void extend_table::Table_extend(Table *table)
 {
    unordered_map<string,int>mp;
-   vector<vector<string>> val;
-   val=table.value;
-   int col_id=table.Join_col_id;
-   for(int i=0;i<val.size();i++)
+  //  vector<vector<string>> val;
+  //  val=table->value;
+   int col_id=table->Join_col_id;
+   for(int i=0;i<table->value.size();i++)
    {
-    table.row_flag[i]=1;
-    mp[val[i][col_id]]++;
+    table->row_flag[i]=1;
+    mp[table->value[i][col_id]]++;
    }
-   Table new_table=table;
+  //  Table new_table=table;
    for(auto&[k,v]: mp)
    {
-     if(v<table.max_frequency)
+     if(v<(table->max_frequency))
      {
-        new_table=Add_dummy_row(new_table,k,v);
+        Add_dummy_row(table,k,v);
      }
    }
-   return new_table;
 }
 vector<Table> extend_table::Smooth_Frequency(vector<Table> child_table)
 {
-  vector<Table> extend_child_table;
+  // vector<Table> extend_child_table;
   int Length=child_table.size();
   for(int i=0;i<Length;i++)
   {
-    Table table=child_table[i];
-    table=Table_extend(table);
-    extend_child_table.push_back(table);
+    Table_extend(&child_table[i]);
+    cout<<i<<":"<<child_table[i].value.size()<<endl;
+    // extend_child_table.push_back(child_table[i]);
   }
-  return extend_child_table;
+  return child_table;
 }

@@ -29,22 +29,22 @@ void pg::execute(string query)
     PGresult *res;
     pg::execute(query,res);
 }
-void  pg::hash_copy_database(Enc_Table Enc_Table)
+void  pg::hash_copy_database(Enc_Table* Enc_Table)
 {
    string query="create table ";
-  query+=Enc_Table.hash_table_name+ "(";
-  int len=Enc_Table.name.size();
+  query+=Enc_Table->hash_table_name+ "(";
+  int len=Enc_Table->name.size();
   for(int i=0;i<len-1;i++)
   {
-   query+=Enc_Table.name[i]+" text,";
+   query+=Enc_Table->name[i]+" text,";
   }
-  query+=Enc_Table.name[len-1]+" text)";
+  query+=Enc_Table->name[len-1]+" text)";
   pg::execute(query);
-  vector<vector<string>>vue=Enc_Table.value;
+  vector<vector<string>>vue=Enc_Table->value;
   for(int i=0;i<vue.size();i++)
   {
     query="insert into ";
-    query=query+Enc_Table.hash_table_name+ " values (";
+    query=query+Enc_Table->hash_table_name+ " values (";
     int length=vue[i].size();
     for(int j=0;j<length-1;j++)
     {
@@ -55,22 +55,22 @@ void  pg::hash_copy_database(Enc_Table Enc_Table)
   }
   cout<<"Copy_Hash_DATA successful!"<<endl;
 }
-void  pg::aes_copy_database(Enc_Table Enc_Table)
+void  pg::aes_copy_database(Enc_Table* Enc_Table)
 {
   string query="create table ";
-  query+=Enc_Table.aes_table_name+ " (flag text,";
-  int len=Enc_Table.name.size();
+  query+=Enc_Table->aes_table_name+ " (flag text,";
+  int len=Enc_Table->name.size();
   for(int i=0;i<len-1;i++)
   {
-   query+=Enc_Table.name[i]+" text,";
+   query+=Enc_Table->name[i]+" text,";
   }
-  query+=Enc_Table.name[len-1]+" text)";
+  query+=Enc_Table->name[len-1]+" text)";
   pg::execute(query);
-  vector<vector<string>>vue=Enc_Table.value;
+  vector<vector<string>>vue=Enc_Table->value;
   for(int i=0;i<vue.size();i++)
   {
     query="insert into ";
-    query=query+Enc_Table.aes_table_name+ " values (";
+    query=query+Enc_Table->aes_table_name+ " values (";
     int length=vue[i].size();
     for(int j=0;j<length-1;j++)
     {
@@ -87,15 +87,15 @@ void  pg::copy_child_database(vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash
   PGresult *res;
   int hash_len=Hash_child_table.size();
   int aes_len=Aes_Table.size();
+  // for(int i=0;i<hash_len;i++)
+  // {
+  //   Enc_Table tmp=Hash_child_table[i];
+  //   string table_map_query="insert into map_table values ('"+tmp.aes_table_name+"', '"+tmp.hash_table_name+"' )";
+  //   pg::execute(table_map_query,res);
+  // }
   for(int i=0;i<hash_len;i++)
   {
-    Enc_Table tmp=Hash_child_table[i];
-    string table_map_query="insert into map_table values ('"+tmp.aes_table_name+"', '"+tmp.hash_table_name+"' )";
-    pg::execute(table_map_query,res);
-  }
-  for(int i=0;i<hash_len;i++)
-  {
-    aes_copy_database(Aes_Table[i]);
-    hash_copy_database(Hash_child_table[i]);
+    aes_copy_database(&Aes_Table[i]);
+    hash_copy_database(&Hash_child_table[i]);
   }
 }

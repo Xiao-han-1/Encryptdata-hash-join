@@ -8,16 +8,15 @@
 #include <vector>
 #include <unordered_map>
 #include <math.h>
+#include <thread>
 #include "Execute_hash_query.hh"
 using namespace std;
 Execute_hash_query::Execute_hash_query(/* args */){
-    con=new pg();
 }
 
 Execute_hash_query::~Execute_hash_query(){
-    delete con;
 }
-
+static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 1);
  unordered_map<string, vector<string>> stringToMap()
 {
      unordered_map<string, vector<string>> mp;
@@ -90,24 +89,25 @@ vector<vector<pair<string, string>>>  Execute_hash_query::Generate_Enc_query(vec
     pair<string,string>te;
     for(int i=0;i<tmp_tab.size();i++)
     {
-         te.first=tmp_tab[i];
-         te.second=tmp_col[i];
+        te.first=tmp_tab[i];
+        te.second=tmp_col[i];
         t.push_back(te);
     }
     child_name.push_back(t);
     }
     vector<vector<pair<string, string>>> result = cartesianProduct(child_name);
-    print_result(result);
+    // print_result(result);
     return result;
 }
 unordered_map<string,string> Execute_hash_query::Read_map()
 {
+    auto conn = pool.getConnection();
     string query="select * from map_table";
-    PGresult *re=PQexec(con->conn,query.c_str());
+    PGresult *re=PQexec(*conn,query.c_str());
     if (PQresultStatus(re) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(con->conn) << endl;
+        cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
         PQclear(re);
-        PQfinish(con->conn);
+        pool.releaseConnection(conn);
     }
      unordered_map<string,string> mymap;
     int rows = PQntuples(re);
@@ -116,31 +116,31 @@ unordered_map<string,string> Execute_hash_query::Read_map()
         const char* value = PQgetvalue(re, i, 1);
         mymap[key] = value;
     }
-    PQclear(re);
-
+     PQclear(re);
+     pool.releaseConnection(conn);
     // 输出map中的数据
     // for (const auto& kv : mymap) {
     //     cout << kv.first << " = " << kv.second << endl;
     // }
     return mymap;
 }
-vector<string>  Execute_hash_query::Get_hash_name(vector<pair<string, string>> re)
-{
-  unordered_map<string,string>mp=Read_map();
-  int len=re.size();
-  vector<string> h_table;
-  for(int i=0;i<len;i++)
-  {
-    string table_name=re[i].first;
-    string col_name=re[i].second;
-    // string hash_table_name="Hash_"+table_name+"_"+col_name;
-    string hash_table_name=mp[table_name];
-    Enc_table_name[hash_table_name]=table_name;
-    // string tmp=Get_hash_data(hash_table_name);
-    h_table.push_back(hash_table_name);
-  }
-  return h_table;
-}
+// vector<string>  Execute_hash_query::Get_hash_name(vector<pair<string, string>> re)
+// {
+//   unordered_map<string,string>mp=Read_map();
+//   int len=re.size();
+//   vector<string> h_table;
+//   for(int i=0;i<len;i++)
+//   {
+//     string table_name=re[i].first;
+//     string col_name=re[i].second;
+//     // string hash_table_name="Hash_"+table_name+"_"+col_name;
+//     string hash_table_name=mp[table_name];
+//     Enc_table_name[hash_table_name]=table_name;
+//     // string tmp=Get_hash_data(hash_table_name);
+//     h_table.push_back(hash_table_name);
+//   }
+//   return h_table;
+// }
 vector<pair<int,int>> get_map(pg_result* res)
 {
     int num_rows = PQntuples(res);
@@ -162,14 +162,15 @@ vector<pair<int,int>> get_map(pg_result* res)
 //暂时只支持俩表join
 unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table)
 {
+    auto conn = pool.getConnection();
     string query="select * from "+table;
-    PGresult *re=PQexec(con->conn,query.c_str());
+    PGresult *re=PQexec(*conn,query.c_str());
     if (PQresultStatus(re) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(con->conn) << endl;
+        cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
         PQclear(re);
-        PQfinish(con->conn);
+        pool.releaseConnection(conn);
     }
-    con->execute(query,re);
+    // con->execute(query,re);
     int num_rows = PQntuples(re);
     int num_cols = PQnfields(re);
     MyAES* aes=new MyAES();
@@ -185,6 +186,8 @@ unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table)
         }
         val[i]=tmp;
     }
+    PQclear(re);
+    pool.releaseConnection(conn);
     return val;
 
 }
@@ -193,15 +196,16 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     vector<vector<string>>result;
     string table1=h_table[0].first;
     string table2=h_table[1].first;
-    table1=Enc_table_name[table1];
-    table2=Enc_table_name[table2];
+    table1="Hash_"+table1;
+    table2="Hash_"+table2;
+    auto conn = pool.getConnection();
     string query="select "+table1+".row_id,"+table2+".row_id from "+table1+","+table2
     +" where "+table1+".hash_value="+table2+".hash_value;";
-    PGresult *res=PQexec(con->conn,query.c_str());
+    PGresult *res=PQexec(*conn,query.c_str());
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(con->conn) << endl;
+        cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
         PQclear(res);
-        PQfinish(con->conn);
+        pool.releaseConnection(conn);
     }
     int num_rows = PQntuples(res);
     int num_cols = PQnfields(res);
@@ -214,6 +218,8 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
         tmp.second=atoi(PQgetvalue(res, i, 1));
         mp.push_back(tmp);
     }
+    PQclear(res);
+    pool.releaseConnection(conn);
     unordered_map<int,vector<string>>val1=get_Aes_val(h_table[0].first);
     unordered_map<int,vector<string>>val2=get_Aes_val(h_table[1].first);
     for(int i=0;i<mp.size();i++)
@@ -237,7 +243,7 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
 }
 void store_data(vector<vector<string>> data)
 {
-    ofstream outfile("result_join_two.txt");
+    ofstream outfile("result_join_three.txt");
 
     // 遍历vector<vector<string>>中的数据，将每一行数据写入到文件中
     for (const auto& row : data) {
@@ -245,6 +251,15 @@ void store_data(vector<vector<string>> data)
             outfile << field << " ";  // 写入每一个字段的值
         }
         outfile << endl;  // 写入行结束符
+    }
+}
+void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,vector<vector<vector<string>>>& res_vecs,Execute_hash_query* eq) {
+    // 在这里写处理数据的代码
+    int len =data.size();
+    for (int i = 0; i < len; i++)
+    {
+        vector<vector<string>> t = eq->Hash_join(data[i]);
+        res_vecs.push_back(t);
     }
 }
  void Execute_hash_query::handle(string  query)
@@ -261,25 +276,46 @@ void store_data(vector<vector<string>> data)
     int length=tab.size();
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enc_query(tab,table_name_map,Enc_query,query);
-    Enc_table_name=Read_map();
-    int len=result.size();
-    vector<vector<string>>Join_result={};
-    int num=0;
-    for(int i=0;i<len;i++)
+    // Enc_table_name=Read_map();
+    // vector<vector<string>>Join_result={};
+    vector<thread> threads;
+    vector<vector<vector<string>>> res_vecs;
+    int len = result.size();
+    int num_threads = min(10, len);
+
+    // 创建线程
+    for (int i = 0; i < num_threads; i++)
     {
-        // tab=result[i];
-        // vector<string> h_table=Get_hash_name(result[i]);
-        vector<vector<string>> t=Hash_join(result[i]);
-        num+=t.size();
-        // store_data(t);
+        int st = i * len / num_threads;
+        int en = (i + 1) * len / num_threads;
+        if (i == num_threads - 1)
+        {
+            end = len;
+        }
+        vector<vector<pair<string, string>>> sub_vecs(result.begin() + st, result.begin() + en);
+        res_vecs.push_back({});
+        threads.push_back(thread(&Execute_hash_query::processData,sub_vecs,ref(res_vecs),this));
+    }
+
+    // 等待线程执行完毕
+    for (int i = 0; i < num_threads; i++)
+    {
+        threads[i].join();
     }
     this->end = clock();           /*记录结束时间*/
     {
         double seconds  =(double)(this->end - this->start)/CLOCKS_PER_SEC;
         fprintf(stderr, "Use time is: %.8f \n", seconds);
     }
+    vector<vector<string>> final_vec;
+    for (int i = 0; i < res_vecs.size(); i++)
+    {
+             final_vec.insert(final_vec.end(), res_vecs[i].begin(), res_vecs[i].end());
+    }
+
+    // 存储数据
+     store_data(final_vec);
 
     cout<<"Hash Join Successfully!"<<endl;
-    cout<<"rows:"<<num<<endl;
  }
  

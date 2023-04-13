@@ -16,8 +16,8 @@ class Hash_Table
     Hash_Table(){};
 	~Hash_Table(){};
 	string Encrypt(string data);
-	vector<Enc_Table> GetHash_table(vector<Table> child_table,vector<Enc_Table> &Aes_child_Table);
-	Enc_Table Hash_Enc_Table(Table table,Enc_Table &enc_table);
+	vector<Enc_Table> GetHash_table(vector<Table> child_table,vector<Enc_Table> &Aes_child_Table,vector<string> column);
+    void Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_table);
 	void Create_data_block(vector<string> &Enc_name,vector<string> &type_name);
 	// Decrypt();
  
