@@ -18,7 +18,6 @@ class Execute_hash_query
 private:
     /* data */
 public:
-    clock_t start, end;
     Execute_hash_query(/* args */);
     ~Execute_hash_query();
     // unordered_map<string,string>Enc_table_name;
@@ -27,8 +26,8 @@ public:
     // vector<string>  Get_hash_name(vector<pair<string, string>> re);
     vector<vector<string>> Hash_join(vector<pair<string, string>> h_table);
     unordered_map<int,vector<string>>  get_Aes_val(string table);
-    unordered_map<string,string> Read_map();
-    static void processData(vector<vector<pair<string, string>>> data, vector<vector<vector<string>>>& res_vecs,Execute_hash_query* eq);
+    // unordered_map<string,string> Read_map();
+    static void processData(vector<vector<pair<string, string>>> data,int* num,Execute_hash_query* eq);
 
 };
 #endif

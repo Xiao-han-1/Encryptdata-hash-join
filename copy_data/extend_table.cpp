@@ -68,11 +68,14 @@ vector<Table> extend_table::Smooth_Frequency(vector<Table> child_table)
 {
   // vector<Table> extend_child_table;
   int Length=child_table.size();
+  int num=0;
   for(int i=0;i<Length;i++)
   {
     Table_extend(&child_table[i]);
-    cout<<i<<":"<<child_table[i].value.size()<<endl;
+    num+=child_table[i].value.size();
+    // cout<<i<<":"<<child_table[i].value.size()<<endl;
     // extend_child_table.push_back(child_table[i]);
   }
+  cout<<"sum"<<":"<<num<<endl;
   return child_table;
 }

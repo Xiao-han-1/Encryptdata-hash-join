@@ -11,7 +11,7 @@
 #include <string>
 #include <iostream>
 #include "child_table.hh"
-
+#include "pg_copy.hh"
 // using namespace CryptoPP;
 using namespace std;
 #undef byte

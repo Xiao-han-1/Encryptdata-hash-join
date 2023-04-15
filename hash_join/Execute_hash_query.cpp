@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <math.h>
 #include <thread>
+#include <chrono>
 #include "Execute_hash_query.hh"
 using namespace std;
 Execute_hash_query::Execute_hash_query(/* args */){
@@ -16,7 +17,7 @@ Execute_hash_query::Execute_hash_query(/* args */){
 
 Execute_hash_query::~Execute_hash_query(){
 }
-static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 1);
+static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 20);
  unordered_map<string, vector<string>> stringToMap()
 {
      unordered_map<string, vector<string>> mp;
@@ -99,31 +100,31 @@ vector<vector<pair<string, string>>>  Execute_hash_query::Generate_Enc_query(vec
     // print_result(result);
     return result;
 }
-unordered_map<string,string> Execute_hash_query::Read_map()
-{
-    auto conn = pool.getConnection();
-    string query="select * from map_table";
-    PGresult *re=PQexec(*conn,query.c_str());
-    if (PQresultStatus(re) != PGRES_TUPLES_OK) {
-        cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
-        PQclear(re);
-        pool.releaseConnection(conn);
-    }
-     unordered_map<string,string> mymap;
-    int rows = PQntuples(re);
-    for (int i = 0; i < rows; i++) {
-        const char* key = PQgetvalue(re, i, 0);
-        const char* value = PQgetvalue(re, i, 1);
-        mymap[key] = value;
-    }
-     PQclear(re);
-     pool.releaseConnection(conn);
-    // 输出map中的数据
-    // for (const auto& kv : mymap) {
-    //     cout << kv.first << " = " << kv.second << endl;
-    // }
-    return mymap;
-}
+// unordered_map<string,string> Execute_hash_query::Read_map()
+// {
+//     auto conn = pool.getConnection();
+//     string query="select * from map_table";
+//     PGresult *re=PQexec(*conn,query.c_str());
+//     if (PQresultStatus(re) != PGRES_TUPLES_OK) {
+//         cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
+//         PQclear(re);
+//         pool.releaseConnection(conn);
+//     }
+//      unordered_map<string,string> mymap;
+//     int rows = PQntuples(re);
+//     for (int i = 0; i < rows; i++) {
+//         const char* key = PQgetvalue(re, i, 0);
+//         const char* value = PQgetvalue(re, i, 1);
+//         mymap[key] = value;
+//     }
+//      PQclear(re);
+//      pool.releaseConnection(conn);
+//     // 输出map中的数据
+//     // for (const auto& kv : mymap) {
+//     //     cout << kv.first << " = " << kv.second << endl;
+//     // }
+//     return mymap;
+// }
 // vector<string>  Execute_hash_query::Get_hash_name(vector<pair<string, string>> re)
 // {
 //   unordered_map<string,string>mp=Read_map();
@@ -193,7 +194,7 @@ unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table)
 }
 vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>> h_table)
 {
-    vector<vector<string>>result;
+    vector<vector<string>>result{};
     string table1=h_table[0].first;
     string table2=h_table[1].first;
     table1="Hash_"+table1;
@@ -209,6 +210,8 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     }
     int num_rows = PQntuples(res);
     int num_cols = PQnfields(res);
+    if(num_rows==0)
+    return result;
     vector<pair<int,int>> mp;
     for (int i = 0; i < num_rows; ++i) 
     {
@@ -253,17 +256,19 @@ void store_data(vector<vector<string>> data)
         outfile << endl;  // 写入行结束符
     }
 }
-void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,vector<vector<vector<string>>>& res_vecs,Execute_hash_query* eq) {
+void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,int* num,Execute_hash_query* eq) {
     // 在这里写处理数据的代码
     int len =data.size();
     for (int i = 0; i < len; i++)
     {
         vector<vector<string>> t = eq->Hash_join(data[i]);
-        res_vecs.push_back(t);
+        *num=*num+t.size();
+        // res_vecs.push_back(t);
     }
 }
  void Execute_hash_query::handle(string  query)
  {
+    auto start = std::chrono::high_resolution_clock::now();
     string str=query;
     unordered_map<string, vector<string>> table_name_map = stringToMap();
     regex rgx("([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)");
@@ -273,49 +278,46 @@ void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,v
        tab.push_back(make_pair(match[1],match[2]));
         str = match.suffix().str();
     }
-    int length=tab.size();
+    // int length=tab.size();
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enc_query(tab,table_name_map,Enc_query,query);
     // Enc_table_name=Read_map();
     // vector<vector<string>>Join_result={};
     vector<thread> threads;
-    vector<vector<vector<string>>> res_vecs;
     int len = result.size();
-    int num_threads = min(10, len);
+    int num_threads = min(20, len);
 
     // 创建线程
+    int num=0;
     for (int i = 0; i < num_threads; i++)
     {
         int st = i * len / num_threads;
         int en = (i + 1) * len / num_threads;
         if (i == num_threads - 1)
         {
-            end = len;
+            en = len;
         }
         vector<vector<pair<string, string>>> sub_vecs(result.begin() + st, result.begin() + en);
-        res_vecs.push_back({});
-        threads.push_back(thread(&Execute_hash_query::processData,sub_vecs,ref(res_vecs),this));
+        threads.push_back(thread(&Execute_hash_query::processData,sub_vecs,&num,this));
     }
-
     // 等待线程执行完毕
     for (int i = 0; i < num_threads; i++)
     {
         threads[i].join();
     }
-    this->end = clock();           /*记录结束时间*/
-    {
-        double seconds  =(double)(this->end - this->start)/CLOCKS_PER_SEC;
-        fprintf(stderr, "Use time is: %.8f \n", seconds);
-    }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    cout<<"Row:"<<num<<endl;
+    std::cout << "程序执行时间：" << elapsed.count() << " 秒" << std::endl;
     vector<vector<string>> final_vec;
-    for (int i = 0; i < res_vecs.size(); i++)
-    {
-             final_vec.insert(final_vec.end(), res_vecs[i].begin(), res_vecs[i].end());
-    }
+    // for (int i = 0; i < res_vecs.size(); i++)
+    // {
+    //          final_vec.insert(final_vec.end(), res_vecs[i].begin(), res_vecs[i].end());
+    // }
 
-    // 存储数据
-     store_data(final_vec);
+    // // 存储数据
+    //  store_data(final_vec);
 
-    cout<<"Hash Join Successfully!"<<endl;
+    // cout<<"Hash Join Successfully!"<<endl;
  }
  

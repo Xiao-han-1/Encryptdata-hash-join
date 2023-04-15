@@ -25,7 +25,7 @@ string mapToString(const unordered_map<string, vector<string>>& map)
     }
     return ss.str();
 }
-unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
+unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> Aes_Table)
 {
   unordered_map<string,vector<string>>table_name_map;
   int len=Aes_Table.size();
@@ -49,8 +49,8 @@ Table store_data()
   vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
   // vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
   // vector<string>type{"int","string","string","int","string","double","string"};
-  // vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
-  // vector<string>type{"string","string","string","string"};
+//   vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
+//   vector<string>type{"string","string","string","string"};
   table.name=name;
   table.type=type;  
   string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/lineitem.tbl";   // 文件名
@@ -84,11 +84,10 @@ int main()
     cin>>n;
     vector<string>Columns;
     Table table=store_data();
-    vector<vector<string>> data=table.value;
     int id=table.Join_col_id;
-      for(int i=0;i<data.size();i++)
+      for(int i=0;i<table.value.size();i++)
     {
-      Columns.push_back(data[i][id]);
+      Columns.push_back(table.value[i][id]);
     }
     // vector<string>name;
     // vector<string>type;
@@ -104,11 +103,11 @@ int main()
     vector<Enc_Table> Aes_Table=ae->Encrypt_child_table(child_table);
     vector<Enc_Table> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns);
     delete de;
-    delete et;
+    delete et; 
     delete ae;
     child_table.clear();
     unordered_map<string,vector<string>> table_name_map;
-    table_name_map=Mapping_name(table,Aes_Table,Hash_child_table);
+    table_name_map=Mapping_name(table,Aes_Table);
     std::ofstream outfile("table_name_map.txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
@@ -123,8 +122,8 @@ int main()
     }
 
     outfile.close();
-    table.~table();
-    pg* p=new pg();
-    p->copy_child_database(Aes_Table,Hash_child_table);
+    // table.~table();
+    // pg* p=new pg();
+    // p->copy_child_database(Aes_Table,Hash_child_table);
     
 }

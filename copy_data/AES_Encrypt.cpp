@@ -283,13 +283,13 @@ void  AES_Encrypt::Encrypt_table(Table* table,Enc_Table* Enc_table)
 	  vector<string> Enc_row=Encrypt_row(table->row_flag[i] ,table->value[i]);
 	  Enc_table->value.push_back(Enc_row);
 	}
-    table->value.clear();
+    // table->value.clear();
 	// Enc_table.value=Enc_val;
     // Enc_val.clear();
 }
 vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
 {
-    
+    pg* p=new pg();
     table En_table;
 	vector<Enc_Table> Aes_child_table;
     int length=child_table.size();
@@ -298,6 +298,8 @@ vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
         cout<<i<<endl;
 	  Enc_Table Atable;
       Encrypt_table(&child_table[i],&Atable);
+      p->aes_copy_database(&Atable,child_table[i].table_name);
+      Atable.value.clear();
 	  Aes_child_table.push_back(Atable);
     }
 	
