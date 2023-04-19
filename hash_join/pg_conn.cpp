@@ -5,7 +5,7 @@
 #include <unordered_map>
 // #include "child_table.hh"
 // #include "Hash_Encrypt.hh"
-#include "/usr/include/postgresql/libpq-fe.h"
+#include "libpq-fe.h"
 #include "pg_conn.hh"
 using namespace std;
 

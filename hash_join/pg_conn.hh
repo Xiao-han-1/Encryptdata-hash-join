@@ -6,7 +6,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include </usr/include/postgresql/libpq-fe.h>
+#include <libpq-fe.h>
 
 using namespace std;
 

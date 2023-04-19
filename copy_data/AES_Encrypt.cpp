@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
+#include <thread>
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 #include <openssl/buffer.h>
@@ -295,7 +296,6 @@ vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
     int length=child_table.size();
     for(int i=0;i<length;i++)
 	{
-        cout<<i<<endl;
 	  Enc_Table Atable;
       Encrypt_table(&child_table[i],&Atable);
       p->aes_copy_database(&Atable,child_table[i].table_name);

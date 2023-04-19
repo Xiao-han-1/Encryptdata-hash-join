@@ -83,8 +83,10 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
 	}
 	// vector<vector<string>>hash_res;
 	ll table_len=0;
-	for(auto&[k,v]:invert_index)
-	{
+   for (auto const& pair: invert_index) 
+   {
+    auto k=pair.first;
+    auto v=pair.second;
 	  string e_k=k; 
 	  e_k=Hash_Table::Encrypt(e_k);
       for(int i=0;i<v.size();i++)

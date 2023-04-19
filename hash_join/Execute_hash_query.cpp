@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <math.h>
 #include <thread>
+#include <regex.h>
 #include <chrono>
 #include "Execute_hash_query.hh"
 using namespace std;
@@ -20,29 +21,44 @@ Execute_hash_query::~Execute_hash_query(){
 static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 20);
  unordered_map<string, vector<string>> stringToMap()
 {
-     unordered_map<string, vector<string>> mp;
-    ifstream fin("../copy_data/table_name_map.txt");
-    string line;
-    while (getline(fin, line)) {
-    string key, value;
-    size_t pos = line.find(',');
-    if (pos != string::npos) {
-        key = line.substr(0, pos);
-        value = line.substr(pos + 1);
-            vector<string> values;
-            size_t start = 0, end = 0;
-            while ((end = value.find(',', start)) != string::npos) {
-                values.push_back(value.substr(start, end - start));
-                start = end + 1;            
-            }
-            // values.push_back(value.substr(start));
-            mp[key] = values;
+    unordered_map<string, vector<string>> table_name_map;
+    std::ifstream infile("../copy_data/table_name_map.txt");
+    if (!infile.is_open()) {
+        std::cerr << "Error: Unable to open file for reading." << std::endl;
+    }
+    // 逐行读取文件
+    std::string line;
+    std::string key;
+    std::vector<std::string> value;
+    while (std::getline(infile, line)) {
+        std::istringstream iss(line);
+        std::string token;
 
+        // 从冒号分隔的行中解析键和值
+        if (std::getline(iss, token, ':')) {
+            if (token != key) {
+                if (!key.empty()) {
+                    table_name_map[key] = value;
+                }
+                key = token;
+                value.clear();
+            }
+            while (std::getline(iss, token)) {
+                if (!token.empty()) {
+                    value.push_back(token);
+                }
+            }
         }
     }
 
-    fin.close();
-    return mp;
+    // 将最后一个键和值添加到 unordered_map 中
+    if (!key.empty()) {
+        table_name_map[key] = value;
+    }
+
+    // 关闭文件
+    infile.close();
+    return table_name_map;
 }
 string replaceAll(string str, string& oldStr, string& newStr) {
     size_t pos = 0;
@@ -271,13 +287,23 @@ void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,i
     auto start = std::chrono::high_resolution_clock::now();
     string str=query;
     unordered_map<string, vector<string>> table_name_map = stringToMap();
-    regex rgx("([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)");
-    vector<pair<string, string>> tab;
-    smatch match;
-    while (regex_search(str, match, rgx)) {
-       tab.push_back(make_pair(match[1],match[2]));
-        str = match.suffix().str();
+    regex_t regex;
+    regmatch_t matches[3];
+    vector<pair<string, string> > tab;
+
+    if (regcomp(&regex, "([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)", REG_EXTENDED) != 0) {
+        cerr << "Failed to compile regex" << endl;
     }
+
+    int pos = 0;
+    while (regexec(&regex, str.c_str() + pos, 3, matches, 0) == 0) {
+        string token1 = str.substr(pos + matches[1].rm_so, matches[1].rm_eo - matches[1].rm_so);
+        string token2 = str.substr(pos + matches[2].rm_so, matches[2].rm_eo - matches[2].rm_so);
+        tab.push_back(make_pair(token1, token2));
+        pos += matches[0].rm_eo;
+    }
+
+    regfree(&regex);
     // int length=tab.size();
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enc_query(tab,table_name_map,Enc_query,query);
@@ -308,7 +334,7 @@ void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,i
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
     cout<<"Row:"<<num<<endl;
-    std::cout << "程序执行时间：" << elapsed.count() << " 秒" << std::endl;
+    std::cout << "Execution time:" << elapsed.count() << " s" << std::endl;
     vector<vector<string>> final_vec;
     // for (int i = 0; i < res_vecs.size(); i++)
     // {

@@ -1,7 +1,7 @@
 CC = g++
-CXXFLAGS = -g -O0  -fno-omit-frame-pointer -Wall -std=c++14 -pthread
-LDFLAGS =  -I/root/pakages/copy/HashJoinOverEncryptedData -L/opt/pgsql/lib -L/usr/lib/x86_64-linux-gnu 
-LIBS = -lpq -lcrypto++ -lssl -lcrypto
+CXXFLAGS = -g -O0  -fno-omit-frame-pointer -Wall -std=c++11 -pthread
+LDFLAGS =  -L/opt/pgsql/lib -L/usr/lib64
+LIBS = -lpq -lcryptopp -lssl -lcrypto -lstdc++
 
 CUR_PATH := $(CURDIR)
 SRCDIR = src

@@ -56,8 +56,10 @@ void extend_table::Table_extend(Table *table)
     mp[table->value[i][col_id]]++;
    }
   //  Table new_table=table;
-   for(auto&[k,v]: mp)
+   for (auto const& pair: mp) 
    {
+    auto k=pair.first;
+    auto v=pair.second;
      if(v<(table->max_frequency))
      {
         Add_dummy_row(table,k,v);

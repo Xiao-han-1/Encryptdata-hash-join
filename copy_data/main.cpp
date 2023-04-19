@@ -16,7 +16,10 @@ using namespace std;
 string mapToString(const unordered_map<string, vector<string>>& map)
 {
     stringstream ss;
-    for (auto& [key, values] : map) {
+   for (auto const& pair: map) 
+   {
+    auto key=pair.first;
+    auto values=pair.second;
         ss << key << ":";
         for (auto& value : values) {
             ss << value << ",";
@@ -40,21 +43,56 @@ unordered_map<string,vector<string>> Mapping_name(Table table,vector<Enc_Table> 
   }
   return table_name_map;
 }
-Table store_data()
+Table store_data(int k)
 {
   Table table;
-  table.table_name="lineitem";
-  vector<string>name{"L_ORDERKEY ","L_PARTKEY","L_SUPPKEY","L_LINENUMBER","L_QUANTITY","L_EXTENDEDPRICE","L_DISCOUNT",
-  "L_TAX","L_RETURNFLAG","L_LINESTATUS","L_SHIPDATE","L_COMMITDATE","L_RECEIPTDATE","L_SHIPINSTRUCT","L_SHIPMODE","L_COMMENT"};
-  vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};
-  // vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
-  // vector<string>type{"int","string","string","int","string","double","string"};
-//   vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
-//   vector<string>type{"string","string","string","string"};
-  table.name=name;
-  table.type=type;  
-  string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/lineitem.tbl";   // 文件名
-  vector<vector<string>> data;      // 二维向量存储数据
+  string filename;
+  if(k==2)
+  {
+    table.table_name="orders";
+    cout<<table.table_name<<endl;
+    vector<string>name{"O_ORDERKEY", "O_CUSTKEY ","O_ORDERSTATUS","O_TOTALPRICE" ,"O_ORDERDATE"  ,"O_ORDERPRIORITY","O_CLERK","O_SHIPPRIORITY","O_COMMENT"};
+    vector<string>type{"string","string","string","string","string","string","string","string","string"};
+    filename = "../tpch-dbgen/orders.tbl";
+    table.Join_col_id=0;
+    table.name=name;
+    table.type=type;
+  }
+  if(k==3)
+  {
+    table.table_name="lineitem";
+    cout<<table.table_name<<endl;
+    vector<string>name{"L_ORDERKEY ","L_PARTKEY","L_SUPPKEY","L_LINENUMBER","L_QUANTITY","L_EXTENDEDPRICE","L_DISCOUNT",
+   "L_TAX","L_RETURNFLAG","L_LINESTATUS","L_SHIPDATE","L_COMMITDATE","L_RECEIPTDATE","L_SHIPINSTRUCT","L_SHIPMODE","L_COMMENT"};
+   vector<string>type{"int","int","int","int","double","double","double","double","string","string","string","string","string","string","string","string"};   filename = "../tpch-dbgen/lineitem.tbl";
+    filename = "../tpch-dbgen/lineitem.tbl";
+    table.Join_col_id=0;
+    table.name=name;
+    table.type=type;
+  }
+    if(k==1)
+  {
+    table.table_name="nation";
+    cout<<table.table_name<<endl;
+    vector<string>name{"N_NATIONKEY","N_NAME","N_REGIONKEY","N_COMMENT"};
+    vector<string>type{"string","string","string","string"}; 
+    filename = "../tpch-dbgen/nation.tbl"; 
+    table.Join_col_id=0;
+    table.name=name;
+    table.type=type;
+  }
+      if(k==0)
+  {
+    table.table_name="supplier";
+    cout<<table.table_name<<endl;
+    vector<string>name{"S_SUPPKEY","S_NAME","S_ADDRESS","S_NATIONKEY","S_PHONE","S_ACCTBAL","S_COMMENT"};
+    vector<string>type{"int","string","string","int","string","double","string"}; 
+    filename = "../tpch-dbgen/supplier.tbl";
+    table.Join_col_id=3;
+    table.name=name;
+    table.type=type;
+  }
+  vector<vector<string>> data;      // 二维向量存储数据cd
   ifstream file(filename);          // 打开文件
   if (file) {                       // 如果文件存在
       string line;
@@ -74,7 +112,6 @@ Table store_data()
   }  
   table.value=data;
   data.clear();
-  table.Join_col_id=2;
   return table;
 
 }
@@ -82,8 +119,11 @@ int main()
 {
     int n;
     cin>>n;
+    int t=3;
     vector<string>Columns;
-    Table table=store_data();
+    while(t==3)
+    {
+    Table table=store_data(t);
     int id=table.Join_col_id;
       for(int i=0;i<table.value.size();i++)
     {
@@ -108,20 +148,22 @@ int main()
     child_table.clear();
     unordered_map<string,vector<string>> table_name_map;
     table_name_map=Mapping_name(table,Aes_Table);
-    std::ofstream outfile("table_name_map.txt", std::ios::app);
+   std::ofstream outfile("table_name_map.txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
-        return 1;
     }
-    for (const auto& [key, value] : table_name_map) {
-        outfile << key << ",";
+    for (auto const& pair: table_name_map) {
+        auto key = pair.first;
+        auto value = pair.second;
+        outfile << key << ":";
         for (const auto& name : value) {
-            outfile << name << ",";
+            outfile << name << std::endl << key << ":";
         }
         outfile << std::endl;
     }
-
     outfile.close();
+    table.~table();
+    }
     // table.~table();
     // pg* p=new pg();
     // p->copy_child_database(Aes_Table,Hash_child_table);

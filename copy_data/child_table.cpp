@@ -48,7 +48,7 @@ int child_table::ElbowMethod(vector<int> data, int n)
 }
 void child_table::K_means(vector<Ls> &data,int k)
 {
-sort(data.begin(),data.end(),[](Ls &l1,Ls  &l2){ return l1.num < l2.num; });
+sort(data.begin(),data.end(),[](const Ls &l1,const Ls  &l2){ return l1.num < l2.num; });
          //初始化聚类中心 
 vector<int> center; 
 int divisor = data.size() / k; 
@@ -89,8 +89,10 @@ void child_table::get_frequency(vector<string>table,unordered_map<string,int> &f
 }
 void child_table::Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre_num,unordered_map<string,vector<int>> local_num)
 {
-  for(auto&[k,v]:fre_num)
-  {
+   for (auto const& pair: fre_num) 
+   {
+    auto k=pair.first;
+    auto v=pair.second;
      Ls tmp;
      tmp.name=k;
      tmp.num=v;
@@ -194,7 +196,9 @@ vector<Table> child_table::Table_divide(vector<string>Columns,Table table)
     Full_K_table(K_table,fre_num,local_num);
     // int k=ElbowMethod(table,table.size());
     // cout<<k<<endl;
-    K_means(K_table,20);
+    if(table.table_name=="orders")
+    K_means(K_table,30);
+    else K_means(K_table,20);
     //unordered_map<string,vector<string>>name_map;
     vector<Table>child_table;
     Devide_table(K_table,table,child_table);

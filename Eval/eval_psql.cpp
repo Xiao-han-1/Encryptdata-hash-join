@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 #include <fstream>
-#include "/usr/include/postgresql/libpq-fe.h"
+#include "libpq-fe.h"
 # include<ctime>
 #include <chrono>
 using namespace std;
@@ -27,7 +27,7 @@ int main() {
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
-    std::cout << "程序执行时间：" << elapsed.count() << " 秒" << std::endl;
+    std::cout << "Execution time" << elapsed.count() << " s" << std::endl;
     ofstream file("result_lineitem.txt");
     for (int row = 0; row < PQntuples(res); row++) {
         for (int col = 0; col < PQnfields(res); col++) {

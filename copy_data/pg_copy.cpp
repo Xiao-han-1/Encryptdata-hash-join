@@ -1,12 +1,13 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <fstream>
 #include <vector>
 #include <unordered_map>
 #include "child_table.hh"
 #include "Hash_Encrypt.hh"
-#include "/usr/include/postgresql/libpq-fe.h"
+#include "libpq-fe.h"
 #include "pg_copy.hh"
 using namespace std;
 
@@ -43,7 +44,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
   }
   query+=Enc_Table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/data/"+Enc_Table->hash_table_name+".tbl";
+  string filename="data/"+Enc_Table->hash_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -61,10 +62,24 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
         outfile << std::endl;
     }
     outfile.close();
+    char *path = realpath(filename.c_str(), NULL);
+    if (path == NULL) {
+        cerr << "failed to get file path!" << endl;
+    }
+    string r_path=path;
+    free(path);
     // filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/"+filename;
-    string s="COPY "+Enc_Table->hash_table_name+ " FROM '"+ filename+"' WITH (FORMAT csv, DELIMITER '|')";
+    string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c";
+    s=s+"\"\\copy "+Enc_Table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
+    // pg::execute(s);
+    std::system(s.c_str());
+    // pg::execute(s);
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    } else {
+        cout << "File successfully deleted" << endl;
+    }
 
-    pg::execute(s);
   // vector<vector<string>>vue=Enc_Table->value;
   // for(int i=0;i<vue.size();i++)
   // {
@@ -78,7 +93,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
   //   query=query+"'"+vue[i][length-1]+"')";
   //   pg::execute(query);
   // }
-  cout<<"Copy_Hash_DATA successful!"<<endl;
+//   cout<<"Copy_Hash_DATA successful!"<<endl;
 }
 void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
 {
@@ -91,7 +106,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
   }
   query+=Enc_Table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/data/"+Enc_Table->aes_table_name+".tbl";
+  string filename="data/"+Enc_Table->aes_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -109,8 +124,20 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
         outfile << std::endl;
     }
     outfile.close();
-    string s="COPY "+Enc_Table->aes_table_name+ " FROM '"+filename+"' WITH (FORMAT csv, DELIMITER '|')";
-    pg::execute(s);
+    char *path = realpath(filename.c_str(), NULL);
+    if (path == NULL) {
+        cerr << "failed to get file path!" << endl;
+    }
+    string r_path=path;
+    free(path);
+    string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c ";
+    s=s+"\"\\copy "+Enc_Table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
+    // pg::execute(s);
+    std::system(s.c_str());
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    }
+
   // vector<vector<string>>vue=Enc_Table->value;
   // for(int i=0;i<Enc_Table->value.size();i++)
   // {
@@ -124,7 +151,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
   //   query=query+"'"+Enc_Table->value[i][length-1]+"')";
   //   pg::execute(query);
   // }
-  //   cout<<"Copy_AES_DATA successful!"<<endl;
+    //  cout<<"Copy_AES_DATA successful!"<<endl;
 
 }
 // void  pg::copy_child_database(vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
