@@ -16,7 +16,10 @@ using namespace std;
 string mapToString(const unordered_map<string, vector<string>>& map)
 {
     stringstream ss;
-    for (auto& [key, values] : map) {
+   for (auto const& pair: map) 
+   {
+    auto key=pair.first;
+    auto values=pair.second;
         ss << key << ":";
         for (auto& value : values) {
             ss << value << ",";
@@ -53,8 +56,8 @@ Table store_data()
 //   vector<string>type{"string","string","string","string"};
   table.name=name;
   table.type=type;  
-  string filename = "/root/pakages/copy/HashJoinOverEncryptedData/TPC-H/dbgen/lineitem.tbl";   // 文件名
-  vector<vector<string>> data;      // 二维向量存储数据
+  string filename = "../tpch-dbgen/lineitem.tbl";   // 文件名
+  vector<vector<string>> data;      // 二维向量存储数据cd
   ifstream file(filename);          // 打开文件
   if (file) {                       // 如果文件存在
       string line;
@@ -113,7 +116,10 @@ int main()
         std::cerr << "Error: Unable to open file for writing." << std::endl;
         return 1;
     }
-    for (const auto& [key, value] : table_name_map) {
+     for (auto const& pair: table_name_map) 
+   {
+    auto key=pair.first;
+    auto value=pair.second;
         outfile << key << ",";
         for (const auto& name : value) {
             outfile << name << ",";

@@ -1,51 +1,24 @@
 #include <iostream>
-#include <string>
-#include <cstring>
-#include <stdint.h>
+#include <iomanip>
+#include <sstream>
+#include <cryptopp/sha.h>
 
-uint64_t MurmurHash64A ( const void * key, int len, unsigned int seed ) {
-    const uint64_t m = 0xc6a4a7935bd1e995;
-    const int r = 47;
+using CryptoPP::SHA256;
 
-    uint64_t h = seed ^ (len * m);
-
-    const uint64_t * data = (const uint64_t *)key;
-    const uint64_t * end = data + (len/8);
-
-    while(data != end) {
-        uint64_t k = *data++;
-
-        k *= m; 
-        k ^= k >> r; 
-        k *= m; 
-
-        h ^= k;
-        h *= m; 
-    }
-
-    const unsigned char * data2 = (const unsigned char*)data;
-
-    switch(len & 7) {
-    case 7: h ^= uint64_t(data2[6]) << 48;
-    case 6: h ^= uint64_t(data2[5]) << 40;
-    case 5: h ^= uint64_t(data2[4]) << 32;
-    case 4: h ^= uint64_t(data2[3]) << 24;
-    case 3: h ^= uint64_t(data2[2]) << 16;
-    case 2: h ^= uint64_t(data2[1]) << 8;
-    case 1: h ^= uint64_t(data2[0]);
-            h *= m;
-    };
-
-    h ^= h >> r;
-    h *= m;
-    h ^= h >> r;
-
-    return h;
-}
 
 int main() {
-    std::string input = "Hello World";
-    uint64_t hash = MurmurHash64A(input.c_str(), input.size(), 0);
-    std::cout << "Hash value of " << input << " is " << hash << std::endl;
+    std::string data = "Hello, world!";
+    std::vector<byte> digest(SHA256::DIGESTSIZE);
+    
+    SHA256 hash;
+    hash.Update((const byte*)data.data(), data.size());
+    hash.Final(digest.data());
+    std::stringstream ss;
+    for (auto b : digest) ss << std::hex << std::setw(2) << std::setfill('0') << (int)b;
+
+    std::string hex_hash = ss.str();
+
+
+
     return 0;
 }

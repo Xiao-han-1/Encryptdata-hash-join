@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <math.h>
 #include <thread>
+#include <regex.h>
 #include <chrono>
 #include "Execute_hash_query.hh"
 using namespace std;
@@ -271,13 +272,23 @@ void Execute_hash_query::processData(vector<vector<pair<string, string>>> data,i
     auto start = std::chrono::high_resolution_clock::now();
     string str=query;
     unordered_map<string, vector<string>> table_name_map = stringToMap();
-    regex rgx("([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)");
-    vector<pair<string, string>> tab;
-    smatch match;
-    while (regex_search(str, match, rgx)) {
-       tab.push_back(make_pair(match[1],match[2]));
-        str = match.suffix().str();
+    regex_t regex;
+    regmatch_t matches[3];
+    vector<pair<string, string> > tab;
+
+    if (regcomp(&regex, "([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)", REG_EXTENDED) != 0) {
+        cerr << "Failed to compile regex" << endl;
     }
+
+    int pos = 0;
+    while (regexec(&regex, str.c_str() + pos, 3, matches, 0) == 0) {
+        string token1 = str.substr(pos + matches[1].rm_so, matches[1].rm_eo - matches[1].rm_so);
+        string token2 = str.substr(pos + matches[2].rm_so, matches[2].rm_eo - matches[2].rm_so);
+        tab.push_back(make_pair(token1, token2));
+        pos += matches[0].rm_eo;
+    }
+
+    regfree(&regex);
     // int length=tab.size();
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enc_query(tab,table_name_map,Enc_query,query);

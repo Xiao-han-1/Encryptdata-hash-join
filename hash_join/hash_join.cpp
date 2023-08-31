@@ -23,8 +23,6 @@ int main()
     // string s="5";
     // s=aes->Decrypt(s);
     // cout<<s<<endl;
-    int n;
-    cin>>n;
     string query="select * from lineitem join nation on lineitem.l_suppkey = nation.n_nationkey";
     // cout<<query<<endl;
     Execute_hash_query* eq=new Execute_hash_query();
