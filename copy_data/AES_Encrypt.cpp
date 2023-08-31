@@ -288,19 +288,20 @@ void  AES_Encrypt::Encrypt_table(Table* table,Enc_Table* Enc_table)
 	// Enc_table.value=Enc_val;
     // Enc_val.clear();
 }
-vector<Enc_Table>  AES_Encrypt::Encrypt_child_table(vector<table> child_table)
+vector<Enc_Table*>  AES_Encrypt::Encrypt_child_table(vector<Table*> child_table)
 {
     pg* p=new pg();
-    table En_table;
-	vector<Enc_Table> Aes_child_table;
+    // Table* En_table=new Table();
+	vector<Enc_Table*> Aes_child_table;
     int length=child_table.size();
     for(int i=0;i<length;i++)
 	{
-	  Enc_Table Atable;
-      Encrypt_table(&child_table[i],&Atable);
-      p->aes_copy_database(&Atable,child_table[i].table_name);
-      Atable.value.clear();
+	  Enc_Table* Atable=new Enc_Table();
+      Encrypt_table(child_table[i],Atable);
+      p->aes_copy_database(Atable,child_table[i]->table_name);
+      Atable->value.clear();
 	  Aes_child_table.push_back(Atable);
+      delete Atable;
     }
 	
     return Aes_child_table;

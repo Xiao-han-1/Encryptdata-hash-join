@@ -12,7 +12,7 @@
 using namespace std;
 
 pg::pg(){
-    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=postgres password=letmien"); 
+    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=hamm password=letmien"); 
     if (PQstatus(conn) == CONNECTION_BAD)
      { cout << "Connection to database failed \n";
      cerr << "查询数据失败: " << PQerrorMessage(conn) << endl;
@@ -33,18 +33,18 @@ void pg::execute(string query)
     PGresult *res;
     pg::execute(query,res);
 }
-void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
+void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
 {
    string query="create table ";
-  query+=Enc_Table->hash_table_name+ "(";
-  int len=Enc_Table->name.size();
+  query+=Enc_table->hash_table_name+ "(";
+  int len=Enc_table->name.size();
   for(int i=0;i<len-1;i++)
   {
-   query+=Enc_Table->name[i]+" text,";
+   query+=Enc_table->name[i]+" text,";
   }
-  query+=Enc_Table->name[len-1]+" text)";
+  query+=Enc_table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="data/"+Enc_Table->hash_table_name+".tbl";
+  string filename="data/"+Enc_table->hash_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -52,7 +52,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
         return;
     }
 
-    for (const auto &row : Enc_Table->value) {
+    for (const auto &row : Enc_table->value) {
         for (std::size_t i = 0; i < row.size(); i++) {
             outfile << row[i];
             if (i != row.size() - 1) {
@@ -70,15 +70,13 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
     free(path);
     // filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/"+filename;
     string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c";
-    s=s+"\"\\copy "+Enc_Table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
+    s=s+"\"\\copy "+Enc_table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     // pg::execute(s);
     std::system(s.c_str());
     // pg::execute(s);
     if (remove(filename.c_str()) != 0) {
         cout << "Error deleting file" << endl;
-    } else {
-        cout << "File successfully deleted" << endl;
-    }
+    } 
 
   // vector<vector<string>>vue=Enc_Table->value;
   // for(int i=0;i<vue.size();i++)
@@ -95,18 +93,18 @@ void  pg::hash_copy_database(Enc_Table* Enc_Table,string table_name)
   // }
 //   cout<<"Copy_Hash_DATA successful!"<<endl;
 }
-void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
+void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
 {
   string query="create table ";
-  query+=Enc_Table->aes_table_name+ " (flag text,";
-  int len=Enc_Table->name.size();
+  query+=Enc_table->aes_table_name+ " (flag text,";
+  int len=Enc_table->name.size();
   for(int i=0;i<len-1;i++)
   {
-   query+=Enc_Table->name[i]+" text,";
+   query+=Enc_table->name[i]+" text,";
   }
-  query+=Enc_Table->name[len-1]+" text)";
+  query+=Enc_table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="data/"+Enc_Table->aes_table_name+".tbl";
+  string filename="data/"+Enc_table->aes_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -114,7 +112,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
         return;
     }
 
-    for (const auto &row : Enc_Table->value) {
+    for (const auto &row : Enc_table->value) {
         for (std::size_t i = 0; i < row.size(); i++) {
             outfile << row[i];
             if (i != row.size() - 1) {
@@ -131,7 +129,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
     string r_path=path;
     free(path);
     string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c ";
-    s=s+"\"\\copy "+Enc_Table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
+    s=s+"\"\\copy "+Enc_table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     // pg::execute(s);
     std::system(s.c_str());
     if (remove(filename.c_str()) != 0) {
@@ -154,7 +152,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_Table,string table_name)
     //  cout<<"Copy_AES_DATA successful!"<<endl;
 
 }
-// void  pg::copy_child_database(vector<Enc_Table> Aes_Table,vector<Enc_Table> Hash_child_table)
+// void  pg::copy_child_database(vector<Enc_Table*> Aes_Table,vector<Enc_Table*> Hash_child_table)
 // {
 //   PGresult *res;
 //   int hash_len=Hash_child_table.size();

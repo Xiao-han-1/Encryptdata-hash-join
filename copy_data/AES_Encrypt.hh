@@ -49,7 +49,7 @@ class AES_Encrypt
 	// vector<Enc_Table> Encrypt_child_table(vector<Table> childtable);
 	vector<string> Encrypt_row(int flag,vector<string>row);
 	void  Encrypt_table(Table* table,Enc_Table* Enc_table);
-	vector<Enc_Table>  Encrypt_child_table(vector<table> child_table);
+	vector<Enc_Table*>  Encrypt_child_table(vector<Table*> child_table);
 };
 
 #endif

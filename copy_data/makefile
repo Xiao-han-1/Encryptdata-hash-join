@@ -1,11 +1,11 @@
 CC = g++
 CXXFLAGS = -g -O0  -fno-omit-frame-pointer -Wall -std=c++11
-LDFLAGS =  -L/opt/pgsql/lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib64
-LIBS = -lpq -lcryptopp -lssl -lcrypto
+LDFLAGS =  -L/usr/local/pgsql/lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib64 
+LIBS = -lcryptopp -lpq -lssl -lcrypto
 
 CUR_PATH := $(CURDIR)
 SRCDIR = src
-INCDIR = -I$(CUR_PATH)
+INCDIR = -I$(CUR_PATH) -I/usr/local/pgsql/include
 OBJDIR = obj
 BINDIR = bin
 

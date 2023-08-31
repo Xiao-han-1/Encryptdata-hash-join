@@ -134,23 +134,25 @@ vector<vector<int>> child_table::trans_row_to_col(vector<vector<int>> vue)
     }
     return re;
 }
-void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &child_table)
+vector<Table*> child_table::Devide_table(vector<Ls> K_table,Table* table)
 {
     // unordered_map<int,vector<string>>local_row;
-    vector<vector<string>>vue=table.value;
+    vector<Table*> child_table;
+    vector<vector<string>>vue=table->value;
     //  trans_col_to_row(vue,local_row);//将原本按列存的数据转为按行存
     int len=K_table.size();
     Ls tmp=K_table[len-1];
     int n=tmp.label+1;
+    Table* t=new Table();
     for(int i=0;i<n;i++)
     {
-        Table t;
         int Frequency_max=0;
-        t.name=table.name;
-        t.table_name=table.table_name;
-        t.type=table.type;
-        t.Join_col_id=table.Join_col_id;
-        vector<vector<string>> ve;
+        t->name=table->name;
+        t->table_name=table->table_name;
+        t->type=table->type;
+        t->Join_col_id=table->Join_col_id;
+        t->value.clear();
+        // vector<vector<string>> ve;
         for(auto &l:K_table)
         {
           if(l.label==i)
@@ -160,21 +162,23 @@ void child_table::Devide_table(vector<Ls> K_table,Table table,vector<Table> &chi
             Frequency_max=max(Frequency_max,tmp_len);
             for(auto &id:tmp)
             {
-                vector<string>row;
-                row=table.value[id];
-                ve.push_back(row);
+                vector<string> row=table->value[id];
+                t->value.push_back(table->value[id]);
             }
           }
           if(l.label>i) break;
         }
         // ve=trans_row_to_col(ve);
-        t.value=ve;
-        t.max_frequency=Frequency_max;
+        // t->value=ve;
+        t->max_frequency=Frequency_max;
+        if(t->value.size()!=0)
         child_table.push_back(t);
     }
+    delete t;
+    return child_table;
 }
 
-vector<Table> child_table::Table_divide(vector<string>Columns,Table table)
+vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table)
 {
     // vector<int>Columns={2,2,3,3,3,1,6,6,6,6,6};
     // Table table;
@@ -196,11 +200,11 @@ vector<Table> child_table::Table_divide(vector<string>Columns,Table table)
     Full_K_table(K_table,fre_num,local_num);
     // int k=ElbowMethod(table,table.size());
     // cout<<k<<endl;
-    if(table.table_name=="orders")
-    K_means(K_table,30);
-    else K_means(K_table,20);
+    // if(table->table_name=="orders")
+    // K_means(K_table,30);
+    // else 
+    K_means(K_table,20);
     //unordered_map<string,vector<string>>name_map;
-    vector<Table>child_table;
-    Devide_table(K_table,table,child_table);
+    vector<Table*>child_table=Devide_table(K_table,table);
     return child_table;
 }

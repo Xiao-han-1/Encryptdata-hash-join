@@ -2,52 +2,26 @@
 #include <time.h>
 #include <sstream>
 #include <iomanip>
-
+#include <cryptopp/sha.h>
 using namespace std;
-uint64_t MurmurHash64A ( const void * key, int len, unsigned int seed ) {
-    const uint64_t m = 0xc6a4a7935bd1e995;
-    const int r = 47;
+using namespace CryptoPP;
+string Sha256_Encrypt(string data) {
 
-    uint64_t h = seed ^ (len * m);
+   std::vector<byte> digest(SHA256::DIGESTSIZE);
+    CryptoPP::SHA256 hash;
+    hash.Update((const byte*)data.data(), data.size());
+    hash.Final(digest.data());
+    std::stringstream ss;
+    for (auto b : digest) ss << std::hex << std::setw(2) << std::setfill('0') << (int)b;
 
-    const uint64_t * data = (const uint64_t *)key;
-    const uint64_t * end = data + (len/8);
-
-    while(data != end) {
-        uint64_t k = *data++;
-
-        k *= m; 
-        k ^= k >> r; 
-        k *= m; 
-
-        h ^= k;
-        h *= m; 
-    }
-
-    const unsigned char * data2 = (const unsigned char*)data;
-
-    switch(len & 7) {
-    case 7: h ^= uint64_t(data2[6]) << 48;
-    case 6: h ^= uint64_t(data2[5]) << 40;
-    case 5: h ^= uint64_t(data2[4]) << 32;
-    case 4: h ^= uint64_t(data2[3]) << 24;
-    case 3: h ^= uint64_t(data2[2]) << 16;
-    case 2: h ^= uint64_t(data2[1]) << 8;
-    case 1: h ^= uint64_t(data2[0]);
-            h *= m;
-    };
-
-    h ^= h >> r;
-    h *= m;
-    h ^= h >> r;
-
-    return h;
+    std::string hex_hash = ss.str();
+	return hex_hash;
+ 
 }
 
 string Hash_Table::Encrypt(string data)
 {
-    uint64_t hash = MurmurHash64A(data.c_str(), data.size(), 0);
-	string hash_output=to_string(hash);
+    string  hash_output = Sha256_Encrypt(data);
     return hash_output;
 };
 void Hash_Table::Create_data_block(vector<string> &Enc_name,vector<string> &type_name)
@@ -112,19 +86,22 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
 	// hash_res.clear();
 	// return h_table;
 }
-vector<Enc_Table> Hash_Table::GetHash_table(vector<Table> child_table,vector<Enc_Table> &Aes_child_Table,vector<string> column)
+vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<Enc_Table*> &Aes_child_Table,vector<string> column)
 {
 	pg* p=new pg();
-	vector<Enc_Table> hash_child_table;
+	vector<Enc_Table*> hash_child_table;
 	int length=child_table.size();
+	Enc_Table* hash_table=new Enc_Table();
 	for(int i=0;i<length;i++)
 	{
-		Enc_Table hash_table;
-		Hash_Enc_Table(&child_table[i],&Aes_child_Table[i],&hash_table);
-        p->hash_copy_database(&hash_table,child_table[i].table_name);
-		hash_table.value.clear();
+		hash_table->~Enc_table();
+		Hash_Enc_Table(child_table[i],Aes_child_Table[i],hash_table);
+        p->hash_copy_database(hash_table,child_table[i]->table_name);
+		hash_table->value.clear();
 		hash_child_table.push_back(hash_table);
+		
 	}
+	delete hash_table;
 	return hash_child_table;
 }
 // int main()
