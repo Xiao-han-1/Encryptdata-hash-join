@@ -1,0 +1,21 @@
+Row:4500000line
+Execution time:514.858 s
+Row:4500000line
+Execution time:523.527 s
+Row:4500000line
+Execution time:524.147 s
+Row:4500000line
+Execution time:524.181 s
+Row:4500000line
+Execution time:523.623 s
+Row:4500000line
+Execution time:523.98 s
+Row:4500000line
+Execution time:523.605 s
+Row:4500000line
+Execution time:524.631 s
+Row:4500000line
+Execution time:523.299 s
+Row:4500000line
+Execution time:523.589 s
+AVG Execution time:522.944 s

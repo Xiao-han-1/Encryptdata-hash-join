@@ -21,7 +21,7 @@ int main() {
 
     // char *command = (char *) malloc(strlen(sql) + strlen(tablename) + strlen(filename) + 1);
     // sprintf(command, sql, tablename, filename);
-    string filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/data/test.tbl";
+    string filename="../TEST/tpch-dbgen-1/orders.tbl";
     ofstream out(filename);
 
     if (!out.is_open()) {
@@ -29,18 +29,18 @@ int main() {
     }
     out.close();
     string name="test";
-    // string filename=" '/root/pakages/copy/HashJoinOverEncryptedData/Eval/test.tbl' ";
-    // string s="COPY "+name+ " FROM "+ filename+" WITH (FORMAT csv, DELIMITER '|')";
-    // cout<<s<<endl;
-    // PGresult *res = PQexec(conn, s.c_str());
-    // if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-    //     fprintf(stderr, "COPY command failed: %s", PQerrorMessage(conn));
-    //     PQclear(res);
-    //     PQfinish(conn);
-    //     exit(1);
-    // }
+    string filename=" '/root/pakages/copy/HashJoinOverEncryptedData/Eval/test.tbl' ";
+    string s="COPY "+name+ " FROM "+ filename+" WITH (FORMAT csv, DELIMITER '|')";
+    cout<<s<<endl;
+    PGresult *res = PQexec(conn, s.c_str());
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        fprintf(stderr, "COPY command failed: %s", PQerrorMessage(conn));
+        PQclear(res);
+        PQfinish(conn);
+        exit(1);
+    }
 
-    // PQclear(res);
+    PQclear(res);
     PQfinish(conn);
     return 0;
 }

@@ -28,10 +28,10 @@ void Hash_Table::Create_data_block(vector<string> &Enc_name,vector<string> &type
 {
 	//倒排索引列表中每个表的结构
 	Enc_name.push_back("hash_value");type_name.push_back("string");
-	Enc_name.push_back("table_name");type_name.push_back("string");
+	// Enc_name.push_back("table_name");type_name.push_back("string");
 	Enc_name.push_back("row_id");type_name.push_back("string");
-	Enc_name.push_back("index_id");type_name.push_back("string");
-	Enc_name.push_back("next_id");type_name.push_back("string");
+	// Enc_name.push_back("index_id");type_name.push_back("string");
+	// Enc_name.push_back("next_id");type_name.push_back("string");
 }
 void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_table)
 {
@@ -45,8 +45,8 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
     Create_data_block(Enc_name,type_name);
 	h_table->name=Enc_name;
 	h_table->type=type_name;
-	Enc_name.clear();
-	type_name.clear();
+	// Enc_name.clear();
+	// type_name.clear();
 	int col=table->Join_col_id;
 	int Row_num=table->value.size();
 	unordered_map<string,vector<string>>invert_index;
@@ -67,14 +67,14 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
 	  {
 		vector<string>tmp;
 		tmp.push_back(e_k);//value
-	    tmp.push_back(h_table->aes_table_name);//table_name
+	    // tmp.push_back(h_table->aes_table_name);//table_name
         tmp.push_back(v[i]);//row_id
-		tmp.push_back(to_string(i));//id
-		if((i+1)<v.size())
-		{
-			tmp.push_back(to_string(table_len+i+1));//next_id
-		}
-        else tmp.push_back("-1");
+		// tmp.push_back(to_string(i));//id
+		// if((i+1)<v.size())
+		// {
+		// 	tmp.push_back(to_string(table_len+i+1));//next_id
+		// }
+        // else tmp.push_back("-1");
 		h_table->value.push_back(tmp);
 		tmp.clear(); 
 	  }
@@ -88,24 +88,33 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
 }
 vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<Enc_Table*> &Aes_child_Table,vector<string> column)
 {
-	pg* p=new pg();
+	// pg* p=new pg();
 	vector<Enc_Table*> hash_child_table;
+	size_t total_size = 0;
 	int length=child_table.size();
-	Enc_Table* hash_table=new Enc_Table();
 	for(int i=0;i<length;i++)
 	{
-		hash_table->~Enc_table();
+		Enc_Table* hash_table=new Enc_Table();
 		Hash_Enc_Table(child_table[i],Aes_child_Table[i],hash_table);
-        p->hash_copy_database(hash_table,child_table[i]->table_name);
-		hash_table->value.clear();
 		hash_child_table.push_back(hash_table);
+		std::vector<std::vector<std::string>> value=hash_table->value;
+        for (const auto &inner_vector : value) {
+            for (const auto &str : inner_vector) {
+                total_size += str.size();
+            }
+		}
 		
 	}
-	delete hash_table;
+	double total_size_kb = static_cast<double>(total_size) / 1024.0;
+    std::ofstream outfile("experiment/result.txt", std::ios::app);
+    if (!outfile.is_open()) {
+        std::cerr << "Failed to open file."<< std::endl;
+    }
+     outfile << "Hash : "<< std::endl;
+    outfile << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+    outfile.close();
+
+    std::cout << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+	// delete hash_table;
 	return hash_child_table;
 }
-// int main()
-// {
-// 	string s="hello";
-// 	Hash_Enc
-// }

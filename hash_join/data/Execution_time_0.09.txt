@@ -1,0 +1,43 @@
+Scale:0.09
+Row:135000 line
+Execution time:13.6533 s
+Decrypt time:12.208 s
+Scale:0.09
+Row:135000 line
+Execution time:13.7063 s
+Decrypt time:12.3036 s
+Scale:0.09
+Row:135000 line
+Execution time:13.6956 s
+Decrypt time:12.3056 s
+Scale:0.09
+Row:135000 line
+Execution time:13.7251 s
+Decrypt time:12.3376 s
+Scale:0.09
+Row:135000 line
+Execution time:13.6922 s
+Decrypt time:12.3059 s
+AVG Execution time:13.6945 s
+Scale:0.09
+Row:135000 line
+Execution time:15.0977 s
+Decrypt time:11.9423 s
+Scale:0.09
+Row:135000 line
+Execution time:13.3787 s
+Decrypt time:12.031 s
+Scale:0.09
+Row:135000 line
+Execution time:13.3882 s
+Decrypt time:12.0528 s
+Scale:0.09
+Row:135000 line
+Execution time:13.4024 s
+Decrypt time:12.066 s
+Scale:0.09
+Row:135000 line
+Execution time:13.3719 s
+Decrypt time:12.0371 s
+AVG Decrypt time:12.0258 s
+AVG Execution time:13.7278 s

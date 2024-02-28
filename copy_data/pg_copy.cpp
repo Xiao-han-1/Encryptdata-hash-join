@@ -12,7 +12,7 @@
 using namespace std;
 
 pg::pg(){
-    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=hamm password=letmien"); 
+    this->conn = PQconnectdb("hostaddr=127.0.0.1 port=5432 dbname=hash_join user=postgres password=letmien"); 
     if (PQstatus(conn) == CONNECTION_BAD)
      { cout << "Connection to database failed \n";
      cerr << "查询数据失败: " << PQerrorMessage(conn) << endl;
@@ -69,7 +69,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
     string r_path=path;
     free(path);
     // filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/"+filename;
-    string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c";
+    string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c";
     s=s+"\"\\copy "+Enc_table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     // pg::execute(s);
     std::system(s.c_str());
@@ -128,7 +128,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
     }
     string r_path=path;
     free(path);
-    string s="/opt/pgsql/bin/psql -d hash_join -U postgres -c ";
+    string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c ";
     s=s+"\"\\copy "+Enc_table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     // pg::execute(s);
     std::system(s.c_str());

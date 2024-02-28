@@ -1,0 +1,21 @@
+Row:7500000line
+Execution time:876.15 s
+Row:7500000line
+Execution time:888.4 s
+Row:7500000line
+Execution time:887.261 s
+Row:7500000line
+Execution time:890.459 s
+Row:7500000line
+Execution time:887.998 s
+Row:7500000line
+Execution time:888.297 s
+Row:7500000line
+Execution time:888.443 s
+Row:7500000line
+Execution time:888.455 s
+Row:7500000line
+Execution time:889.566 s
+Row:7500000line
+Execution time:890.616 s
+AVG Execution time:887.565 s

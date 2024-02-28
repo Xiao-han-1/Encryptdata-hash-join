@@ -1,0 +1,718 @@
+Query:
+SELECT L_SUPPKEY,S_SUPPKEY,S_NATIONKEY,N_NATIONKEY FROM lineitem, supplier, nation WHERE lineitem.L_SUPPKEY = supplier.S_SUPPKEY And supplier.S_NATIONKEY = nation.N_NATIONKEY
+Enc Query:
+SELECT Hash_table_ap3stp.row_id,Hash_table_b3p4yz.row_id,Hash_table_nn7lwl.row_id FROM  Hash_table_ap3stp,Hash_table_b3p4yz,Hash_table_nvm4j2,Hash_table_nn7lwl  WHERE Hash_table_ap3stp.Hash_value=Hash_table_b3p4yz.Hash_value And Hash_table_nvm4j2.Hash_value=Hash_table_nn7lwl.Hash_value And Hash_table_b3p4yz.row_id = Hash_table_nvm4j2.row_id;
+Enc Query:
+SELECT Hash_table_16qo7f.row_id,Hash_table_9wjce9.row_id,Hash_table_xk1gw9.row_id FROM  Hash_table_16qo7f,Hash_table_9wjce9,Hash_table_ev4huu,Hash_table_xk1gw9  WHERE Hash_table_16qo7f.Hash_value=Hash_table_9wjce9.Hash_value And Hash_table_ev4huu.Hash_value=Hash_table_xk1gw9.Hash_value And Hash_table_9wjce9.row_id = Hash_table_ev4huu.row_id;
+Enc Query:
+SELECT Hash_table_3poucy.row_id,Hash_table_c9mtf9.row_id,Hash_table_dzwhlc.row_id FROM  Hash_table_3poucy,Hash_table_c9mtf9,Hash_table_jp495y,Hash_table_dzwhlc  WHERE Hash_table_3poucy.Hash_value=Hash_table_c9mtf9.Hash_value And Hash_table_jp495y.Hash_value=Hash_table_dzwhlc.Hash_value And Hash_table_c9mtf9.row_id = Hash_table_jp495y.row_id;
+Enc Query:
+SELECT Hash_table_ceun64.row_id,Hash_table_lxdepm.row_id,Hash_table_kovfdo.row_id FROM  Hash_table_ceun64,Hash_table_lxdepm,Hash_table_1wxy07,Hash_table_kovfdo  WHERE Hash_table_ceun64.Hash_value=Hash_table_lxdepm.Hash_value And Hash_table_1wxy07.Hash_value=Hash_table_kovfdo.Hash_value And Hash_table_lxdepm.row_id = Hash_table_1wxy07.row_id;
+Enc Query:
+SELECT Hash_table_ilsn81.row_id,Hash_table_97qke2.row_id,Hash_table_2yktpz.row_id FROM  Hash_table_ilsn81,Hash_table_97qke2,Hash_table_vjujk6,Hash_table_2yktpz  WHERE Hash_table_ilsn81.Hash_value=Hash_table_97qke2.Hash_value And Hash_table_vjujk6.Hash_value=Hash_table_2yktpz.Hash_value And Hash_table_97qke2.row_id = Hash_table_vjujk6.row_id;
+Enc Query:
+SELECT Hash_table_nltgm8.row_id,Hash_table_c9nuw5.row_id,Hash_table_o6frhb.row_id FROM  Hash_table_nltgm8,Hash_table_c9nuw5,Hash_table_f01zq2,Hash_table_o6frhb  WHERE Hash_table_nltgm8.Hash_value=Hash_table_c9nuw5.Hash_value And Hash_table_f01zq2.Hash_value=Hash_table_o6frhb.Hash_value And Hash_table_c9nuw5.row_id = Hash_table_f01zq2.row_id;
+Enc Query:
+SELECT Hash_table_j0h4t8.row_id,Hash_table_7nsufg.row_id,Hash_table_80wb2j.row_id FROM  Hash_table_j0h4t8,Hash_table_7nsufg,Hash_table_o036df,Hash_table_80wb2j  WHERE Hash_table_j0h4t8.Hash_value=Hash_table_7nsufg.Hash_value And Hash_table_o036df.Hash_value=Hash_table_80wb2j.Hash_value And Hash_table_7nsufg.row_id = Hash_table_o036df.row_id;
+Enc Query:
+SELECT Hash_table_0g8d3h.row_id,Hash_table_pu40yv.row_id,Hash_table_pnpbfs.row_id FROM  Hash_table_0g8d3h,Hash_table_pu40yv,Hash_table_f9l9y7,Hash_table_pnpbfs  WHERE Hash_table_0g8d3h.Hash_value=Hash_table_pu40yv.Hash_value And Hash_table_f9l9y7.Hash_value=Hash_table_pnpbfs.Hash_value And Hash_table_pu40yv.row_id = Hash_table_f9l9y7.row_id;
+Enc Query:
+SELECT Hash_table_4om5ps.row_id,Hash_table_bi9onu.row_id,Hash_table_p2knzh.row_id FROM  Hash_table_4om5ps,Hash_table_bi9onu,Hash_table_1clw4a,Hash_table_p2knzh  WHERE Hash_table_4om5ps.Hash_value=Hash_table_bi9onu.Hash_value And Hash_table_1clw4a.Hash_value=Hash_table_p2knzh.Hash_value And Hash_table_bi9onu.row_id = Hash_table_1clw4a.row_id;
+Enc Query:
+SELECT Hash_table_ccgkun.row_id,Hash_table_62d07p.row_id,Hash_table_rwsgzx.row_id FROM  Hash_table_ccgkun,Hash_table_62d07p,Hash_table_87lur2,Hash_table_rwsgzx  WHERE Hash_table_ccgkun.Hash_value=Hash_table_62d07p.Hash_value And Hash_table_87lur2.Hash_value=Hash_table_rwsgzx.Hash_value And Hash_table_62d07p.row_id = Hash_table_87lur2.row_id;
+Enc Query:
+SELECT Hash_table_o0wq9f.row_id,Hash_table_3qg1qa.row_id,Hash_table_iu130x.row_id FROM  Hash_table_o0wq9f,Hash_table_3qg1qa,Hash_table_54ht7o,Hash_table_iu130x  WHERE Hash_table_o0wq9f.Hash_value=Hash_table_3qg1qa.Hash_value And Hash_table_54ht7o.Hash_value=Hash_table_iu130x.Hash_value And Hash_table_3qg1qa.row_id = Hash_table_54ht7o.row_id;
+Enc Query:
+SELECT Hash_table_o1pcxt.row_id,Hash_table_bk3xt8.row_id,Hash_table_69bten.row_id FROM  Hash_table_o1pcxt,Hash_table_bk3xt8,Hash_table_f4coq1,Hash_table_69bten  WHERE Hash_table_o1pcxt.Hash_value=Hash_table_bk3xt8.Hash_value And Hash_table_f4coq1.Hash_value=Hash_table_69bten.Hash_value And Hash_table_bk3xt8.row_id = Hash_table_f4coq1.row_id;
+Enc Query:
+SELECT Hash_table_sgn3ft.row_id,Hash_table_t0ss1p.row_id,Hash_table_l5qadh.row_id FROM  Hash_table_sgn3ft,Hash_table_t0ss1p,Hash_table_s571ml,Hash_table_l5qadh  WHERE Hash_table_sgn3ft.Hash_value=Hash_table_t0ss1p.Hash_value And Hash_table_s571ml.Hash_value=Hash_table_l5qadh.Hash_value And Hash_table_t0ss1p.row_id = Hash_table_s571ml.row_id;
+Enc Query:
+SELECT Hash_table_ebc5df.row_id,Hash_table_mp1ahn.row_id,Hash_table_03vgkg.row_id FROM  Hash_table_ebc5df,Hash_table_mp1ahn,Hash_table_isylra,Hash_table_03vgkg  WHERE Hash_table_ebc5df.Hash_value=Hash_table_mp1ahn.Hash_value And Hash_table_isylra.Hash_value=Hash_table_03vgkg.Hash_value And Hash_table_mp1ahn.row_id = Hash_table_isylra.row_id;
+Enc Query:
+SELECT Hash_table_34w2cx.row_id,Hash_table_thkrhf.row_id,Hash_table_1alyop.row_id FROM  Hash_table_34w2cx,Hash_table_thkrhf,Hash_table_2jkjxv,Hash_table_1alyop  WHERE Hash_table_34w2cx.Hash_value=Hash_table_thkrhf.Hash_value And Hash_table_2jkjxv.Hash_value=Hash_table_1alyop.Hash_value And Hash_table_thkrhf.row_id = Hash_table_2jkjxv.row_id;
+Enc Query:
+SELECT Hash_table_oa4u2b.row_id,Hash_table_jdqtgg.row_id,Hash_table_p1o1kw.row_id FROM  Hash_table_oa4u2b,Hash_table_jdqtgg,Hash_table_lpwr3g,Hash_table_p1o1kw  WHERE Hash_table_oa4u2b.Hash_value=Hash_table_jdqtgg.Hash_value And Hash_table_lpwr3g.Hash_value=Hash_table_p1o1kw.Hash_value And Hash_table_jdqtgg.row_id = Hash_table_lpwr3g.row_id;
+Enc Query:
+SELECT Hash_table_3wii4t.row_id,Hash_table_ry5nhj.row_id,Hash_table_go3wip.row_id FROM  Hash_table_3wii4t,Hash_table_ry5nhj,Hash_table_49u45l,Hash_table_go3wip  WHERE Hash_table_3wii4t.Hash_value=Hash_table_ry5nhj.Hash_value And Hash_table_49u45l.Hash_value=Hash_table_go3wip.Hash_value And Hash_table_ry5nhj.row_id = Hash_table_49u45l.row_id;
+Enc Query:
+SELECT Hash_table_xvulfw.row_id,Hash_table_2cprmp.row_id,Hash_table_1za2tc.row_id FROM  Hash_table_xvulfw,Hash_table_2cprmp,Hash_table_s8eycs,Hash_table_1za2tc  WHERE Hash_table_xvulfw.Hash_value=Hash_table_2cprmp.Hash_value And Hash_table_s8eycs.Hash_value=Hash_table_1za2tc.Hash_value And Hash_table_2cprmp.row_id = Hash_table_s8eycs.row_id;
+Enc Query:
+SELECT Hash_table_20c3zk.row_id,Hash_table_e5pcyt.row_id,Hash_table_uhixdc.row_id FROM  Hash_table_20c3zk,Hash_table_e5pcyt,Hash_table_288n4s,Hash_table_uhixdc  WHERE Hash_table_20c3zk.Hash_value=Hash_table_e5pcyt.Hash_value And Hash_table_288n4s.Hash_value=Hash_table_uhixdc.Hash_value And Hash_table_e5pcyt.row_id = Hash_table_288n4s.row_id;
+Enc Query:
+SELECT Hash_table_0ic50g.row_id,Hash_table_9hats0.row_id,Hash_table_8k7lgp.row_id FROM  Hash_table_0ic50g,Hash_table_9hats0,Hash_table_04m2qo,Hash_table_8k7lgp  WHERE Hash_table_0ic50g.Hash_value=Hash_table_9hats0.Hash_value And Hash_table_04m2qo.Hash_value=Hash_table_8k7lgp.Hash_value And Hash_table_9hats0.row_id = Hash_table_04m2qo.row_id;
+Enc Query:
+SELECT Hash_table_0ar1t1.row_id,Hash_table_diw7kv.row_id,Hash_table_g274cr.row_id FROM  Hash_table_0ar1t1,Hash_table_diw7kv,Hash_table_lsyvyz,Hash_table_g274cr  WHERE Hash_table_0ar1t1.Hash_value=Hash_table_diw7kv.Hash_value And Hash_table_lsyvyz.Hash_value=Hash_table_g274cr.Hash_value And Hash_table_diw7kv.row_id = Hash_table_lsyvyz.row_id;
+Enc Query:
+SELECT Hash_table_pvik96.row_id,Hash_table_27hjw0.row_id,Hash_table_yfgd58.row_id FROM  Hash_table_pvik96,Hash_table_27hjw0,Hash_table_gauk67,Hash_table_yfgd58  WHERE Hash_table_pvik96.Hash_value=Hash_table_27hjw0.Hash_value And Hash_table_gauk67.Hash_value=Hash_table_yfgd58.Hash_value And Hash_table_27hjw0.row_id = Hash_table_gauk67.row_id;
+Enc Query:
+SELECT Hash_table_ptnq0a.row_id,Hash_table_g0g5c9.row_id,Hash_table_jopw4n.row_id FROM  Hash_table_ptnq0a,Hash_table_g0g5c9,Hash_table_q18sck,Hash_table_jopw4n  WHERE Hash_table_ptnq0a.Hash_value=Hash_table_g0g5c9.Hash_value And Hash_table_q18sck.Hash_value=Hash_table_jopw4n.Hash_value And Hash_table_g0g5c9.row_id = Hash_table_q18sck.row_id;
+Enc Query:
+SELECT Hash_table_rfl6cu.row_id,Hash_table_7hosst.row_id,Hash_table_h2nte7.row_id FROM  Hash_table_rfl6cu,Hash_table_7hosst,Hash_table_3p4tll,Hash_table_h2nte7  WHERE Hash_table_rfl6cu.Hash_value=Hash_table_7hosst.Hash_value And Hash_table_3p4tll.Hash_value=Hash_table_h2nte7.Hash_value And Hash_table_7hosst.row_id = Hash_table_3p4tll.row_id;
+Enc Query:
+SELECT Hash_table_7u32ka.row_id,Hash_table_fanc8s.row_id,Hash_table_xnzik0.row_id FROM  Hash_table_7u32ka,Hash_table_fanc8s,Hash_table_a0p3tj,Hash_table_xnzik0  WHERE Hash_table_7u32ka.Hash_value=Hash_table_fanc8s.Hash_value And Hash_table_a0p3tj.Hash_value=Hash_table_xnzik0.Hash_value And Hash_table_fanc8s.row_id = Hash_table_a0p3tj.row_id;
+Enc Query:
+SELECT Hash_table_u1tie3.row_id,Hash_table_7gneud.row_id,Hash_table_k7ygz2.row_id FROM  Hash_table_u1tie3,Hash_table_7gneud,Hash_table_pgfh4o,Hash_table_k7ygz2  WHERE Hash_table_u1tie3.Hash_value=Hash_table_7gneud.Hash_value And Hash_table_pgfh4o.Hash_value=Hash_table_k7ygz2.Hash_value And Hash_table_7gneud.row_id = Hash_table_pgfh4o.row_id;
+Enc Query:
+SELECT Hash_table_kitnfq.row_id,Hash_table_50bmu5.row_id,Hash_table_djufxb.row_id FROM  Hash_table_kitnfq,Hash_table_50bmu5,Hash_table_68g4qp,Hash_table_djufxb  WHERE Hash_table_kitnfq.Hash_value=Hash_table_50bmu5.Hash_value And Hash_table_68g4qp.Hash_value=Hash_table_djufxb.Hash_value And Hash_table_50bmu5.row_id = Hash_table_68g4qp.row_id;
+Enc Query:
+SELECT Hash_table_3l5036.row_id,Hash_table_0m5qnd.row_id,Hash_table_cccezj.row_id FROM  Hash_table_3l5036,Hash_table_0m5qnd,Hash_table_5tj3sj,Hash_table_cccezj  WHERE Hash_table_3l5036.Hash_value=Hash_table_0m5qnd.Hash_value And Hash_table_5tj3sj.Hash_value=Hash_table_cccezj.Hash_value And Hash_table_0m5qnd.row_id = Hash_table_5tj3sj.row_id;
+Enc Query:
+SELECT Hash_table_lct9us.row_id,Hash_table_w3xj86.row_id,Hash_table_19z54x.row_id FROM  Hash_table_lct9us,Hash_table_w3xj86,Hash_table_7pa94c,Hash_table_19z54x  WHERE Hash_table_lct9us.Hash_value=Hash_table_w3xj86.Hash_value And Hash_table_7pa94c.Hash_value=Hash_table_19z54x.Hash_value And Hash_table_w3xj86.row_id = Hash_table_7pa94c.row_id;
+Enc Query:
+SELECT Hash_table_89a96z.row_id,Hash_table_qv78mw.row_id,Hash_table_ydxx1q.row_id FROM  Hash_table_89a96z,Hash_table_qv78mw,Hash_table_4jy7qg,Hash_table_ydxx1q  WHERE Hash_table_89a96z.Hash_value=Hash_table_qv78mw.Hash_value And Hash_table_4jy7qg.Hash_value=Hash_table_ydxx1q.Hash_value And Hash_table_qv78mw.row_id = Hash_table_4jy7qg.row_id;
+Enc Query:
+SELECT Hash_table_vmeve1.row_id,Hash_table_pg6rx3.row_id,Hash_table_bvc324.row_id FROM  Hash_table_vmeve1,Hash_table_pg6rx3,Hash_table_c7ly20,Hash_table_bvc324  WHERE Hash_table_vmeve1.Hash_value=Hash_table_pg6rx3.Hash_value And Hash_table_c7ly20.Hash_value=Hash_table_bvc324.Hash_value And Hash_table_pg6rx3.row_id = Hash_table_c7ly20.row_id;
+Enc Query:
+SELECT Hash_table_yct1wv.row_id,Hash_table_mv2ej5.row_id,Hash_table_2spy0g.row_id FROM  Hash_table_yct1wv,Hash_table_mv2ej5,Hash_table_sorp4e,Hash_table_2spy0g  WHERE Hash_table_yct1wv.Hash_value=Hash_table_mv2ej5.Hash_value And Hash_table_sorp4e.Hash_value=Hash_table_2spy0g.Hash_value And Hash_table_mv2ej5.row_id = Hash_table_sorp4e.row_id;
+Enc Query:
+SELECT Hash_table_q201s1.row_id,Hash_table_okvqpf.row_id,Hash_table_etw1e2.row_id FROM  Hash_table_q201s1,Hash_table_okvqpf,Hash_table_j7fkpo,Hash_table_etw1e2  WHERE Hash_table_q201s1.Hash_value=Hash_table_okvqpf.Hash_value And Hash_table_j7fkpo.Hash_value=Hash_table_etw1e2.Hash_value And Hash_table_okvqpf.row_id = Hash_table_j7fkpo.row_id;
+Enc Query:
+SELECT Hash_table_92a121.row_id,Hash_table_rqtuj6.row_id,Hash_table_54ak4w.row_id FROM  Hash_table_92a121,Hash_table_rqtuj6,Hash_table_mjde73,Hash_table_54ak4w  WHERE Hash_table_92a121.Hash_value=Hash_table_rqtuj6.Hash_value And Hash_table_mjde73.Hash_value=Hash_table_54ak4w.Hash_value And Hash_table_rqtuj6.row_id = Hash_table_mjde73.row_id;
+Enc Query:
+SELECT Hash_table_tuqjm2.row_id,Hash_table_t13bcn.row_id,Hash_table_y9p7q4.row_id FROM  Hash_table_tuqjm2,Hash_table_t13bcn,Hash_table_6amxe8,Hash_table_y9p7q4  WHERE Hash_table_tuqjm2.Hash_value=Hash_table_t13bcn.Hash_value And Hash_table_6amxe8.Hash_value=Hash_table_y9p7q4.Hash_value And Hash_table_t13bcn.row_id = Hash_table_6amxe8.row_id;
+Enc Query:
+SELECT Hash_table_vmdq1a.row_id,Hash_table_h9enk8.row_id,Hash_table_qm2436.row_id FROM  Hash_table_vmdq1a,Hash_table_h9enk8,Hash_table_p2h3kj,Hash_table_qm2436  WHERE Hash_table_vmdq1a.Hash_value=Hash_table_h9enk8.Hash_value And Hash_table_p2h3kj.Hash_value=Hash_table_qm2436.Hash_value And Hash_table_h9enk8.row_id = Hash_table_p2h3kj.row_id;
+Enc Query:
+SELECT Hash_table_gldm4h.row_id,Hash_table_4w2did.row_id,Hash_table_rkwxh4.row_id FROM  Hash_table_gldm4h,Hash_table_4w2did,Hash_table_eairsw,Hash_table_rkwxh4  WHERE Hash_table_gldm4h.Hash_value=Hash_table_4w2did.Hash_value And Hash_table_eairsw.Hash_value=Hash_table_rkwxh4.Hash_value And Hash_table_4w2did.row_id = Hash_table_eairsw.row_id;
+Enc Query:
+SELECT Hash_table_wg4o7r.row_id,Hash_table_ykbnau.row_id,Hash_table_m9dmtm.row_id FROM  Hash_table_wg4o7r,Hash_table_ykbnau,Hash_table_80qc98,Hash_table_m9dmtm  WHERE Hash_table_wg4o7r.Hash_value=Hash_table_ykbnau.Hash_value And Hash_table_80qc98.Hash_value=Hash_table_m9dmtm.Hash_value And Hash_table_ykbnau.row_id = Hash_table_80qc98.row_id;
+Enc Query:
+SELECT Hash_table_p3wugl.row_id,Hash_table_h8787k.row_id,Hash_table_7q5hzg.row_id FROM  Hash_table_p3wugl,Hash_table_h8787k,Hash_table_6l7w0e,Hash_table_7q5hzg  WHERE Hash_table_p3wugl.Hash_value=Hash_table_h8787k.Hash_value And Hash_table_6l7w0e.Hash_value=Hash_table_7q5hzg.Hash_value And Hash_table_h8787k.row_id = Hash_table_6l7w0e.row_id;
+Enc Query:
+SELECT Hash_table_difeh2.row_id,Hash_table_v4y05f.row_id,Hash_table_qz2qe5.row_id FROM  Hash_table_difeh2,Hash_table_v4y05f,Hash_table_ukzsh1,Hash_table_qz2qe5  WHERE Hash_table_difeh2.Hash_value=Hash_table_v4y05f.Hash_value And Hash_table_ukzsh1.Hash_value=Hash_table_qz2qe5.Hash_value And Hash_table_v4y05f.row_id = Hash_table_ukzsh1.row_id;
+Scale:1
+Row:2737356line
+Execution time:61.3083 s
+Decrypt time:27.8924 s
+Query:
+SELECT L_SUPPKEY,S_SUPPKEY,S_NATIONKEY,N_NATIONKEY FROM lineitem, supplier, nation WHERE lineitem.L_SUPPKEY = supplier.S_SUPPKEY And supplier.S_NATIONKEY = nation.N_NATIONKEY
+Enc Query:
+SELECT Hash_table_ap3stp.row_id,Hash_table_b3p4yz.row_id,Hash_table_nn7lwl.row_id FROM  Hash_table_ap3stp,Hash_table_b3p4yz,Hash_table_nvm4j2,Hash_table_nn7lwl  WHERE Hash_table_ap3stp.Hash_value=Hash_table_b3p4yz.Hash_value And Hash_table_nvm4j2.Hash_value=Hash_table_nn7lwl.Hash_value And Hash_table_b3p4yz.row_id = Hash_table_nvm4j2.row_id;
+Enc Query:
+SELECT Hash_table_16qo7f.row_id,Hash_table_9wjce9.row_id,Hash_table_xk1gw9.row_id FROM  Hash_table_16qo7f,Hash_table_9wjce9,Hash_table_ev4huu,Hash_table_xk1gw9  WHERE Hash_table_16qo7f.Hash_value=Hash_table_9wjce9.Hash_value And Hash_table_ev4huu.Hash_value=Hash_table_xk1gw9.Hash_value And Hash_table_9wjce9.row_id = Hash_table_ev4huu.row_id;
+Enc Query:
+SELECT Hash_table_3poucy.row_id,Hash_table_c9mtf9.row_id,Hash_table_dzwhlc.row_id FROM  Hash_table_3poucy,Hash_table_c9mtf9,Hash_table_jp495y,Hash_table_dzwhlc  WHERE Hash_table_3poucy.Hash_value=Hash_table_c9mtf9.Hash_value And Hash_table_jp495y.Hash_value=Hash_table_dzwhlc.Hash_value And Hash_table_c9mtf9.row_id = Hash_table_jp495y.row_id;
+Enc Query:
+SELECT Hash_table_ceun64.row_id,Hash_table_lxdepm.row_id,Hash_table_kovfdo.row_id FROM  Hash_table_ceun64,Hash_table_lxdepm,Hash_table_1wxy07,Hash_table_kovfdo  WHERE Hash_table_ceun64.Hash_value=Hash_table_lxdepm.Hash_value And Hash_table_1wxy07.Hash_value=Hash_table_kovfdo.Hash_value And Hash_table_lxdepm.row_id = Hash_table_1wxy07.row_id;
+Enc Query:
+SELECT Hash_table_ilsn81.row_id,Hash_table_97qke2.row_id,Hash_table_2yktpz.row_id FROM  Hash_table_ilsn81,Hash_table_97qke2,Hash_table_vjujk6,Hash_table_2yktpz  WHERE Hash_table_ilsn81.Hash_value=Hash_table_97qke2.Hash_value And Hash_table_vjujk6.Hash_value=Hash_table_2yktpz.Hash_value And Hash_table_97qke2.row_id = Hash_table_vjujk6.row_id;
+Enc Query:
+SELECT Hash_table_nltgm8.row_id,Hash_table_c9nuw5.row_id,Hash_table_o6frhb.row_id FROM  Hash_table_nltgm8,Hash_table_c9nuw5,Hash_table_f01zq2,Hash_table_o6frhb  WHERE Hash_table_nltgm8.Hash_value=Hash_table_c9nuw5.Hash_value And Hash_table_f01zq2.Hash_value=Hash_table_o6frhb.Hash_value And Hash_table_c9nuw5.row_id = Hash_table_f01zq2.row_id;
+Enc Query:
+SELECT Hash_table_j0h4t8.row_id,Hash_table_7nsufg.row_id,Hash_table_80wb2j.row_id FROM  Hash_table_j0h4t8,Hash_table_7nsufg,Hash_table_o036df,Hash_table_80wb2j  WHERE Hash_table_j0h4t8.Hash_value=Hash_table_7nsufg.Hash_value And Hash_table_o036df.Hash_value=Hash_table_80wb2j.Hash_value And Hash_table_7nsufg.row_id = Hash_table_o036df.row_id;
+Enc Query:
+SELECT Hash_table_0g8d3h.row_id,Hash_table_pu40yv.row_id,Hash_table_pnpbfs.row_id FROM  Hash_table_0g8d3h,Hash_table_pu40yv,Hash_table_f9l9y7,Hash_table_pnpbfs  WHERE Hash_table_0g8d3h.Hash_value=Hash_table_pu40yv.Hash_value And Hash_table_f9l9y7.Hash_value=Hash_table_pnpbfs.Hash_value And Hash_table_pu40yv.row_id = Hash_table_f9l9y7.row_id;
+Enc Query:
+SELECT Hash_table_4om5ps.row_id,Hash_table_bi9onu.row_id,Hash_table_p2knzh.row_id FROM  Hash_table_4om5ps,Hash_table_bi9onu,Hash_table_1clw4a,Hash_table_p2knzh  WHERE Hash_table_4om5ps.Hash_value=Hash_table_bi9onu.Hash_value And Hash_table_1clw4a.Hash_value=Hash_table_p2knzh.Hash_value And Hash_table_bi9onu.row_id = Hash_table_1clw4a.row_id;
+Enc Query:
+SELECT Hash_table_ccgkun.row_id,Hash_table_62d07p.row_id,Hash_table_rwsgzx.row_id FROM  Hash_table_ccgkun,Hash_table_62d07p,Hash_table_87lur2,Hash_table_rwsgzx  WHERE Hash_table_ccgkun.Hash_value=Hash_table_62d07p.Hash_value And Hash_table_87lur2.Hash_value=Hash_table_rwsgzx.Hash_value And Hash_table_62d07p.row_id = Hash_table_87lur2.row_id;
+Enc Query:
+SELECT Hash_table_o0wq9f.row_id,Hash_table_3qg1qa.row_id,Hash_table_iu130x.row_id FROM  Hash_table_o0wq9f,Hash_table_3qg1qa,Hash_table_54ht7o,Hash_table_iu130x  WHERE Hash_table_o0wq9f.Hash_value=Hash_table_3qg1qa.Hash_value And Hash_table_54ht7o.Hash_value=Hash_table_iu130x.Hash_value And Hash_table_3qg1qa.row_id = Hash_table_54ht7o.row_id;
+Enc Query:
+SELECT Hash_table_o1pcxt.row_id,Hash_table_bk3xt8.row_id,Hash_table_69bten.row_id FROM  Hash_table_o1pcxt,Hash_table_bk3xt8,Hash_table_f4coq1,Hash_table_69bten  WHERE Hash_table_o1pcxt.Hash_value=Hash_table_bk3xt8.Hash_value And Hash_table_f4coq1.Hash_value=Hash_table_69bten.Hash_value And Hash_table_bk3xt8.row_id = Hash_table_f4coq1.row_id;
+Enc Query:
+SELECT Hash_table_sgn3ft.row_id,Hash_table_t0ss1p.row_id,Hash_table_l5qadh.row_id FROM  Hash_table_sgn3ft,Hash_table_t0ss1p,Hash_table_s571ml,Hash_table_l5qadh  WHERE Hash_table_sgn3ft.Hash_value=Hash_table_t0ss1p.Hash_value And Hash_table_s571ml.Hash_value=Hash_table_l5qadh.Hash_value And Hash_table_t0ss1p.row_id = Hash_table_s571ml.row_id;
+Enc Query:
+SELECT Hash_table_ebc5df.row_id,Hash_table_mp1ahn.row_id,Hash_table_03vgkg.row_id FROM  Hash_table_ebc5df,Hash_table_mp1ahn,Hash_table_isylra,Hash_table_03vgkg  WHERE Hash_table_ebc5df.Hash_value=Hash_table_mp1ahn.Hash_value And Hash_table_isylra.Hash_value=Hash_table_03vgkg.Hash_value And Hash_table_mp1ahn.row_id = Hash_table_isylra.row_id;
+Enc Query:
+SELECT Hash_table_34w2cx.row_id,Hash_table_thkrhf.row_id,Hash_table_1alyop.row_id FROM  Hash_table_34w2cx,Hash_table_thkrhf,Hash_table_2jkjxv,Hash_table_1alyop  WHERE Hash_table_34w2cx.Hash_value=Hash_table_thkrhf.Hash_value And Hash_table_2jkjxv.Hash_value=Hash_table_1alyop.Hash_value And Hash_table_thkrhf.row_id = Hash_table_2jkjxv.row_id;
+Enc Query:
+SELECT Hash_table_oa4u2b.row_id,Hash_table_jdqtgg.row_id,Hash_table_p1o1kw.row_id FROM  Hash_table_oa4u2b,Hash_table_jdqtgg,Hash_table_lpwr3g,Hash_table_p1o1kw  WHERE Hash_table_oa4u2b.Hash_value=Hash_table_jdqtgg.Hash_value And Hash_table_lpwr3g.Hash_value=Hash_table_p1o1kw.Hash_value And Hash_table_jdqtgg.row_id = Hash_table_lpwr3g.row_id;
+Enc Query:
+SELECT Hash_table_3wii4t.row_id,Hash_table_ry5nhj.row_id,Hash_table_go3wip.row_id FROM  Hash_table_3wii4t,Hash_table_ry5nhj,Hash_table_49u45l,Hash_table_go3wip  WHERE Hash_table_3wii4t.Hash_value=Hash_table_ry5nhj.Hash_value And Hash_table_49u45l.Hash_value=Hash_table_go3wip.Hash_value And Hash_table_ry5nhj.row_id = Hash_table_49u45l.row_id;
+Enc Query:
+SELECT Hash_table_xvulfw.row_id,Hash_table_2cprmp.row_id,Hash_table_1za2tc.row_id FROM  Hash_table_xvulfw,Hash_table_2cprmp,Hash_table_s8eycs,Hash_table_1za2tc  WHERE Hash_table_xvulfw.Hash_value=Hash_table_2cprmp.Hash_value And Hash_table_s8eycs.Hash_value=Hash_table_1za2tc.Hash_value And Hash_table_2cprmp.row_id = Hash_table_s8eycs.row_id;
+Enc Query:
+SELECT Hash_table_20c3zk.row_id,Hash_table_e5pcyt.row_id,Hash_table_uhixdc.row_id FROM  Hash_table_20c3zk,Hash_table_e5pcyt,Hash_table_288n4s,Hash_table_uhixdc  WHERE Hash_table_20c3zk.Hash_value=Hash_table_e5pcyt.Hash_value And Hash_table_288n4s.Hash_value=Hash_table_uhixdc.Hash_value And Hash_table_e5pcyt.row_id = Hash_table_288n4s.row_id;
+Enc Query:
+SELECT Hash_table_0ic50g.row_id,Hash_table_9hats0.row_id,Hash_table_8k7lgp.row_id FROM  Hash_table_0ic50g,Hash_table_9hats0,Hash_table_04m2qo,Hash_table_8k7lgp  WHERE Hash_table_0ic50g.Hash_value=Hash_table_9hats0.Hash_value And Hash_table_04m2qo.Hash_value=Hash_table_8k7lgp.Hash_value And Hash_table_9hats0.row_id = Hash_table_04m2qo.row_id;
+Enc Query:
+SELECT Hash_table_0ar1t1.row_id,Hash_table_diw7kv.row_id,Hash_table_g274cr.row_id FROM  Hash_table_0ar1t1,Hash_table_diw7kv,Hash_table_lsyvyz,Hash_table_g274cr  WHERE Hash_table_0ar1t1.Hash_value=Hash_table_diw7kv.Hash_value And Hash_table_lsyvyz.Hash_value=Hash_table_g274cr.Hash_value And Hash_table_diw7kv.row_id = Hash_table_lsyvyz.row_id;
+Enc Query:
+SELECT Hash_table_pvik96.row_id,Hash_table_27hjw0.row_id,Hash_table_yfgd58.row_id FROM  Hash_table_pvik96,Hash_table_27hjw0,Hash_table_gauk67,Hash_table_yfgd58  WHERE Hash_table_pvik96.Hash_value=Hash_table_27hjw0.Hash_value And Hash_table_gauk67.Hash_value=Hash_table_yfgd58.Hash_value And Hash_table_27hjw0.row_id = Hash_table_gauk67.row_id;
+Enc Query:
+SELECT Hash_table_ptnq0a.row_id,Hash_table_g0g5c9.row_id,Hash_table_jopw4n.row_id FROM  Hash_table_ptnq0a,Hash_table_g0g5c9,Hash_table_q18sck,Hash_table_jopw4n  WHERE Hash_table_ptnq0a.Hash_value=Hash_table_g0g5c9.Hash_value And Hash_table_q18sck.Hash_value=Hash_table_jopw4n.Hash_value And Hash_table_g0g5c9.row_id = Hash_table_q18sck.row_id;
+Enc Query:
+SELECT Hash_table_rfl6cu.row_id,Hash_table_7hosst.row_id,Hash_table_h2nte7.row_id FROM  Hash_table_rfl6cu,Hash_table_7hosst,Hash_table_3p4tll,Hash_table_h2nte7  WHERE Hash_table_rfl6cu.Hash_value=Hash_table_7hosst.Hash_value And Hash_table_3p4tll.Hash_value=Hash_table_h2nte7.Hash_value And Hash_table_7hosst.row_id = Hash_table_3p4tll.row_id;
+Enc Query:
+SELECT Hash_table_7u32ka.row_id,Hash_table_fanc8s.row_id,Hash_table_xnzik0.row_id FROM  Hash_table_7u32ka,Hash_table_fanc8s,Hash_table_a0p3tj,Hash_table_xnzik0  WHERE Hash_table_7u32ka.Hash_value=Hash_table_fanc8s.Hash_value And Hash_table_a0p3tj.Hash_value=Hash_table_xnzik0.Hash_value And Hash_table_fanc8s.row_id = Hash_table_a0p3tj.row_id;
+Enc Query:
+SELECT Hash_table_u1tie3.row_id,Hash_table_7gneud.row_id,Hash_table_k7ygz2.row_id FROM  Hash_table_u1tie3,Hash_table_7gneud,Hash_table_pgfh4o,Hash_table_k7ygz2  WHERE Hash_table_u1tie3.Hash_value=Hash_table_7gneud.Hash_value And Hash_table_pgfh4o.Hash_value=Hash_table_k7ygz2.Hash_value And Hash_table_7gneud.row_id = Hash_table_pgfh4o.row_id;
+Enc Query:
+SELECT Hash_table_kitnfq.row_id,Hash_table_50bmu5.row_id,Hash_table_djufxb.row_id FROM  Hash_table_kitnfq,Hash_table_50bmu5,Hash_table_68g4qp,Hash_table_djufxb  WHERE Hash_table_kitnfq.Hash_value=Hash_table_50bmu5.Hash_value And Hash_table_68g4qp.Hash_value=Hash_table_djufxb.Hash_value And Hash_table_50bmu5.row_id = Hash_table_68g4qp.row_id;
+Enc Query:
+SELECT Hash_table_3l5036.row_id,Hash_table_0m5qnd.row_id,Hash_table_cccezj.row_id FROM  Hash_table_3l5036,Hash_table_0m5qnd,Hash_table_5tj3sj,Hash_table_cccezj  WHERE Hash_table_3l5036.Hash_value=Hash_table_0m5qnd.Hash_value And Hash_table_5tj3sj.Hash_value=Hash_table_cccezj.Hash_value And Hash_table_0m5qnd.row_id = Hash_table_5tj3sj.row_id;
+Enc Query:
+SELECT Hash_table_lct9us.row_id,Hash_table_w3xj86.row_id,Hash_table_19z54x.row_id FROM  Hash_table_lct9us,Hash_table_w3xj86,Hash_table_7pa94c,Hash_table_19z54x  WHERE Hash_table_lct9us.Hash_value=Hash_table_w3xj86.Hash_value And Hash_table_7pa94c.Hash_value=Hash_table_19z54x.Hash_value And Hash_table_w3xj86.row_id = Hash_table_7pa94c.row_id;
+Enc Query:
+SELECT Hash_table_89a96z.row_id,Hash_table_qv78mw.row_id,Hash_table_ydxx1q.row_id FROM  Hash_table_89a96z,Hash_table_qv78mw,Hash_table_4jy7qg,Hash_table_ydxx1q  WHERE Hash_table_89a96z.Hash_value=Hash_table_qv78mw.Hash_value And Hash_table_4jy7qg.Hash_value=Hash_table_ydxx1q.Hash_value And Hash_table_qv78mw.row_id = Hash_table_4jy7qg.row_id;
+Enc Query:
+SELECT Hash_table_vmeve1.row_id,Hash_table_pg6rx3.row_id,Hash_table_bvc324.row_id FROM  Hash_table_vmeve1,Hash_table_pg6rx3,Hash_table_c7ly20,Hash_table_bvc324  WHERE Hash_table_vmeve1.Hash_value=Hash_table_pg6rx3.Hash_value And Hash_table_c7ly20.Hash_value=Hash_table_bvc324.Hash_value And Hash_table_pg6rx3.row_id = Hash_table_c7ly20.row_id;
+Enc Query:
+SELECT Hash_table_yct1wv.row_id,Hash_table_mv2ej5.row_id,Hash_table_2spy0g.row_id FROM  Hash_table_yct1wv,Hash_table_mv2ej5,Hash_table_sorp4e,Hash_table_2spy0g  WHERE Hash_table_yct1wv.Hash_value=Hash_table_mv2ej5.Hash_value And Hash_table_sorp4e.Hash_value=Hash_table_2spy0g.Hash_value And Hash_table_mv2ej5.row_id = Hash_table_sorp4e.row_id;
+Enc Query:
+SELECT Hash_table_q201s1.row_id,Hash_table_okvqpf.row_id,Hash_table_etw1e2.row_id FROM  Hash_table_q201s1,Hash_table_okvqpf,Hash_table_j7fkpo,Hash_table_etw1e2  WHERE Hash_table_q201s1.Hash_value=Hash_table_okvqpf.Hash_value And Hash_table_j7fkpo.Hash_value=Hash_table_etw1e2.Hash_value And Hash_table_okvqpf.row_id = Hash_table_j7fkpo.row_id;
+Enc Query:
+SELECT Hash_table_92a121.row_id,Hash_table_rqtuj6.row_id,Hash_table_54ak4w.row_id FROM  Hash_table_92a121,Hash_table_rqtuj6,Hash_table_mjde73,Hash_table_54ak4w  WHERE Hash_table_92a121.Hash_value=Hash_table_rqtuj6.Hash_value And Hash_table_mjde73.Hash_value=Hash_table_54ak4w.Hash_value And Hash_table_rqtuj6.row_id = Hash_table_mjde73.row_id;
+Enc Query:
+SELECT Hash_table_tuqjm2.row_id,Hash_table_t13bcn.row_id,Hash_table_y9p7q4.row_id FROM  Hash_table_tuqjm2,Hash_table_t13bcn,Hash_table_6amxe8,Hash_table_y9p7q4  WHERE Hash_table_tuqjm2.Hash_value=Hash_table_t13bcn.Hash_value And Hash_table_6amxe8.Hash_value=Hash_table_y9p7q4.Hash_value And Hash_table_t13bcn.row_id = Hash_table_6amxe8.row_id;
+Enc Query:
+SELECT Hash_table_vmdq1a.row_id,Hash_table_h9enk8.row_id,Hash_table_qm2436.row_id FROM  Hash_table_vmdq1a,Hash_table_h9enk8,Hash_table_p2h3kj,Hash_table_qm2436  WHERE Hash_table_vmdq1a.Hash_value=Hash_table_h9enk8.Hash_value And Hash_table_p2h3kj.Hash_value=Hash_table_qm2436.Hash_value And Hash_table_h9enk8.row_id = Hash_table_p2h3kj.row_id;
+Enc Query:
+SELECT Hash_table_gldm4h.row_id,Hash_table_4w2did.row_id,Hash_table_rkwxh4.row_id FROM  Hash_table_gldm4h,Hash_table_4w2did,Hash_table_eairsw,Hash_table_rkwxh4  WHERE Hash_table_gldm4h.Hash_value=Hash_table_4w2did.Hash_value And Hash_table_eairsw.Hash_value=Hash_table_rkwxh4.Hash_value And Hash_table_4w2did.row_id = Hash_table_eairsw.row_id;
+Enc Query:
+SELECT Hash_table_wg4o7r.row_id,Hash_table_ykbnau.row_id,Hash_table_m9dmtm.row_id FROM  Hash_table_wg4o7r,Hash_table_ykbnau,Hash_table_80qc98,Hash_table_m9dmtm  WHERE Hash_table_wg4o7r.Hash_value=Hash_table_ykbnau.Hash_value And Hash_table_80qc98.Hash_value=Hash_table_m9dmtm.Hash_value And Hash_table_ykbnau.row_id = Hash_table_80qc98.row_id;
+Enc Query:
+SELECT Hash_table_p3wugl.row_id,Hash_table_h8787k.row_id,Hash_table_7q5hzg.row_id FROM  Hash_table_p3wugl,Hash_table_h8787k,Hash_table_6l7w0e,Hash_table_7q5hzg  WHERE Hash_table_p3wugl.Hash_value=Hash_table_h8787k.Hash_value And Hash_table_6l7w0e.Hash_value=Hash_table_7q5hzg.Hash_value And Hash_table_h8787k.row_id = Hash_table_6l7w0e.row_id;
+Enc Query:
+SELECT Hash_table_difeh2.row_id,Hash_table_v4y05f.row_id,Hash_table_qz2qe5.row_id FROM  Hash_table_difeh2,Hash_table_v4y05f,Hash_table_ukzsh1,Hash_table_qz2qe5  WHERE Hash_table_difeh2.Hash_value=Hash_table_v4y05f.Hash_value And Hash_table_ukzsh1.Hash_value=Hash_table_qz2qe5.Hash_value And Hash_table_v4y05f.row_id = Hash_table_ukzsh1.row_id;
+Scale:1
+Row:2737356line
+Execution time:62.2483 s
+Decrypt time:28.0448 s
+AVG Decrypt time:55.9372 s
+AVG Execution time:61.7783 s
+Query:
+SELECT S_NATIONKEY,N_NATIONKEY FROM supplier, nation WHERE supplier.S_NATIONKEY = nation.N_NATIONKEY
+Enc Query:
+SELECT Hash_table_nvm4j2.row_id,Hash_table_nn7lwl.row_id FROM  Hash_table_nvm4j2,Hash_table_nn7lwl  WHERE Hash_table_nvm4j2.Hash_value=Hash_table_nn7lwl.Hash_value;
+Enc Query:
+SELECT Hash_table_ev4huu.row_id,Hash_table_xk1gw9.row_id FROM  Hash_table_ev4huu,Hash_table_xk1gw9  WHERE Hash_table_ev4huu.Hash_value=Hash_table_xk1gw9.Hash_value;
+Enc Query:
+SELECT Hash_table_jp495y.row_id,Hash_table_dzwhlc.row_id FROM  Hash_table_jp495y,Hash_table_dzwhlc  WHERE Hash_table_jp495y.Hash_value=Hash_table_dzwhlc.Hash_value;
+Enc Query:
+SELECT Hash_table_1wxy07.row_id,Hash_table_kovfdo.row_id FROM  Hash_table_1wxy07,Hash_table_kovfdo  WHERE Hash_table_1wxy07.Hash_value=Hash_table_kovfdo.Hash_value;
+Enc Query:
+SELECT Hash_table_vjujk6.row_id,Hash_table_2yktpz.row_id FROM  Hash_table_vjujk6,Hash_table_2yktpz  WHERE Hash_table_vjujk6.Hash_value=Hash_table_2yktpz.Hash_value;
+Enc Query:
+SELECT Hash_table_f01zq2.row_id,Hash_table_o6frhb.row_id FROM  Hash_table_f01zq2,Hash_table_o6frhb  WHERE Hash_table_f01zq2.Hash_value=Hash_table_o6frhb.Hash_value;
+Enc Query:
+SELECT Hash_table_o036df.row_id,Hash_table_80wb2j.row_id FROM  Hash_table_o036df,Hash_table_80wb2j  WHERE Hash_table_o036df.Hash_value=Hash_table_80wb2j.Hash_value;
+Enc Query:
+SELECT Hash_table_f9l9y7.row_id,Hash_table_pnpbfs.row_id FROM  Hash_table_f9l9y7,Hash_table_pnpbfs  WHERE Hash_table_f9l9y7.Hash_value=Hash_table_pnpbfs.Hash_value;
+Enc Query:
+SELECT Hash_table_1clw4a.row_id,Hash_table_p2knzh.row_id FROM  Hash_table_1clw4a,Hash_table_p2knzh  WHERE Hash_table_1clw4a.Hash_value=Hash_table_p2knzh.Hash_value;
+Enc Query:
+SELECT Hash_table_87lur2.row_id,Hash_table_rwsgzx.row_id FROM  Hash_table_87lur2,Hash_table_rwsgzx  WHERE Hash_table_87lur2.Hash_value=Hash_table_rwsgzx.Hash_value;
+Enc Query:
+SELECT Hash_table_54ht7o.row_id,Hash_table_iu130x.row_id FROM  Hash_table_54ht7o,Hash_table_iu130x  WHERE Hash_table_54ht7o.Hash_value=Hash_table_iu130x.Hash_value;
+Enc Query:
+SELECT Hash_table_f4coq1.row_id,Hash_table_69bten.row_id FROM  Hash_table_f4coq1,Hash_table_69bten  WHERE Hash_table_f4coq1.Hash_value=Hash_table_69bten.Hash_value;
+Enc Query:
+SELECT Hash_table_s571ml.row_id,Hash_table_l5qadh.row_id FROM  Hash_table_s571ml,Hash_table_l5qadh  WHERE Hash_table_s571ml.Hash_value=Hash_table_l5qadh.Hash_value;
+Enc Query:
+SELECT Hash_table_isylra.row_id,Hash_table_03vgkg.row_id FROM  Hash_table_isylra,Hash_table_03vgkg  WHERE Hash_table_isylra.Hash_value=Hash_table_03vgkg.Hash_value;
+Enc Query:
+SELECT Hash_table_2jkjxv.row_id,Hash_table_1alyop.row_id FROM  Hash_table_2jkjxv,Hash_table_1alyop  WHERE Hash_table_2jkjxv.Hash_value=Hash_table_1alyop.Hash_value;
+Enc Query:
+SELECT Hash_table_lpwr3g.row_id,Hash_table_p1o1kw.row_id FROM  Hash_table_lpwr3g,Hash_table_p1o1kw  WHERE Hash_table_lpwr3g.Hash_value=Hash_table_p1o1kw.Hash_value;
+Enc Query:
+SELECT Hash_table_49u45l.row_id,Hash_table_go3wip.row_id FROM  Hash_table_49u45l,Hash_table_go3wip  WHERE Hash_table_49u45l.Hash_value=Hash_table_go3wip.Hash_value;
+Enc Query:
+SELECT Hash_table_s8eycs.row_id,Hash_table_1za2tc.row_id FROM  Hash_table_s8eycs,Hash_table_1za2tc  WHERE Hash_table_s8eycs.Hash_value=Hash_table_1za2tc.Hash_value;
+Enc Query:
+SELECT Hash_table_288n4s.row_id,Hash_table_uhixdc.row_id FROM  Hash_table_288n4s,Hash_table_uhixdc  WHERE Hash_table_288n4s.Hash_value=Hash_table_uhixdc.Hash_value;
+Enc Query:
+SELECT Hash_table_04m2qo.row_id,Hash_table_8k7lgp.row_id FROM  Hash_table_04m2qo,Hash_table_8k7lgp  WHERE Hash_table_04m2qo.Hash_value=Hash_table_8k7lgp.Hash_value;
+Enc Query:
+SELECT Hash_table_lsyvyz.row_id,Hash_table_g274cr.row_id FROM  Hash_table_lsyvyz,Hash_table_g274cr  WHERE Hash_table_lsyvyz.Hash_value=Hash_table_g274cr.Hash_value;
+Enc Query:
+SELECT Hash_table_gauk67.row_id,Hash_table_yfgd58.row_id FROM  Hash_table_gauk67,Hash_table_yfgd58  WHERE Hash_table_gauk67.Hash_value=Hash_table_yfgd58.Hash_value;
+Enc Query:
+SELECT Hash_table_q18sck.row_id,Hash_table_jopw4n.row_id FROM  Hash_table_q18sck,Hash_table_jopw4n  WHERE Hash_table_q18sck.Hash_value=Hash_table_jopw4n.Hash_value;
+Enc Query:
+SELECT Hash_table_3p4tll.row_id,Hash_table_h2nte7.row_id FROM  Hash_table_3p4tll,Hash_table_h2nte7  WHERE Hash_table_3p4tll.Hash_value=Hash_table_h2nte7.Hash_value;
+Enc Query:
+SELECT Hash_table_a0p3tj.row_id,Hash_table_xnzik0.row_id FROM  Hash_table_a0p3tj,Hash_table_xnzik0  WHERE Hash_table_a0p3tj.Hash_value=Hash_table_xnzik0.Hash_value;
+Enc Query:
+SELECT Hash_table_pgfh4o.row_id,Hash_table_k7ygz2.row_id FROM  Hash_table_pgfh4o,Hash_table_k7ygz2  WHERE Hash_table_pgfh4o.Hash_value=Hash_table_k7ygz2.Hash_value;
+Enc Query:
+SELECT Hash_table_68g4qp.row_id,Hash_table_djufxb.row_id FROM  Hash_table_68g4qp,Hash_table_djufxb  WHERE Hash_table_68g4qp.Hash_value=Hash_table_djufxb.Hash_value;
+Enc Query:
+SELECT Hash_table_5tj3sj.row_id,Hash_table_cccezj.row_id FROM  Hash_table_5tj3sj,Hash_table_cccezj  WHERE Hash_table_5tj3sj.Hash_value=Hash_table_cccezj.Hash_value;
+Enc Query:
+SELECT Hash_table_7pa94c.row_id,Hash_table_19z54x.row_id FROM  Hash_table_7pa94c,Hash_table_19z54x  WHERE Hash_table_7pa94c.Hash_value=Hash_table_19z54x.Hash_value;
+Enc Query:
+SELECT Hash_table_4jy7qg.row_id,Hash_table_ydxx1q.row_id FROM  Hash_table_4jy7qg,Hash_table_ydxx1q  WHERE Hash_table_4jy7qg.Hash_value=Hash_table_ydxx1q.Hash_value;
+Enc Query:
+SELECT Hash_table_c7ly20.row_id,Hash_table_bvc324.row_id FROM  Hash_table_c7ly20,Hash_table_bvc324  WHERE Hash_table_c7ly20.Hash_value=Hash_table_bvc324.Hash_value;
+Enc Query:
+SELECT Hash_table_sorp4e.row_id,Hash_table_2spy0g.row_id FROM  Hash_table_sorp4e,Hash_table_2spy0g  WHERE Hash_table_sorp4e.Hash_value=Hash_table_2spy0g.Hash_value;
+Enc Query:
+SELECT Hash_table_j7fkpo.row_id,Hash_table_etw1e2.row_id FROM  Hash_table_j7fkpo,Hash_table_etw1e2  WHERE Hash_table_j7fkpo.Hash_value=Hash_table_etw1e2.Hash_value;
+Enc Query:
+SELECT Hash_table_mjde73.row_id,Hash_table_54ak4w.row_id FROM  Hash_table_mjde73,Hash_table_54ak4w  WHERE Hash_table_mjde73.Hash_value=Hash_table_54ak4w.Hash_value;
+Enc Query:
+SELECT Hash_table_6amxe8.row_id,Hash_table_y9p7q4.row_id FROM  Hash_table_6amxe8,Hash_table_y9p7q4  WHERE Hash_table_6amxe8.Hash_value=Hash_table_y9p7q4.Hash_value;
+Enc Query:
+SELECT Hash_table_p2h3kj.row_id,Hash_table_qm2436.row_id FROM  Hash_table_p2h3kj,Hash_table_qm2436  WHERE Hash_table_p2h3kj.Hash_value=Hash_table_qm2436.Hash_value;
+Enc Query:
+SELECT Hash_table_eairsw.row_id,Hash_table_rkwxh4.row_id FROM  Hash_table_eairsw,Hash_table_rkwxh4  WHERE Hash_table_eairsw.Hash_value=Hash_table_rkwxh4.Hash_value;
+Enc Query:
+SELECT Hash_table_80qc98.row_id,Hash_table_m9dmtm.row_id FROM  Hash_table_80qc98,Hash_table_m9dmtm  WHERE Hash_table_80qc98.Hash_value=Hash_table_m9dmtm.Hash_value;
+Enc Query:
+SELECT Hash_table_6l7w0e.row_id,Hash_table_7q5hzg.row_id FROM  Hash_table_6l7w0e,Hash_table_7q5hzg  WHERE Hash_table_6l7w0e.Hash_value=Hash_table_7q5hzg.Hash_value;
+Enc Query:
+SELECT Hash_table_ukzsh1.row_id,Hash_table_qz2qe5.row_id FROM  Hash_table_ukzsh1,Hash_table_qz2qe5  WHERE Hash_table_ukzsh1.Hash_value=Hash_table_qz2qe5.Hash_value;
+Scale:1
+Row:10001line
+Execution time:0.379589 s
+Decrypt time:0.0973271 s
+Query:
+SELECT S_NATIONKEY,N_NATIONKEY FROM supplier, nation WHERE supplier.S_NATIONKEY = nation.N_NATIONKEY
+Enc Query:
+SELECT Hash_table_nvm4j2.row_id,Hash_table_nn7lwl.row_id FROM  Hash_table_nvm4j2,Hash_table_nn7lwl  WHERE Hash_table_nvm4j2.Hash_value=Hash_table_nn7lwl.Hash_value;
+Enc Query:
+SELECT Hash_table_ev4huu.row_id,Hash_table_xk1gw9.row_id FROM  Hash_table_ev4huu,Hash_table_xk1gw9  WHERE Hash_table_ev4huu.Hash_value=Hash_table_xk1gw9.Hash_value;
+Enc Query:
+SELECT Hash_table_jp495y.row_id,Hash_table_dzwhlc.row_id FROM  Hash_table_jp495y,Hash_table_dzwhlc  WHERE Hash_table_jp495y.Hash_value=Hash_table_dzwhlc.Hash_value;
+Enc Query:
+SELECT Hash_table_1wxy07.row_id,Hash_table_kovfdo.row_id FROM  Hash_table_1wxy07,Hash_table_kovfdo  WHERE Hash_table_1wxy07.Hash_value=Hash_table_kovfdo.Hash_value;
+Enc Query:
+SELECT Hash_table_vjujk6.row_id,Hash_table_2yktpz.row_id FROM  Hash_table_vjujk6,Hash_table_2yktpz  WHERE Hash_table_vjujk6.Hash_value=Hash_table_2yktpz.Hash_value;
+Enc Query:
+SELECT Hash_table_f01zq2.row_id,Hash_table_o6frhb.row_id FROM  Hash_table_f01zq2,Hash_table_o6frhb  WHERE Hash_table_f01zq2.Hash_value=Hash_table_o6frhb.Hash_value;
+Enc Query:
+SELECT Hash_table_o036df.row_id,Hash_table_80wb2j.row_id FROM  Hash_table_o036df,Hash_table_80wb2j  WHERE Hash_table_o036df.Hash_value=Hash_table_80wb2j.Hash_value;
+Enc Query:
+SELECT Hash_table_f9l9y7.row_id,Hash_table_pnpbfs.row_id FROM  Hash_table_f9l9y7,Hash_table_pnpbfs  WHERE Hash_table_f9l9y7.Hash_value=Hash_table_pnpbfs.Hash_value;
+Enc Query:
+SELECT Hash_table_1clw4a.row_id,Hash_table_p2knzh.row_id FROM  Hash_table_1clw4a,Hash_table_p2knzh  WHERE Hash_table_1clw4a.Hash_value=Hash_table_p2knzh.Hash_value;
+Enc Query:
+SELECT Hash_table_87lur2.row_id,Hash_table_rwsgzx.row_id FROM  Hash_table_87lur2,Hash_table_rwsgzx  WHERE Hash_table_87lur2.Hash_value=Hash_table_rwsgzx.Hash_value;
+Enc Query:
+SELECT Hash_table_54ht7o.row_id,Hash_table_iu130x.row_id FROM  Hash_table_54ht7o,Hash_table_iu130x  WHERE Hash_table_54ht7o.Hash_value=Hash_table_iu130x.Hash_value;
+Enc Query:
+SELECT Hash_table_f4coq1.row_id,Hash_table_69bten.row_id FROM  Hash_table_f4coq1,Hash_table_69bten  WHERE Hash_table_f4coq1.Hash_value=Hash_table_69bten.Hash_value;
+Enc Query:
+SELECT Hash_table_s571ml.row_id,Hash_table_l5qadh.row_id FROM  Hash_table_s571ml,Hash_table_l5qadh  WHERE Hash_table_s571ml.Hash_value=Hash_table_l5qadh.Hash_value;
+Enc Query:
+SELECT Hash_table_isylra.row_id,Hash_table_03vgkg.row_id FROM  Hash_table_isylra,Hash_table_03vgkg  WHERE Hash_table_isylra.Hash_value=Hash_table_03vgkg.Hash_value;
+Enc Query:
+SELECT Hash_table_2jkjxv.row_id,Hash_table_1alyop.row_id FROM  Hash_table_2jkjxv,Hash_table_1alyop  WHERE Hash_table_2jkjxv.Hash_value=Hash_table_1alyop.Hash_value;
+Enc Query:
+SELECT Hash_table_lpwr3g.row_id,Hash_table_p1o1kw.row_id FROM  Hash_table_lpwr3g,Hash_table_p1o1kw  WHERE Hash_table_lpwr3g.Hash_value=Hash_table_p1o1kw.Hash_value;
+Enc Query:
+SELECT Hash_table_49u45l.row_id,Hash_table_go3wip.row_id FROM  Hash_table_49u45l,Hash_table_go3wip  WHERE Hash_table_49u45l.Hash_value=Hash_table_go3wip.Hash_value;
+Enc Query:
+SELECT Hash_table_s8eycs.row_id,Hash_table_1za2tc.row_id FROM  Hash_table_s8eycs,Hash_table_1za2tc  WHERE Hash_table_s8eycs.Hash_value=Hash_table_1za2tc.Hash_value;
+Enc Query:
+SELECT Hash_table_288n4s.row_id,Hash_table_uhixdc.row_id FROM  Hash_table_288n4s,Hash_table_uhixdc  WHERE Hash_table_288n4s.Hash_value=Hash_table_uhixdc.Hash_value;
+Enc Query:
+SELECT Hash_table_04m2qo.row_id,Hash_table_8k7lgp.row_id FROM  Hash_table_04m2qo,Hash_table_8k7lgp  WHERE Hash_table_04m2qo.Hash_value=Hash_table_8k7lgp.Hash_value;
+Enc Query:
+SELECT Hash_table_lsyvyz.row_id,Hash_table_g274cr.row_id FROM  Hash_table_lsyvyz,Hash_table_g274cr  WHERE Hash_table_lsyvyz.Hash_value=Hash_table_g274cr.Hash_value;
+Enc Query:
+SELECT Hash_table_gauk67.row_id,Hash_table_yfgd58.row_id FROM  Hash_table_gauk67,Hash_table_yfgd58  WHERE Hash_table_gauk67.Hash_value=Hash_table_yfgd58.Hash_value;
+Enc Query:
+SELECT Hash_table_q18sck.row_id,Hash_table_jopw4n.row_id FROM  Hash_table_q18sck,Hash_table_jopw4n  WHERE Hash_table_q18sck.Hash_value=Hash_table_jopw4n.Hash_value;
+Enc Query:
+SELECT Hash_table_3p4tll.row_id,Hash_table_h2nte7.row_id FROM  Hash_table_3p4tll,Hash_table_h2nte7  WHERE Hash_table_3p4tll.Hash_value=Hash_table_h2nte7.Hash_value;
+Enc Query:
+SELECT Hash_table_a0p3tj.row_id,Hash_table_xnzik0.row_id FROM  Hash_table_a0p3tj,Hash_table_xnzik0  WHERE Hash_table_a0p3tj.Hash_value=Hash_table_xnzik0.Hash_value;
+Enc Query:
+SELECT Hash_table_pgfh4o.row_id,Hash_table_k7ygz2.row_id FROM  Hash_table_pgfh4o,Hash_table_k7ygz2  WHERE Hash_table_pgfh4o.Hash_value=Hash_table_k7ygz2.Hash_value;
+Enc Query:
+SELECT Hash_table_68g4qp.row_id,Hash_table_djufxb.row_id FROM  Hash_table_68g4qp,Hash_table_djufxb  WHERE Hash_table_68g4qp.Hash_value=Hash_table_djufxb.Hash_value;
+Enc Query:
+SELECT Hash_table_5tj3sj.row_id,Hash_table_cccezj.row_id FROM  Hash_table_5tj3sj,Hash_table_cccezj  WHERE Hash_table_5tj3sj.Hash_value=Hash_table_cccezj.Hash_value;
+Enc Query:
+SELECT Hash_table_7pa94c.row_id,Hash_table_19z54x.row_id FROM  Hash_table_7pa94c,Hash_table_19z54x  WHERE Hash_table_7pa94c.Hash_value=Hash_table_19z54x.Hash_value;
+Enc Query:
+SELECT Hash_table_4jy7qg.row_id,Hash_table_ydxx1q.row_id FROM  Hash_table_4jy7qg,Hash_table_ydxx1q  WHERE Hash_table_4jy7qg.Hash_value=Hash_table_ydxx1q.Hash_value;
+Enc Query:
+SELECT Hash_table_c7ly20.row_id,Hash_table_bvc324.row_id FROM  Hash_table_c7ly20,Hash_table_bvc324  WHERE Hash_table_c7ly20.Hash_value=Hash_table_bvc324.Hash_value;
+Enc Query:
+SELECT Hash_table_sorp4e.row_id,Hash_table_2spy0g.row_id FROM  Hash_table_sorp4e,Hash_table_2spy0g  WHERE Hash_table_sorp4e.Hash_value=Hash_table_2spy0g.Hash_value;
+Enc Query:
+SELECT Hash_table_j7fkpo.row_id,Hash_table_etw1e2.row_id FROM  Hash_table_j7fkpo,Hash_table_etw1e2  WHERE Hash_table_j7fkpo.Hash_value=Hash_table_etw1e2.Hash_value;
+Enc Query:
+SELECT Hash_table_mjde73.row_id,Hash_table_54ak4w.row_id FROM  Hash_table_mjde73,Hash_table_54ak4w  WHERE Hash_table_mjde73.Hash_value=Hash_table_54ak4w.Hash_value;
+Enc Query:
+SELECT Hash_table_6amxe8.row_id,Hash_table_y9p7q4.row_id FROM  Hash_table_6amxe8,Hash_table_y9p7q4  WHERE Hash_table_6amxe8.Hash_value=Hash_table_y9p7q4.Hash_value;
+Enc Query:
+SELECT Hash_table_p2h3kj.row_id,Hash_table_qm2436.row_id FROM  Hash_table_p2h3kj,Hash_table_qm2436  WHERE Hash_table_p2h3kj.Hash_value=Hash_table_qm2436.Hash_value;
+Enc Query:
+SELECT Hash_table_eairsw.row_id,Hash_table_rkwxh4.row_id FROM  Hash_table_eairsw,Hash_table_rkwxh4  WHERE Hash_table_eairsw.Hash_value=Hash_table_rkwxh4.Hash_value;
+Enc Query:
+SELECT Hash_table_80qc98.row_id,Hash_table_m9dmtm.row_id FROM  Hash_table_80qc98,Hash_table_m9dmtm  WHERE Hash_table_80qc98.Hash_value=Hash_table_m9dmtm.Hash_value;
+Enc Query:
+SELECT Hash_table_6l7w0e.row_id,Hash_table_7q5hzg.row_id FROM  Hash_table_6l7w0e,Hash_table_7q5hzg  WHERE Hash_table_6l7w0e.Hash_value=Hash_table_7q5hzg.Hash_value;
+Enc Query:
+SELECT Hash_table_ukzsh1.row_id,Hash_table_qz2qe5.row_id FROM  Hash_table_ukzsh1,Hash_table_qz2qe5  WHERE Hash_table_ukzsh1.Hash_value=Hash_table_qz2qe5.Hash_value;
+Scale:1
+Row:10001line
+Execution time:0.341903 s
+Decrypt time:0.0976583 s
+AVG Decrypt time:0.194985 s
+AVG Execution time:0.360746 s
+Query:
+SELECT L_SUPPKEY,S_SUPPKEY FROM lineitem, supplier WHERE lineitem.L_SUPPKEY = supplier.S_SUPPKEY 
+Enc Query:
+SELECT Hash_table_ap3stp.row_id,Hash_table_b3p4yz.row_id FROM  Hash_table_ap3stp,Hash_table_b3p4yz  WHERE Hash_table_ap3stp.Hash_value=Hash_table_b3p4yz.Hash_value;
+Enc Query:
+SELECT Hash_table_16qo7f.row_id,Hash_table_9wjce9.row_id FROM  Hash_table_16qo7f,Hash_table_9wjce9  WHERE Hash_table_16qo7f.Hash_value=Hash_table_9wjce9.Hash_value;
+Enc Query:
+SELECT Hash_table_3poucy.row_id,Hash_table_c9mtf9.row_id FROM  Hash_table_3poucy,Hash_table_c9mtf9  WHERE Hash_table_3poucy.Hash_value=Hash_table_c9mtf9.Hash_value;
+Enc Query:
+SELECT Hash_table_ceun64.row_id,Hash_table_lxdepm.row_id FROM  Hash_table_ceun64,Hash_table_lxdepm  WHERE Hash_table_ceun64.Hash_value=Hash_table_lxdepm.Hash_value;
+Enc Query:
+SELECT Hash_table_ilsn81.row_id,Hash_table_97qke2.row_id FROM  Hash_table_ilsn81,Hash_table_97qke2  WHERE Hash_table_ilsn81.Hash_value=Hash_table_97qke2.Hash_value;
+Enc Query:
+SELECT Hash_table_nltgm8.row_id,Hash_table_c9nuw5.row_id FROM  Hash_table_nltgm8,Hash_table_c9nuw5  WHERE Hash_table_nltgm8.Hash_value=Hash_table_c9nuw5.Hash_value;
+Enc Query:
+SELECT Hash_table_j0h4t8.row_id,Hash_table_7nsufg.row_id FROM  Hash_table_j0h4t8,Hash_table_7nsufg  WHERE Hash_table_j0h4t8.Hash_value=Hash_table_7nsufg.Hash_value;
+Enc Query:
+SELECT Hash_table_0g8d3h.row_id,Hash_table_pu40yv.row_id FROM  Hash_table_0g8d3h,Hash_table_pu40yv  WHERE Hash_table_0g8d3h.Hash_value=Hash_table_pu40yv.Hash_value;
+Enc Query:
+SELECT Hash_table_4om5ps.row_id,Hash_table_bi9onu.row_id FROM  Hash_table_4om5ps,Hash_table_bi9onu  WHERE Hash_table_4om5ps.Hash_value=Hash_table_bi9onu.Hash_value;
+Enc Query:
+SELECT Hash_table_ccgkun.row_id,Hash_table_62d07p.row_id FROM  Hash_table_ccgkun,Hash_table_62d07p  WHERE Hash_table_ccgkun.Hash_value=Hash_table_62d07p.Hash_value;
+Enc Query:
+SELECT Hash_table_o0wq9f.row_id,Hash_table_3qg1qa.row_id FROM  Hash_table_o0wq9f,Hash_table_3qg1qa  WHERE Hash_table_o0wq9f.Hash_value=Hash_table_3qg1qa.Hash_value;
+Enc Query:
+SELECT Hash_table_o1pcxt.row_id,Hash_table_bk3xt8.row_id FROM  Hash_table_o1pcxt,Hash_table_bk3xt8  WHERE Hash_table_o1pcxt.Hash_value=Hash_table_bk3xt8.Hash_value;
+Enc Query:
+SELECT Hash_table_sgn3ft.row_id,Hash_table_t0ss1p.row_id FROM  Hash_table_sgn3ft,Hash_table_t0ss1p  WHERE Hash_table_sgn3ft.Hash_value=Hash_table_t0ss1p.Hash_value;
+Enc Query:
+SELECT Hash_table_ebc5df.row_id,Hash_table_mp1ahn.row_id FROM  Hash_table_ebc5df,Hash_table_mp1ahn  WHERE Hash_table_ebc5df.Hash_value=Hash_table_mp1ahn.Hash_value;
+Enc Query:
+SELECT Hash_table_34w2cx.row_id,Hash_table_thkrhf.row_id FROM  Hash_table_34w2cx,Hash_table_thkrhf  WHERE Hash_table_34w2cx.Hash_value=Hash_table_thkrhf.Hash_value;
+Enc Query:
+SELECT Hash_table_oa4u2b.row_id,Hash_table_jdqtgg.row_id FROM  Hash_table_oa4u2b,Hash_table_jdqtgg  WHERE Hash_table_oa4u2b.Hash_value=Hash_table_jdqtgg.Hash_value;
+Enc Query:
+SELECT Hash_table_3wii4t.row_id,Hash_table_ry5nhj.row_id FROM  Hash_table_3wii4t,Hash_table_ry5nhj  WHERE Hash_table_3wii4t.Hash_value=Hash_table_ry5nhj.Hash_value;
+Enc Query:
+SELECT Hash_table_xvulfw.row_id,Hash_table_2cprmp.row_id FROM  Hash_table_xvulfw,Hash_table_2cprmp  WHERE Hash_table_xvulfw.Hash_value=Hash_table_2cprmp.Hash_value;
+Enc Query:
+SELECT Hash_table_20c3zk.row_id,Hash_table_e5pcyt.row_id FROM  Hash_table_20c3zk,Hash_table_e5pcyt  WHERE Hash_table_20c3zk.Hash_value=Hash_table_e5pcyt.Hash_value;
+Enc Query:
+SELECT Hash_table_0ic50g.row_id,Hash_table_9hats0.row_id FROM  Hash_table_0ic50g,Hash_table_9hats0  WHERE Hash_table_0ic50g.Hash_value=Hash_table_9hats0.Hash_value;
+Enc Query:
+SELECT Hash_table_0ar1t1.row_id,Hash_table_diw7kv.row_id FROM  Hash_table_0ar1t1,Hash_table_diw7kv  WHERE Hash_table_0ar1t1.Hash_value=Hash_table_diw7kv.Hash_value;
+Enc Query:
+SELECT Hash_table_pvik96.row_id,Hash_table_27hjw0.row_id FROM  Hash_table_pvik96,Hash_table_27hjw0  WHERE Hash_table_pvik96.Hash_value=Hash_table_27hjw0.Hash_value;
+Enc Query:
+SELECT Hash_table_ptnq0a.row_id,Hash_table_g0g5c9.row_id FROM  Hash_table_ptnq0a,Hash_table_g0g5c9  WHERE Hash_table_ptnq0a.Hash_value=Hash_table_g0g5c9.Hash_value;
+Enc Query:
+SELECT Hash_table_rfl6cu.row_id,Hash_table_7hosst.row_id FROM  Hash_table_rfl6cu,Hash_table_7hosst  WHERE Hash_table_rfl6cu.Hash_value=Hash_table_7hosst.Hash_value;
+Enc Query:
+SELECT Hash_table_7u32ka.row_id,Hash_table_fanc8s.row_id FROM  Hash_table_7u32ka,Hash_table_fanc8s  WHERE Hash_table_7u32ka.Hash_value=Hash_table_fanc8s.Hash_value;
+Enc Query:
+SELECT Hash_table_u1tie3.row_id,Hash_table_7gneud.row_id FROM  Hash_table_u1tie3,Hash_table_7gneud  WHERE Hash_table_u1tie3.Hash_value=Hash_table_7gneud.Hash_value;
+Enc Query:
+SELECT Hash_table_kitnfq.row_id,Hash_table_50bmu5.row_id FROM  Hash_table_kitnfq,Hash_table_50bmu5  WHERE Hash_table_kitnfq.Hash_value=Hash_table_50bmu5.Hash_value;
+Enc Query:
+SELECT Hash_table_3l5036.row_id,Hash_table_0m5qnd.row_id FROM  Hash_table_3l5036,Hash_table_0m5qnd  WHERE Hash_table_3l5036.Hash_value=Hash_table_0m5qnd.Hash_value;
+Enc Query:
+SELECT Hash_table_lct9us.row_id,Hash_table_w3xj86.row_id FROM  Hash_table_lct9us,Hash_table_w3xj86  WHERE Hash_table_lct9us.Hash_value=Hash_table_w3xj86.Hash_value;
+Enc Query:
+SELECT Hash_table_89a96z.row_id,Hash_table_qv78mw.row_id FROM  Hash_table_89a96z,Hash_table_qv78mw  WHERE Hash_table_89a96z.Hash_value=Hash_table_qv78mw.Hash_value;
+Enc Query:
+SELECT Hash_table_vmeve1.row_id,Hash_table_pg6rx3.row_id FROM  Hash_table_vmeve1,Hash_table_pg6rx3  WHERE Hash_table_vmeve1.Hash_value=Hash_table_pg6rx3.Hash_value;
+Enc Query:
+SELECT Hash_table_yct1wv.row_id,Hash_table_mv2ej5.row_id FROM  Hash_table_yct1wv,Hash_table_mv2ej5  WHERE Hash_table_yct1wv.Hash_value=Hash_table_mv2ej5.Hash_value;
+Enc Query:
+SELECT Hash_table_q201s1.row_id,Hash_table_okvqpf.row_id FROM  Hash_table_q201s1,Hash_table_okvqpf  WHERE Hash_table_q201s1.Hash_value=Hash_table_okvqpf.Hash_value;
+Enc Query:
+SELECT Hash_table_92a121.row_id,Hash_table_rqtuj6.row_id FROM  Hash_table_92a121,Hash_table_rqtuj6  WHERE Hash_table_92a121.Hash_value=Hash_table_rqtuj6.Hash_value;
+Enc Query:
+SELECT Hash_table_tuqjm2.row_id,Hash_table_t13bcn.row_id FROM  Hash_table_tuqjm2,Hash_table_t13bcn  WHERE Hash_table_tuqjm2.Hash_value=Hash_table_t13bcn.Hash_value;
+Enc Query:
+SELECT Hash_table_vmdq1a.row_id,Hash_table_h9enk8.row_id FROM  Hash_table_vmdq1a,Hash_table_h9enk8  WHERE Hash_table_vmdq1a.Hash_value=Hash_table_h9enk8.Hash_value;
+Enc Query:
+SELECT Hash_table_gldm4h.row_id,Hash_table_4w2did.row_id FROM  Hash_table_gldm4h,Hash_table_4w2did  WHERE Hash_table_gldm4h.Hash_value=Hash_table_4w2did.Hash_value;
+Enc Query:
+SELECT Hash_table_wg4o7r.row_id,Hash_table_ykbnau.row_id FROM  Hash_table_wg4o7r,Hash_table_ykbnau  WHERE Hash_table_wg4o7r.Hash_value=Hash_table_ykbnau.Hash_value;
+Enc Query:
+SELECT Hash_table_p3wugl.row_id,Hash_table_h8787k.row_id FROM  Hash_table_p3wugl,Hash_table_h8787k  WHERE Hash_table_p3wugl.Hash_value=Hash_table_h8787k.Hash_value;
+Enc Query:
+SELECT Hash_table_difeh2.row_id,Hash_table_v4y05f.row_id FROM  Hash_table_difeh2,Hash_table_v4y05f  WHERE Hash_table_difeh2.Hash_value=Hash_table_v4y05f.Hash_value;
+Scale:1
+Row:6001216line
+Execution time:126.173 s
+Decrypt time:63.6276 s
+Query:
+SELECT L_SUPPKEY,S_SUPPKEY FROM lineitem, supplier WHERE lineitem.L_SUPPKEY = supplier.S_SUPPKEY 
+Enc Query:
+SELECT Hash_table_ap3stp.row_id,Hash_table_b3p4yz.row_id FROM  Hash_table_ap3stp,Hash_table_b3p4yz  WHERE Hash_table_ap3stp.Hash_value=Hash_table_b3p4yz.Hash_value;
+Enc Query:
+SELECT Hash_table_16qo7f.row_id,Hash_table_9wjce9.row_id FROM  Hash_table_16qo7f,Hash_table_9wjce9  WHERE Hash_table_16qo7f.Hash_value=Hash_table_9wjce9.Hash_value;
+Enc Query:
+SELECT Hash_table_3poucy.row_id,Hash_table_c9mtf9.row_id FROM  Hash_table_3poucy,Hash_table_c9mtf9  WHERE Hash_table_3poucy.Hash_value=Hash_table_c9mtf9.Hash_value;
+Enc Query:
+SELECT Hash_table_ceun64.row_id,Hash_table_lxdepm.row_id FROM  Hash_table_ceun64,Hash_table_lxdepm  WHERE Hash_table_ceun64.Hash_value=Hash_table_lxdepm.Hash_value;
+Enc Query:
+SELECT Hash_table_ilsn81.row_id,Hash_table_97qke2.row_id FROM  Hash_table_ilsn81,Hash_table_97qke2  WHERE Hash_table_ilsn81.Hash_value=Hash_table_97qke2.Hash_value;
+Enc Query:
+SELECT Hash_table_nltgm8.row_id,Hash_table_c9nuw5.row_id FROM  Hash_table_nltgm8,Hash_table_c9nuw5  WHERE Hash_table_nltgm8.Hash_value=Hash_table_c9nuw5.Hash_value;
+Enc Query:
+SELECT Hash_table_j0h4t8.row_id,Hash_table_7nsufg.row_id FROM  Hash_table_j0h4t8,Hash_table_7nsufg  WHERE Hash_table_j0h4t8.Hash_value=Hash_table_7nsufg.Hash_value;
+Enc Query:
+SELECT Hash_table_0g8d3h.row_id,Hash_table_pu40yv.row_id FROM  Hash_table_0g8d3h,Hash_table_pu40yv  WHERE Hash_table_0g8d3h.Hash_value=Hash_table_pu40yv.Hash_value;
+Enc Query:
+SELECT Hash_table_4om5ps.row_id,Hash_table_bi9onu.row_id FROM  Hash_table_4om5ps,Hash_table_bi9onu  WHERE Hash_table_4om5ps.Hash_value=Hash_table_bi9onu.Hash_value;
+Enc Query:
+SELECT Hash_table_ccgkun.row_id,Hash_table_62d07p.row_id FROM  Hash_table_ccgkun,Hash_table_62d07p  WHERE Hash_table_ccgkun.Hash_value=Hash_table_62d07p.Hash_value;
+Enc Query:
+SELECT Hash_table_o0wq9f.row_id,Hash_table_3qg1qa.row_id FROM  Hash_table_o0wq9f,Hash_table_3qg1qa  WHERE Hash_table_o0wq9f.Hash_value=Hash_table_3qg1qa.Hash_value;
+Enc Query:
+SELECT Hash_table_o1pcxt.row_id,Hash_table_bk3xt8.row_id FROM  Hash_table_o1pcxt,Hash_table_bk3xt8  WHERE Hash_table_o1pcxt.Hash_value=Hash_table_bk3xt8.Hash_value;
+Enc Query:
+SELECT Hash_table_sgn3ft.row_id,Hash_table_t0ss1p.row_id FROM  Hash_table_sgn3ft,Hash_table_t0ss1p  WHERE Hash_table_sgn3ft.Hash_value=Hash_table_t0ss1p.Hash_value;
+Enc Query:
+SELECT Hash_table_ebc5df.row_id,Hash_table_mp1ahn.row_id FROM  Hash_table_ebc5df,Hash_table_mp1ahn  WHERE Hash_table_ebc5df.Hash_value=Hash_table_mp1ahn.Hash_value;
+Enc Query:
+SELECT Hash_table_34w2cx.row_id,Hash_table_thkrhf.row_id FROM  Hash_table_34w2cx,Hash_table_thkrhf  WHERE Hash_table_34w2cx.Hash_value=Hash_table_thkrhf.Hash_value;
+Enc Query:
+SELECT Hash_table_oa4u2b.row_id,Hash_table_jdqtgg.row_id FROM  Hash_table_oa4u2b,Hash_table_jdqtgg  WHERE Hash_table_oa4u2b.Hash_value=Hash_table_jdqtgg.Hash_value;
+Enc Query:
+SELECT Hash_table_3wii4t.row_id,Hash_table_ry5nhj.row_id FROM  Hash_table_3wii4t,Hash_table_ry5nhj  WHERE Hash_table_3wii4t.Hash_value=Hash_table_ry5nhj.Hash_value;
+Enc Query:
+SELECT Hash_table_xvulfw.row_id,Hash_table_2cprmp.row_id FROM  Hash_table_xvulfw,Hash_table_2cprmp  WHERE Hash_table_xvulfw.Hash_value=Hash_table_2cprmp.Hash_value;
+Enc Query:
+SELECT Hash_table_20c3zk.row_id,Hash_table_e5pcyt.row_id FROM  Hash_table_20c3zk,Hash_table_e5pcyt  WHERE Hash_table_20c3zk.Hash_value=Hash_table_e5pcyt.Hash_value;
+Enc Query:
+SELECT Hash_table_0ic50g.row_id,Hash_table_9hats0.row_id FROM  Hash_table_0ic50g,Hash_table_9hats0  WHERE Hash_table_0ic50g.Hash_value=Hash_table_9hats0.Hash_value;
+Enc Query:
+SELECT Hash_table_0ar1t1.row_id,Hash_table_diw7kv.row_id FROM  Hash_table_0ar1t1,Hash_table_diw7kv  WHERE Hash_table_0ar1t1.Hash_value=Hash_table_diw7kv.Hash_value;
+Enc Query:
+SELECT Hash_table_pvik96.row_id,Hash_table_27hjw0.row_id FROM  Hash_table_pvik96,Hash_table_27hjw0  WHERE Hash_table_pvik96.Hash_value=Hash_table_27hjw0.Hash_value;
+Enc Query:
+SELECT Hash_table_ptnq0a.row_id,Hash_table_g0g5c9.row_id FROM  Hash_table_ptnq0a,Hash_table_g0g5c9  WHERE Hash_table_ptnq0a.Hash_value=Hash_table_g0g5c9.Hash_value;
+Enc Query:
+SELECT Hash_table_rfl6cu.row_id,Hash_table_7hosst.row_id FROM  Hash_table_rfl6cu,Hash_table_7hosst  WHERE Hash_table_rfl6cu.Hash_value=Hash_table_7hosst.Hash_value;
+Enc Query:
+SELECT Hash_table_7u32ka.row_id,Hash_table_fanc8s.row_id FROM  Hash_table_7u32ka,Hash_table_fanc8s  WHERE Hash_table_7u32ka.Hash_value=Hash_table_fanc8s.Hash_value;
+Enc Query:
+SELECT Hash_table_u1tie3.row_id,Hash_table_7gneud.row_id FROM  Hash_table_u1tie3,Hash_table_7gneud  WHERE Hash_table_u1tie3.Hash_value=Hash_table_7gneud.Hash_value;
+Enc Query:
+SELECT Hash_table_kitnfq.row_id,Hash_table_50bmu5.row_id FROM  Hash_table_kitnfq,Hash_table_50bmu5  WHERE Hash_table_kitnfq.Hash_value=Hash_table_50bmu5.Hash_value;
+Enc Query:
+SELECT Hash_table_3l5036.row_id,Hash_table_0m5qnd.row_id FROM  Hash_table_3l5036,Hash_table_0m5qnd  WHERE Hash_table_3l5036.Hash_value=Hash_table_0m5qnd.Hash_value;
+Enc Query:
+SELECT Hash_table_lct9us.row_id,Hash_table_w3xj86.row_id FROM  Hash_table_lct9us,Hash_table_w3xj86  WHERE Hash_table_lct9us.Hash_value=Hash_table_w3xj86.Hash_value;
+Enc Query:
+SELECT Hash_table_89a96z.row_id,Hash_table_qv78mw.row_id FROM  Hash_table_89a96z,Hash_table_qv78mw  WHERE Hash_table_89a96z.Hash_value=Hash_table_qv78mw.Hash_value;
+Enc Query:
+SELECT Hash_table_vmeve1.row_id,Hash_table_pg6rx3.row_id FROM  Hash_table_vmeve1,Hash_table_pg6rx3  WHERE Hash_table_vmeve1.Hash_value=Hash_table_pg6rx3.Hash_value;
+Enc Query:
+SELECT Hash_table_yct1wv.row_id,Hash_table_mv2ej5.row_id FROM  Hash_table_yct1wv,Hash_table_mv2ej5  WHERE Hash_table_yct1wv.Hash_value=Hash_table_mv2ej5.Hash_value;
+Enc Query:
+SELECT Hash_table_q201s1.row_id,Hash_table_okvqpf.row_id FROM  Hash_table_q201s1,Hash_table_okvqpf  WHERE Hash_table_q201s1.Hash_value=Hash_table_okvqpf.Hash_value;
+Enc Query:
+SELECT Hash_table_92a121.row_id,Hash_table_rqtuj6.row_id FROM  Hash_table_92a121,Hash_table_rqtuj6  WHERE Hash_table_92a121.Hash_value=Hash_table_rqtuj6.Hash_value;
+Enc Query:
+SELECT Hash_table_tuqjm2.row_id,Hash_table_t13bcn.row_id FROM  Hash_table_tuqjm2,Hash_table_t13bcn  WHERE Hash_table_tuqjm2.Hash_value=Hash_table_t13bcn.Hash_value;
+Enc Query:
+SELECT Hash_table_vmdq1a.row_id,Hash_table_h9enk8.row_id FROM  Hash_table_vmdq1a,Hash_table_h9enk8  WHERE Hash_table_vmdq1a.Hash_value=Hash_table_h9enk8.Hash_value;
+Enc Query:
+SELECT Hash_table_gldm4h.row_id,Hash_table_4w2did.row_id FROM  Hash_table_gldm4h,Hash_table_4w2did  WHERE Hash_table_gldm4h.Hash_value=Hash_table_4w2did.Hash_value;
+Enc Query:
+SELECT Hash_table_wg4o7r.row_id,Hash_table_ykbnau.row_id FROM  Hash_table_wg4o7r,Hash_table_ykbnau  WHERE Hash_table_wg4o7r.Hash_value=Hash_table_ykbnau.Hash_value;
+Enc Query:
+SELECT Hash_table_p3wugl.row_id,Hash_table_h8787k.row_id FROM  Hash_table_p3wugl,Hash_table_h8787k  WHERE Hash_table_p3wugl.Hash_value=Hash_table_h8787k.Hash_value;
+Enc Query:
+SELECT Hash_table_difeh2.row_id,Hash_table_v4y05f.row_id FROM  Hash_table_difeh2,Hash_table_v4y05f  WHERE Hash_table_difeh2.Hash_value=Hash_table_v4y05f.Hash_value;
+Scale:1
+Row:6001216line
+Execution time:124.935 s
+Decrypt time:62.6904 s
+AVG Decrypt time:126.318 s
+AVG Execution time:125.554 s
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders JOIN customer ON orders.O_CUSTKEY = customer.C_CUSTKEY; 
+Scale:1
+Row:1line
+Execution time:0.0287603 s
+Decrypt time:0 s
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders JOIN customer ON orders.O_CUSTKEY = customer.C_CUSTKEY; 
+Scale:1
+Row:1line
+Execution time:0.00160078 s
+Decrypt time:0 s
+AVG Decrypt time:0 s
+AVG Execution time:0.0151806 s
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders JOIN customer ON orders.O_CUSTKEY = customer.C_CUSTKEY; 
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY
+Enc Query:
+SELECT Hash_table_rzp81d.row_id,Hash_table_6k7gt1.row_id FROM  Hash_table_rzp81d,Hash_table_6k7gt1  WHERE Hash_table_rzp81d.Hash_value=Hash_table_6k7gt1.Hash_value;
+Enc Query:
+SELECT Hash_table_0z7dzo.row_id,Hash_table_cw15jt.row_id FROM  Hash_table_0z7dzo,Hash_table_cw15jt  WHERE Hash_table_0z7dzo.Hash_value=Hash_table_cw15jt.Hash_value;
+Enc Query:
+SELECT Hash_table_dg5w7z.row_id,Hash_table_nsb7kj.row_id FROM  Hash_table_dg5w7z,Hash_table_nsb7kj  WHERE Hash_table_dg5w7z.Hash_value=Hash_table_nsb7kj.Hash_value;
+Enc Query:
+SELECT Hash_table_vow4x3.row_id,Hash_table_y58g2k.row_id FROM  Hash_table_vow4x3,Hash_table_y58g2k  WHERE Hash_table_vow4x3.Hash_value=Hash_table_y58g2k.Hash_value;
+Enc Query:
+SELECT Hash_table_0ij42g.row_id,Hash_table_3vs1hk.row_id FROM  Hash_table_0ij42g,Hash_table_3vs1hk  WHERE Hash_table_0ij42g.Hash_value=Hash_table_3vs1hk.Hash_value;
+Enc Query:
+SELECT Hash_table_zrtmzy.row_id,Hash_table_mtwafh.row_id FROM  Hash_table_zrtmzy,Hash_table_mtwafh  WHERE Hash_table_zrtmzy.Hash_value=Hash_table_mtwafh.Hash_value;
+Enc Query:
+SELECT Hash_table_jdm7m1.row_id,Hash_table_zp30n3.row_id FROM  Hash_table_jdm7m1,Hash_table_zp30n3  WHERE Hash_table_jdm7m1.Hash_value=Hash_table_zp30n3.Hash_value;
+Enc Query:
+SELECT Hash_table_2dvfhz.row_id,Hash_table_2dou9h.row_id FROM  Hash_table_2dvfhz,Hash_table_2dou9h  WHERE Hash_table_2dvfhz.Hash_value=Hash_table_2dou9h.Hash_value;
+Enc Query:
+SELECT Hash_table_z4putl.row_id,Hash_table_0u7xer.row_id FROM  Hash_table_z4putl,Hash_table_0u7xer  WHERE Hash_table_z4putl.Hash_value=Hash_table_0u7xer.Hash_value;
+Enc Query:
+SELECT Hash_table_tkgeqk.row_id,Hash_table_qxx4id.row_id FROM  Hash_table_tkgeqk,Hash_table_qxx4id  WHERE Hash_table_tkgeqk.Hash_value=Hash_table_qxx4id.Hash_value;
+Enc Query:
+SELECT Hash_table_3sqvv6.row_id,Hash_table_xlykoa.row_id FROM  Hash_table_3sqvv6,Hash_table_xlykoa  WHERE Hash_table_3sqvv6.Hash_value=Hash_table_xlykoa.Hash_value;
+Enc Query:
+SELECT Hash_table_97bevu.row_id,Hash_table_9hjcze.row_id FROM  Hash_table_97bevu,Hash_table_9hjcze  WHERE Hash_table_97bevu.Hash_value=Hash_table_9hjcze.Hash_value;
+Enc Query:
+SELECT Hash_table_lo8ggq.row_id,Hash_table_j238kf.row_id FROM  Hash_table_lo8ggq,Hash_table_j238kf  WHERE Hash_table_lo8ggq.Hash_value=Hash_table_j238kf.Hash_value;
+Enc Query:
+SELECT Hash_table_7q4g33.row_id,Hash_table_t6gco7.row_id FROM  Hash_table_7q4g33,Hash_table_t6gco7  WHERE Hash_table_7q4g33.Hash_value=Hash_table_t6gco7.Hash_value;
+Enc Query:
+SELECT Hash_table_jpwnq0.row_id,Hash_table_jni6qi.row_id FROM  Hash_table_jpwnq0,Hash_table_jni6qi  WHERE Hash_table_jpwnq0.Hash_value=Hash_table_jni6qi.Hash_value;
+Enc Query:
+SELECT Hash_table_p0lz84.row_id,Hash_table_9krci4.row_id FROM  Hash_table_p0lz84,Hash_table_9krci4  WHERE Hash_table_p0lz84.Hash_value=Hash_table_9krci4.Hash_value;
+Enc Query:
+SELECT Hash_table_5m8dzt.row_id,Hash_table_h7qz7m.row_id FROM  Hash_table_5m8dzt,Hash_table_h7qz7m  WHERE Hash_table_5m8dzt.Hash_value=Hash_table_h7qz7m.Hash_value;
+Enc Query:
+SELECT Hash_table_y57m32.row_id,Hash_table_1e319h.row_id FROM  Hash_table_y57m32,Hash_table_1e319h  WHERE Hash_table_y57m32.Hash_value=Hash_table_1e319h.Hash_value;
+Enc Query:
+SELECT Hash_table_s9n5l9.row_id,Hash_table_ivw08n.row_id FROM  Hash_table_s9n5l9,Hash_table_ivw08n  WHERE Hash_table_s9n5l9.Hash_value=Hash_table_ivw08n.Hash_value;
+Enc Query:
+SELECT Hash_table_c794rb.row_id,Hash_table_s6ojdw.row_id FROM  Hash_table_c794rb,Hash_table_s6ojdw  WHERE Hash_table_c794rb.Hash_value=Hash_table_s6ojdw.Hash_value;
+Enc Query:
+SELECT Hash_table_3e0b9s.row_id,Hash_table_7rooyz.row_id FROM  Hash_table_3e0b9s,Hash_table_7rooyz  WHERE Hash_table_3e0b9s.Hash_value=Hash_table_7rooyz.Hash_value;
+Enc Query:
+SELECT Hash_table_akbaup.row_id,Hash_table_8v680c.row_id FROM  Hash_table_akbaup,Hash_table_8v680c  WHERE Hash_table_akbaup.Hash_value=Hash_table_8v680c.Hash_value;
+Enc Query:
+SELECT Hash_table_kjzold.row_id,Hash_table_ahnkn1.row_id FROM  Hash_table_kjzold,Hash_table_ahnkn1  WHERE Hash_table_kjzold.Hash_value=Hash_table_ahnkn1.Hash_value;
+Enc Query:
+SELECT Hash_table_s2z1jn.row_id,Hash_table_al8km5.row_id FROM  Hash_table_s2z1jn,Hash_table_al8km5  WHERE Hash_table_s2z1jn.Hash_value=Hash_table_al8km5.Hash_value;
+Enc Query:
+SELECT Hash_table_exlcyc.row_id,Hash_table_lltl15.row_id FROM  Hash_table_exlcyc,Hash_table_lltl15  WHERE Hash_table_exlcyc.Hash_value=Hash_table_lltl15.Hash_value;
+Enc Query:
+SELECT Hash_table_4c8uzq.row_id,Hash_table_g0bnz4.row_id FROM  Hash_table_4c8uzq,Hash_table_g0bnz4  WHERE Hash_table_4c8uzq.Hash_value=Hash_table_g0bnz4.Hash_value;
+Enc Query:
+SELECT Hash_table_j2y142.row_id,Hash_table_3l2cgv.row_id FROM  Hash_table_j2y142,Hash_table_3l2cgv  WHERE Hash_table_j2y142.Hash_value=Hash_table_3l2cgv.Hash_value;
+Enc Query:
+SELECT Hash_table_mqoiop.row_id,Hash_table_baaepa.row_id FROM  Hash_table_mqoiop,Hash_table_baaepa  WHERE Hash_table_mqoiop.Hash_value=Hash_table_baaepa.Hash_value;
+Enc Query:
+SELECT Hash_table_c64z7l.row_id,Hash_table_kemgvt.row_id FROM  Hash_table_c64z7l,Hash_table_kemgvt  WHERE Hash_table_c64z7l.Hash_value=Hash_table_kemgvt.Hash_value;
+Enc Query:
+SELECT Hash_table_g8z1cj.row_id,Hash_table_f9zig7.row_id FROM  Hash_table_g8z1cj,Hash_table_f9zig7  WHERE Hash_table_g8z1cj.Hash_value=Hash_table_f9zig7.Hash_value;
+Enc Query:
+SELECT Hash_table_283vyc.row_id,Hash_table_0mfkex.row_id FROM  Hash_table_283vyc,Hash_table_0mfkex  WHERE Hash_table_283vyc.Hash_value=Hash_table_0mfkex.Hash_value;
+Enc Query:
+SELECT Hash_table_pvl1hd.row_id,Hash_table_wraml0.row_id FROM  Hash_table_pvl1hd,Hash_table_wraml0  WHERE Hash_table_pvl1hd.Hash_value=Hash_table_wraml0.Hash_value;
+Enc Query:
+SELECT Hash_table_fta8ef.row_id,Hash_table_jo310w.row_id FROM  Hash_table_fta8ef,Hash_table_jo310w  WHERE Hash_table_fta8ef.Hash_value=Hash_table_jo310w.Hash_value;
+Enc Query:
+SELECT Hash_table_tjz3ys.row_id,Hash_table_dslykm.row_id FROM  Hash_table_tjz3ys,Hash_table_dslykm  WHERE Hash_table_tjz3ys.Hash_value=Hash_table_dslykm.Hash_value;
+Enc Query:
+SELECT Hash_table_v4bgsn.row_id,Hash_table_c1ohey.row_id FROM  Hash_table_v4bgsn,Hash_table_c1ohey  WHERE Hash_table_v4bgsn.Hash_value=Hash_table_c1ohey.Hash_value;
+Enc Query:
+SELECT Hash_table_df0b2z.row_id,Hash_table_4mec7g.row_id FROM  Hash_table_df0b2z,Hash_table_4mec7g  WHERE Hash_table_df0b2z.Hash_value=Hash_table_4mec7g.Hash_value;
+Enc Query:
+SELECT Hash_table_pvhvky.row_id,Hash_table_9xzrqj.row_id FROM  Hash_table_pvhvky,Hash_table_9xzrqj  WHERE Hash_table_pvhvky.Hash_value=Hash_table_9xzrqj.Hash_value;
+Enc Query:
+SELECT Hash_table_m60yto.row_id,Hash_table_6l6ljc.row_id FROM  Hash_table_m60yto,Hash_table_6l6ljc  WHERE Hash_table_m60yto.Hash_value=Hash_table_6l6ljc.Hash_value;
+Enc Query:
+SELECT Hash_table_o1c6fr.row_id,Hash_table_umpyna.row_id FROM  Hash_table_o1c6fr,Hash_table_umpyna  WHERE Hash_table_o1c6fr.Hash_value=Hash_table_umpyna.Hash_value;
+Enc Query:
+SELECT Hash_table_6ltf2b.row_id,Hash_table_ug4qzw.row_id FROM  Hash_table_6ltf2b,Hash_table_ug4qzw  WHERE Hash_table_6ltf2b.Hash_value=Hash_table_ug4qzw.Hash_value;
+Scale:1
+Row:1500001line
+Execution time:56.8031 s
+Decrypt time:34.5377 s
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY
+Enc Query:
+SELECT Hash_table_rzp81d.row_id,Hash_table_6k7gt1.row_id FROM  Hash_table_rzp81d,Hash_table_6k7gt1  WHERE Hash_table_rzp81d.Hash_value=Hash_table_6k7gt1.Hash_value;
+Enc Query:
+SELECT Hash_table_0z7dzo.row_id,Hash_table_cw15jt.row_id FROM  Hash_table_0z7dzo,Hash_table_cw15jt  WHERE Hash_table_0z7dzo.Hash_value=Hash_table_cw15jt.Hash_value;
+Enc Query:
+SELECT Hash_table_dg5w7z.row_id,Hash_table_nsb7kj.row_id FROM  Hash_table_dg5w7z,Hash_table_nsb7kj  WHERE Hash_table_dg5w7z.Hash_value=Hash_table_nsb7kj.Hash_value;
+Enc Query:
+SELECT Hash_table_vow4x3.row_id,Hash_table_y58g2k.row_id FROM  Hash_table_vow4x3,Hash_table_y58g2k  WHERE Hash_table_vow4x3.Hash_value=Hash_table_y58g2k.Hash_value;
+Enc Query:
+SELECT Hash_table_0ij42g.row_id,Hash_table_3vs1hk.row_id FROM  Hash_table_0ij42g,Hash_table_3vs1hk  WHERE Hash_table_0ij42g.Hash_value=Hash_table_3vs1hk.Hash_value;
+Enc Query:
+SELECT Hash_table_zrtmzy.row_id,Hash_table_mtwafh.row_id FROM  Hash_table_zrtmzy,Hash_table_mtwafh  WHERE Hash_table_zrtmzy.Hash_value=Hash_table_mtwafh.Hash_value;
+Enc Query:
+SELECT Hash_table_jdm7m1.row_id,Hash_table_zp30n3.row_id FROM  Hash_table_jdm7m1,Hash_table_zp30n3  WHERE Hash_table_jdm7m1.Hash_value=Hash_table_zp30n3.Hash_value;
+Enc Query:
+SELECT Hash_table_2dvfhz.row_id,Hash_table_2dou9h.row_id FROM  Hash_table_2dvfhz,Hash_table_2dou9h  WHERE Hash_table_2dvfhz.Hash_value=Hash_table_2dou9h.Hash_value;
+Enc Query:
+SELECT Hash_table_z4putl.row_id,Hash_table_0u7xer.row_id FROM  Hash_table_z4putl,Hash_table_0u7xer  WHERE Hash_table_z4putl.Hash_value=Hash_table_0u7xer.Hash_value;
+Enc Query:
+SELECT Hash_table_tkgeqk.row_id,Hash_table_qxx4id.row_id FROM  Hash_table_tkgeqk,Hash_table_qxx4id  WHERE Hash_table_tkgeqk.Hash_value=Hash_table_qxx4id.Hash_value;
+Enc Query:
+SELECT Hash_table_3sqvv6.row_id,Hash_table_xlykoa.row_id FROM  Hash_table_3sqvv6,Hash_table_xlykoa  WHERE Hash_table_3sqvv6.Hash_value=Hash_table_xlykoa.Hash_value;
+Enc Query:
+SELECT Hash_table_97bevu.row_id,Hash_table_9hjcze.row_id FROM  Hash_table_97bevu,Hash_table_9hjcze  WHERE Hash_table_97bevu.Hash_value=Hash_table_9hjcze.Hash_value;
+Enc Query:
+SELECT Hash_table_lo8ggq.row_id,Hash_table_j238kf.row_id FROM  Hash_table_lo8ggq,Hash_table_j238kf  WHERE Hash_table_lo8ggq.Hash_value=Hash_table_j238kf.Hash_value;
+Enc Query:
+SELECT Hash_table_7q4g33.row_id,Hash_table_t6gco7.row_id FROM  Hash_table_7q4g33,Hash_table_t6gco7  WHERE Hash_table_7q4g33.Hash_value=Hash_table_t6gco7.Hash_value;
+Enc Query:
+SELECT Hash_table_jpwnq0.row_id,Hash_table_jni6qi.row_id FROM  Hash_table_jpwnq0,Hash_table_jni6qi  WHERE Hash_table_jpwnq0.Hash_value=Hash_table_jni6qi.Hash_value;
+Enc Query:
+SELECT Hash_table_p0lz84.row_id,Hash_table_9krci4.row_id FROM  Hash_table_p0lz84,Hash_table_9krci4  WHERE Hash_table_p0lz84.Hash_value=Hash_table_9krci4.Hash_value;
+Enc Query:
+SELECT Hash_table_5m8dzt.row_id,Hash_table_h7qz7m.row_id FROM  Hash_table_5m8dzt,Hash_table_h7qz7m  WHERE Hash_table_5m8dzt.Hash_value=Hash_table_h7qz7m.Hash_value;
+Enc Query:
+SELECT Hash_table_y57m32.row_id,Hash_table_1e319h.row_id FROM  Hash_table_y57m32,Hash_table_1e319h  WHERE Hash_table_y57m32.Hash_value=Hash_table_1e319h.Hash_value;
+Enc Query:
+SELECT Hash_table_s9n5l9.row_id,Hash_table_ivw08n.row_id FROM  Hash_table_s9n5l9,Hash_table_ivw08n  WHERE Hash_table_s9n5l9.Hash_value=Hash_table_ivw08n.Hash_value;
+Enc Query:
+SELECT Hash_table_c794rb.row_id,Hash_table_s6ojdw.row_id FROM  Hash_table_c794rb,Hash_table_s6ojdw  WHERE Hash_table_c794rb.Hash_value=Hash_table_s6ojdw.Hash_value;
+Enc Query:
+SELECT Hash_table_3e0b9s.row_id,Hash_table_7rooyz.row_id FROM  Hash_table_3e0b9s,Hash_table_7rooyz  WHERE Hash_table_3e0b9s.Hash_value=Hash_table_7rooyz.Hash_value;
+Enc Query:
+SELECT Hash_table_akbaup.row_id,Hash_table_8v680c.row_id FROM  Hash_table_akbaup,Hash_table_8v680c  WHERE Hash_table_akbaup.Hash_value=Hash_table_8v680c.Hash_value;
+Enc Query:
+SELECT Hash_table_kjzold.row_id,Hash_table_ahnkn1.row_id FROM  Hash_table_kjzold,Hash_table_ahnkn1  WHERE Hash_table_kjzold.Hash_value=Hash_table_ahnkn1.Hash_value;
+Enc Query:
+SELECT Hash_table_s2z1jn.row_id,Hash_table_al8km5.row_id FROM  Hash_table_s2z1jn,Hash_table_al8km5  WHERE Hash_table_s2z1jn.Hash_value=Hash_table_al8km5.Hash_value;
+Enc Query:
+SELECT Hash_table_exlcyc.row_id,Hash_table_lltl15.row_id FROM  Hash_table_exlcyc,Hash_table_lltl15  WHERE Hash_table_exlcyc.Hash_value=Hash_table_lltl15.Hash_value;
+Enc Query:
+SELECT Hash_table_4c8uzq.row_id,Hash_table_g0bnz4.row_id FROM  Hash_table_4c8uzq,Hash_table_g0bnz4  WHERE Hash_table_4c8uzq.Hash_value=Hash_table_g0bnz4.Hash_value;
+Enc Query:
+SELECT Hash_table_j2y142.row_id,Hash_table_3l2cgv.row_id FROM  Hash_table_j2y142,Hash_table_3l2cgv  WHERE Hash_table_j2y142.Hash_value=Hash_table_3l2cgv.Hash_value;
+Enc Query:
+SELECT Hash_table_mqoiop.row_id,Hash_table_baaepa.row_id FROM  Hash_table_mqoiop,Hash_table_baaepa  WHERE Hash_table_mqoiop.Hash_value=Hash_table_baaepa.Hash_value;
+Enc Query:
+SELECT Hash_table_c64z7l.row_id,Hash_table_kemgvt.row_id FROM  Hash_table_c64z7l,Hash_table_kemgvt  WHERE Hash_table_c64z7l.Hash_value=Hash_table_kemgvt.Hash_value;
+Enc Query:
+SELECT Hash_table_g8z1cj.row_id,Hash_table_f9zig7.row_id FROM  Hash_table_g8z1cj,Hash_table_f9zig7  WHERE Hash_table_g8z1cj.Hash_value=Hash_table_f9zig7.Hash_value;
+Enc Query:
+SELECT Hash_table_283vyc.row_id,Hash_table_0mfkex.row_id FROM  Hash_table_283vyc,Hash_table_0mfkex  WHERE Hash_table_283vyc.Hash_value=Hash_table_0mfkex.Hash_value;
+Enc Query:
+SELECT Hash_table_pvl1hd.row_id,Hash_table_wraml0.row_id FROM  Hash_table_pvl1hd,Hash_table_wraml0  WHERE Hash_table_pvl1hd.Hash_value=Hash_table_wraml0.Hash_value;
+Enc Query:
+SELECT Hash_table_fta8ef.row_id,Hash_table_jo310w.row_id FROM  Hash_table_fta8ef,Hash_table_jo310w  WHERE Hash_table_fta8ef.Hash_value=Hash_table_jo310w.Hash_value;
+Enc Query:
+SELECT Hash_table_tjz3ys.row_id,Hash_table_dslykm.row_id FROM  Hash_table_tjz3ys,Hash_table_dslykm  WHERE Hash_table_tjz3ys.Hash_value=Hash_table_dslykm.Hash_value;
+Enc Query:
+SELECT Hash_table_v4bgsn.row_id,Hash_table_c1ohey.row_id FROM  Hash_table_v4bgsn,Hash_table_c1ohey  WHERE Hash_table_v4bgsn.Hash_value=Hash_table_c1ohey.Hash_value;
+Enc Query:
+SELECT Hash_table_df0b2z.row_id,Hash_table_4mec7g.row_id FROM  Hash_table_df0b2z,Hash_table_4mec7g  WHERE Hash_table_df0b2z.Hash_value=Hash_table_4mec7g.Hash_value;
+Enc Query:
+SELECT Hash_table_pvhvky.row_id,Hash_table_9xzrqj.row_id FROM  Hash_table_pvhvky,Hash_table_9xzrqj  WHERE Hash_table_pvhvky.Hash_value=Hash_table_9xzrqj.Hash_value;
+Enc Query:
+SELECT Hash_table_m60yto.row_id,Hash_table_6l6ljc.row_id FROM  Hash_table_m60yto,Hash_table_6l6ljc  WHERE Hash_table_m60yto.Hash_value=Hash_table_6l6ljc.Hash_value;
+Enc Query:
+SELECT Hash_table_o1c6fr.row_id,Hash_table_umpyna.row_id FROM  Hash_table_o1c6fr,Hash_table_umpyna  WHERE Hash_table_o1c6fr.Hash_value=Hash_table_umpyna.Hash_value;
+Enc Query:
+SELECT Hash_table_6ltf2b.row_id,Hash_table_ug4qzw.row_id FROM  Hash_table_6ltf2b,Hash_table_ug4qzw  WHERE Hash_table_6ltf2b.Hash_value=Hash_table_ug4qzw.Hash_value;
+Scale:1
+Row:1500001line
+Execution time:55.4543 s
+Decrypt time:34.409 s
+AVG Decrypt time:68.9468 s
+AVG Execution time:56.1287 s
+Query:
+SELECT O_CUSTKEY,C_CUSTKEY FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY
+Enc Query:
+SELECT Hash_table_pqku6o.row_id,Hash_table_ashs1y.row_id FROM  Hash_table_pqku6o,Hash_table_ashs1y  WHERE Hash_table_pqku6o.Hash_value=Hash_table_ashs1y.Hash_value;

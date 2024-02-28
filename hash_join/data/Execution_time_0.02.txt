@@ -1,0 +1,43 @@
+Scale:0.02
+Row:30000 line
+Execution time:2.80629 s
+Decrypt time:2.45738 s
+Scale:0.02
+Row:30000 line
+Execution time:2.785 s
+Decrypt time:2.47578 s
+Scale:0.02
+Row:30000 line
+Execution time:2.78357 s
+Decrypt time:2.47452 s
+Scale:0.02
+Row:30000 line
+Execution time:2.78139 s
+Decrypt time:2.47204 s
+Scale:0.02
+Row:30000 line
+Execution time:2.77812 s
+Decrypt time:2.47218 s
+AVG Execution time:2.78687 s
+Scale:0.02
+Row:30000 line
+Execution time:3.31681 s
+Decrypt time:2.39892 s
+Scale:0.02
+Row:30000 line
+Execution time:2.71598 s
+Decrypt time:2.41493 s
+Scale:0.02
+Row:30000 line
+Execution time:2.71982 s
+Decrypt time:2.41866 s
+Scale:0.02
+Row:30000 line
+Execution time:2.72083 s
+Decrypt time:2.42015 s
+Scale:0.02
+Row:30000 line
+Execution time:2.71423 s
+Decrypt time:2.41676 s
+AVG Decrypt time:2.41388 s
+AVG Execution time:2.83753 s

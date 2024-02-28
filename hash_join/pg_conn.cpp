@@ -27,12 +27,12 @@ void pg::execute(string query,PGresult *res)
     }
        
 }
-void pg::execute(string query)
-{
-    PGresult *res;
-    pg::execute(query,res);
-    PQclear(res);
-}
+// void pg::execute(string query)
+// {
+//     PGresult *res;
+//     pg::execute(query,res);
+//     PQclear(res);
+// }
 // void  pg::hash_copy_database(Enc_Table Enc_Table)
 // {
 //    string query="create table ";

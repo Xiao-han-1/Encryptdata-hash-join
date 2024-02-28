@@ -7,6 +7,8 @@
 #include<vector>
 #include<unordered_map>
 #include<math.h>
+#include<iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
@@ -74,12 +76,15 @@ class child_table
 public:
     child_table();
     int ElbowMethod(vector<int> data, int n);
-    void K_means(vector<Ls> &data,int k);
+    void classification(vector<string> Columns,int k);
+    void K_means(vector<Ls> &data,int &k);
     void get_frequency(vector<string>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num);
     void Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre_num,unordered_map<string,vector<int>> local_num);
     // void trans_col_to_row(vector<vector<int>>vue,unordered_map<int,vector<int>>&local_row);
     vector<vector<int>> trans_row_to_col(vector<vector<int>>vue);
-    vector<Table*> Devide_table(vector<Ls> K_table,Table* table);
+    void Classification(vector<string> Columns,int &k,vector<int>& Mark_Col);
+    vector<Table*> Devide_table(vector<Ls> K_table,Table* table,int k);
+    vector<Table*> Devide_table_v1(vector<int> Mark_Col,Table* table,vector<string>Columns,int k,unordered_map<string,int> fre_num);
     vector<Table*> Table_divide(vector<string>Columns,Table* table);
 };
 #endif

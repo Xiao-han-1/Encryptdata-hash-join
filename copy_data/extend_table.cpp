@@ -22,6 +22,7 @@ void extend_table::Add_dummy_row(Table* table,string k,int v)
 {
   // Table dummy_table=table;
   int num=table->max_frequency-v;
+  // cout<<num<<endl;
   for(int i=0;i<num;i++)
   {
     vector<string>dummy_row;
@@ -70,14 +71,26 @@ vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
 {
   // vector<Table> extend_child_table;
   int Length=child_table.size();
-  int num=0;
+  int num=0,sum=0;;
   for(int i=0;i<Length;i++)
   {
+    num=child_table[i]->value.size();
     Table_extend(child_table[i]);
-    num+=child_table[i]->value.size();
-    // cout<<i<<":"<<child_table[i].value.size()<<endl;
+    sum+=child_table[i]->value.size()-num;
+    //  cout<<i<<":"<<child_table[i]->value.size()-num<<endl;
     // extend_child_table.push_back(child_table[i]);
   }
-  cout<<"sum"<<":"<<num<<endl;
+  cout<<"num"<<":"<<Length<<endl;
+  cout<<"sum"<<":"<<sum<<endl;
+  std::ofstream outfile("experiment/result.txt", std::ios::app);
+
+    if (!outfile.is_open()) {
+        std::cerr << "Failed to open file."<< std::endl;
+    }
+
+    outfile << "num:"<< Length<< std::endl;
+    outfile << "sum:"<< sum<< std::endl;
+
+    outfile.close();
   return child_table;
 }
