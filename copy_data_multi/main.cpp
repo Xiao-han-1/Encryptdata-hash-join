@@ -31,7 +31,7 @@ string mapToString(const unordered_map<string, vector<string>>& map)
 }
 void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table)
 {
-  unordered_map<string,vector<string>>table_name_map;
+  map<string,vector<string>>table_name_map;
   int len=Aes_Table.size();
   for(int i=0;i<len;i++)
   {
@@ -49,9 +49,8 @@ void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table)
     for (auto const& pair: table_name_map) {
         auto key = pair.first;
         auto value = pair.second;
-        outfile << key << ":";
         for (const auto& name : value) {
-            outfile << name << std::endl << key << ":";
+            outfile<< key << ":" << name << std::endl;
         }
         outfile << std::endl;
     }
@@ -223,18 +222,28 @@ void experiment(string scale,string table_name,int col_id)
     {
       Columns.push_back(table->value[i][id]);
     }
+    std::vector<unsigned char> key(32, 0x01);
     pg* p=new pg();
     child_table* de = new child_table();
     extend_table* et = new extend_table();
-    AES_Encrypt* ae=new AES_Encrypt();
+    AesUfeEncryptor* ae=new AesUfeEncryptor(key);
     Hash_Table* ht=new Hash_Table();
-    vector<int> Mark_Col==de->Table_divide(Columns,table);
-    
-    auto start = std::chrono::high_resolution_clock::now();
-    
-    Enc_Table Aes_Table=ae->Encrypt_child_table(table);
+    vector<Table*>child_table=de->Table_divide(Columns,table);
     child_table=et->Smooth_Frequency(child_table);
+    auto start = std::chrono::high_resolution_clock::now();
+    vector<Enc_Table*> Aes_Table=ae->Encrypt_child_table(child_table);
     vector<Enc_Table*> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns);
+
+    for(int i=0;i<Aes_Table.size();i++)
+    {
+      p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
+    } 
+
+    for(int i=0;i<Aes_Table.size();i++)
+    {
+      p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
+    }
+
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
     std::cout << "Execution time:" << elapsed.count() << " s" << std::endl;
@@ -246,19 +255,8 @@ void experiment(string scale,string table_name,int col_id)
 
     out_file << "Execution time:"<< elapsed.count()<< " s" << std::endl;
     out_file.close();
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
-    } 
-
-
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
-    }
     unordered_map<string,vector<string>> table_name_map;
     Aes_Mapping_name(table,Aes_Table);
-    // Hash_Mapping_name(table,Hash_child_table);
     delete de;
     delete et; 
     delete ae;
@@ -280,7 +278,8 @@ void experiment(string scale,string table_name,int col_id)
 }
 int main()
 {
-
+  // int k;
+  // cin>>k;
   // experiment("1","supplier",0);
   // experiment("1","supplier",3);
   // experiment("1","nation",0);

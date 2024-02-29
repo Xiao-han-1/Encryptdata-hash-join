@@ -6,6 +6,8 @@
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 #include <openssl/buffer.h>
+#include<openssl/aes.h>
+#include<openssl/rand.h>
 using namespace std;
 MyAES::MyAES()
 {
@@ -155,90 +157,36 @@ string MyAES::Decrypt(string & cipher)
 					new StringSink(recover)));
 	return recover;
 }
+AesUfeDecryptor::AesUfeDecryptor(const std::vector<unsigned char>& key) : key_(key) {}
+
+std::string AesUfeDecryptor::decrypt(const std::vector<unsigned char>& ciphertext) {
+    std::vector<unsigned char> iv(ciphertext.begin(), ciphertext.begin() + AES_BLOCK_SIZE);
+    std::vector<unsigned char> encrypted_data(ciphertext.begin() + AES_BLOCK_SIZE, ciphertext.end());
+
+    std::string plaintext(encrypted_data.size(), 0);
+
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key_.data(), iv.data());
+
+    int plaintext_len;
+    EVP_DecryptUpdate(ctx, reinterpret_cast<unsigned char*>(&plaintext[0]), &plaintext_len, encrypted_data.data(), encrypted_data.size());
+
+    int final_len;
+    EVP_DecryptFinal_ex(ctx, reinterpret_cast<unsigned char*>(&plaintext[plaintext_len]), &final_len);
+
+    EVP_CIPHER_CTX_free(ctx);
+
+    plaintext.resize(plaintext_len + final_len);
+
+    return plaintext;
+}
+
+std::vector<std::string> AesUfeDecryptor::decrypt_array(const std::vector<std::vector<unsigned char>>& ciphertext_array) {
+    std::vector<std::string> decrypted_text_array;
+    for (const auto& ciphertext : ciphertext_array) {
+        decrypted_text_array.push_back(decrypt(ciphertext));
+    }
+    return decrypted_text_array;
+}
 
 
-/*
- * Description: use the key to encrypt the 'inFilename' and store the cipher in 'outFilname'
- * Input:
- *  inFilename: the file need to be encrypted!
- *  outFilename: the encrypted file
- * OutPut:
- *  if encrypt success, return true, or return false
- * Others: the function should delete the file : 'inFilename', however I note it
- */
-
-/*
- * Description: use the same key to decrypt the 'decFilename' and create recoverFile
- * Input:
- * 	decFilename: the encrypted file name
- * 	recoverFilename: the decrypted file name
- * OutPut:
- * 	if decrypted the file successful, return true, else return false
- * Others: we should also delete the file 'decFilename'
- */
-
-
-
-//  int main() {
-
-// 	 //	byte key[]	= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,	0x01,0x02, 0x03,0x04,0x05,0x06,0x07,0x08};
-// 	 //	//AES::DEFAULT_KEYLENGTH
-// 	 //	byte iv[]	= {0x01,0x02,0x03,0x03,0x03,0x03,0x03,0x03,	0x03,0x03, 0x01,0x02,0x03,0x03,0x03,0x03};
-// 	 //	int keysize = 16;
-
-
-// 	 // generate the key
-// 	 AutoSeededRandomPool rnd;
-// 	 byte key[AES::DEFAULT_KEYLENGTH];
-// 	 rnd.GenerateBlock( key, AES::DEFAULT_KEYLENGTH);
-
-// 	 // Generate a random IV
-// 	 byte iv[AES::BLOCKSIZE];
-// 	 rnd.GenerateBlock(iv, AES::BLOCKSIZE);
-
-// 	 int keysize = 16;
-
-// 	 string plainText = "Hello World!";
-
-// 	 clock_t start , finish;
-// 	 double duration;
-// 	 start = clock();
-
-// 	 MyAES aes(key, iv, keysize);
-
-// 	 cout << "AES parameters: " << endl;
-// 	 cout << "The algorithm name is : " << AES::StaticAlgorithmName() << endl;
-// 	 cout << "The iv is : " << aes.iv << endl;
-// 	 cout << "The key is : " << aes.key << endl;
-// 	 cout << "The key length is : " << aes.key_length << endl;
-
-// 	 string cipher = aes.Encrypt(plainText);
-// 	 cout << "The cipher is : " << cipher << endl;
-
-// 	 string recover = aes.Decrypt(cipher);
-// 	 cout << "The recover is : " << recover << endl;
-
-// 	 cout << "=====================" << endl;
-
-// 	 // encrypt the file and decrypt it
-// 	 string inFilename = "aesTest";
-// 	 string outFilename = "aesEncrypt";
-// 	 string recoverFilename = "aesRecover";
-
-// 	 if(aes.EncryptFile(inFilename, outFilename)){
-// 	 cout << "*__*" << endl << "Encrypt succeed!" << endl;
-// 	 if(aes.DecryptFile(outFilename, recoverFilename)){
-// 	 cout << "*__*" << endl << "Recover succeed!" << endl;
-// 	 } else
-// 	 cout << ")__(" << endl << "Recover failed!" << endl;
-// 	 } else
-// 	 cout << ")__(" << endl << "Encrypt failed!" << endl;
-
-
-
-// 	 finish = clock();
-// 	 duration = (double)(finish - start) / CLOCKS_PER_SEC;
-// 	 cout << "the cost is : " << duration << endl;
-
-// 	 return 0;
-//  }

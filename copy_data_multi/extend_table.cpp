@@ -20,9 +20,7 @@ string generate_num()
 }
 void extend_table::Add_dummy_row(Table* table,string k,int v)
 {
-  // Table dummy_table=table;
   int num=table->max_frequency-v;
-  // cout<<num<<endl;
   for(int i=0;i<num;i++)
   {
     vector<string>dummy_row;
@@ -37,10 +35,11 @@ void extend_table::Add_dummy_row(Table* table,string k,int v)
              string val=generate_num();
              dummy_row.push_back(val);
         }
-    }
-    table->value.push_back(dummy_row);
-    int dummy_location=table->value.size()-1;
+    } 
+    int dummy_location=table->value.size();
     table->row_flag[dummy_location]=0;
+    table->value.push_back(dummy_row);
+
     dummy_row.clear();
   }
 
@@ -48,15 +47,12 @@ void extend_table::Add_dummy_row(Table* table,string k,int v)
 void extend_table::Table_extend(Table *table)
 {
    unordered_map<string,int>mp;
-  //  vector<vector<string>> val;
-  //  val=table->value;
    int col_id=table->Join_col_id;
    for(int i=0;i<table->value.size();i++)
    {
     table->row_flag[i]=1;
     mp[table->value[i][col_id]]++;
    }
-  //  Table new_table=table;
    for (auto const& pair: mp) 
    {
     auto k=pair.first;
@@ -69,7 +65,6 @@ void extend_table::Table_extend(Table *table)
 }
 vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
 {
-  // vector<Table> extend_child_table;
   int Length=child_table.size();
   int num=0,sum=0;;
   for(int i=0;i<Length;i++)
@@ -77,10 +72,7 @@ vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
     num=child_table[i]->value.size();
     Table_extend(child_table[i]);
     sum+=child_table[i]->value.size()-num;
-    //  cout<<i<<":"<<child_table[i]->value.size()-num<<endl;
-    // extend_child_table.push_back(child_table[i]);
   }
-  cout<<"num"<<":"<<Length<<endl;
   cout<<"sum"<<":"<<sum<<endl;
   std::ofstream outfile("data/multi/aes_table_name_map.txt", std::ios::app);
 
@@ -88,7 +80,6 @@ vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
         std::cerr << "Failed to open file."<< std::endl;
     }
 
-    outfile << "num:"<< Length<< std::endl;
     outfile << "sum:"<< sum<< std::endl;
 
     outfile.close();

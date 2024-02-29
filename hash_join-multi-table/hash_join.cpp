@@ -45,6 +45,7 @@ int main()
     time+=eq->handle(query,scale,decrypt_time);
     }
     time=(double)time/iter;
+    decrypt_time =(double)decrypt_time /iter;
     cout << "AVG Decrypt time:" << decrypt_time << " s" << std::endl;
     std::cout << "AVG Execution time:" << time << " s" << std::endl;
     cout<<"Hash Join Successfully!"<<endl;

@@ -44,7 +44,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
   }
   query+=Enc_table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="data/"+Enc_table->hash_table_name+".tbl";
+  string filename="data/table/"+Enc_table->hash_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -68,30 +68,13 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
     }
     string r_path=path;
     free(path);
-    // filename="/root/pakages/copy/HashJoinOverEncryptedData/copy_data/"+filename;
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c";
     s=s+"\"\\copy "+Enc_table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
-    // pg::execute(s);
     std::system(s.c_str());
-    // pg::execute(s);
-    if (remove(filename.c_str()) != 0) {
-        cout << "Error deleting file" << endl;
-    } 
+    // if (remove(filename.c_str()) != 0) {
+    //     cout << "Error deleting file" << endl;
+    // } 
 
-  // vector<vector<string>>vue=Enc_Table->value;
-  // for(int i=0;i<vue.size();i++)
-  // {
-  //   query="insert into ";
-  //   query=query+Enc_Table->hash_table_name+ " values (";
-  //   int length=vue[i].size();
-  //   for(int j=0;j<length-1;j++)
-  //   {
-  //       query=query+"'"+vue[i][j]+"',";
-  //   }
-  //   query=query+"'"+vue[i][length-1]+"')";
-  //   pg::execute(query);
-  // }
-//   cout<<"Copy_Hash_DATA successful!"<<endl;
 }
 void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
 {
@@ -104,7 +87,7 @@ void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
   }
   query+=Enc_table->name[len-1]+" text)";
   pg::execute(query);
-  string filename="data/"+Enc_table->aes_table_name+".tbl";
+  string filename="data/table/"+Enc_table->aes_table_name+".tbl";
   ofstream outfile(filename);
 
     if (!outfile.is_open()) {
@@ -130,42 +113,9 @@ void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
     free(path);
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c ";
     s=s+"\"\\copy "+Enc_table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
-    // pg::execute(s);
     std::system(s.c_str());
-    if (remove(filename.c_str()) != 0) {
-        cout << "Error deleting file" << endl;
-    }
-
-  // vector<vector<string>>vue=Enc_Table->value;
-  // for(int i=0;i<Enc_Table->value.size();i++)
-  // {
-  //   query="insert into ";
-  //   query=query+Enc_Table->aes_table_name+ " values (";
-  //   int length=Enc_Table->value[i].size();
-  //   for(int j=0;j<length-1;j++)
-  //   {
-  //       query=query+"'"+Enc_Table->value[i][j]+"',";
-  //   }
-  //   query=query+"'"+Enc_Table->value[i][length-1]+"')";
-  //   pg::execute(query);
-  // }
-    //  cout<<"Copy_AES_DATA successful!"<<endl;
+    // if (remove(filename.c_str()) != 0) {
+    //     cout << "Error deleting file" << endl;
+    // }
 
 }
-// void  pg::copy_child_database(vector<Enc_Table*> Aes_Table,vector<Enc_Table*> Hash_child_table)
-// {
-//   PGresult *res;
-//   int hash_len=Hash_child_table.size();
-//   int aes_len=Aes_Table.size();
-//   // for(int i=0;i<hash_len;i++)
-//   // {
-//   //   Enc_Table tmp=Hash_child_table[i];
-//   //   string table_map_query="insert into map_table values ('"+tmp.aes_table_name+"', '"+tmp.hash_table_name+"' )";
-//   //   pg::execute(table_map_query,res);
-//   // }
-//   for(int i=0;i<hash_len;i++)
-//   {
-//     aes_copy_database(&Aes_Table[i]);
-//     hash_copy_database(&Hash_child_table[i]);
-//   }
-// }

@@ -76,7 +76,7 @@ class child_table
 public:
     child_table();
     int ElbowMethod(vector<int> data, int n);
-    vector<int> Classification(vector<string> Columns,int k);
+    void classification(vector<string> Columns,int k);
     void K_means(vector<Ls> &data,int &k);
     void get_frequency(vector<string>table,unordered_map<string,int> &fre_num,unordered_map<string,vector<int>> &local_num);
     void Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre_num,unordered_map<string,vector<int>> local_num);
@@ -85,6 +85,6 @@ public:
     void Classification(vector<string> Columns,int &k,vector<int>& Mark_Col);
     vector<Table*> Devide_table(vector<Ls> K_table,Table* table,int k);
     vector<Table*> Devide_table_v1(vector<int> Mark_Col,Table* table,vector<string>Columns,int k,unordered_map<string,int> fre_num);
-    vector<int>  Table_divide(vector<string>Columns,Table* table);
+    vector<Table*> Table_divide(vector<string>Columns,Table* table);
 };
 #endif

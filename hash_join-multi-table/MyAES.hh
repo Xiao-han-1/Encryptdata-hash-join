@@ -35,4 +35,13 @@ public:
 	string Decrypt(string &cipher);
 };
 
+class AesUfeDecryptor {
+public:
+    AesUfeDecryptor(const std::vector<unsigned char>& key);
+    std::string decrypt(const std::vector<unsigned char>& ciphertext);
+    std::vector<std::string> decrypt_array(const std::vector<std::vector<unsigned char>>& ciphertext_array);
+
+private:
+    std::vector<unsigned char> key_;
+};
 #endif /* MYAES_H_ */

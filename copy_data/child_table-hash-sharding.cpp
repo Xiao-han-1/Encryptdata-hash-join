@@ -105,32 +105,6 @@ void child_table::get_frequency(vector<string>table,unordered_map<string,int> &f
         t_ve.push_back(i);
         local_num[tmp]=t_ve;
     }
-    // cout<<"maxn_i:"<<maxn_i<<endl;
-    // cout<<"string:"<<table[maxn_i]<<endl;
-    // while(1)
-    // {
-    // }
-      //local_num存储每一个字符串在原join列的定位位置
-//    std::string table_name = "customers-10";
-
-//     // 将表名添加到文件路径中
-//     std::string file_path = "data/" + table_name + ".txt";
-
-//     // 打开文件以写入数据
-//     std::ofstream outfile(file_path);
-
-//     if (!outfile) {
-//         std::cerr << "无法打开文件！"<< std::endl;
-//     }
-
-//     // 遍历unordered_map并将数据写入文件
-//     for (const auto& item : fre_num) {
-//         outfile<< item.first << " "<< item.second<< std::endl;
-//     }
-
-//     // 关闭文件
-//     outfile.close();
-
 
 }
 void child_table::Full_K_table(vector<Ls> &K_table,unordered_map<string,int> fre_num,unordered_map<string,vector<int>> local_num)
@@ -254,12 +228,9 @@ vector<Table*> child_table::Devide_table(vector<Ls> K_table,Table* table,int k)
 }
 vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,vector<string>Columns,int k,unordered_map<string,int> fre_num)
 {
-    vector<Table*> child_table;
+    vector<Table*> child_table(k);
     vector<vector<string>>vue=table->value;
-    //  trans_col_to_row(vue,local_row);//将原本按列存的数据转为按行存
-    // int len=Mark_Col.size();
-    int n=k;
-    for(int i=0;i<n;i++)
+    for(int i=0;i<k;i++)
     {
         Table* t=new Table();
         t->max_frequency=0;
@@ -267,15 +238,13 @@ vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,ve
         t->table_name=table->table_name;
         t->type=table->type;
         t->Join_col_id=table->Join_col_id;
-        t->value.clear();
         child_table.push_back(t);
     }
 
     for (int i=0;i<Mark_Col.size();i++) {
-        int id=i;
         int flag=Mark_Col[i];
-        child_table[flag]->value.push_back(table->value[id]);
-        child_table[flag]->max_frequency=max(fre_num[Columns[id]],child_table[flag]->max_frequency);
+        child_table[flag]->value.push_back(table->value[i]);
+        child_table[flag]->max_frequency=max(fre_num[Columns[i]],child_table[flag]->max_frequency);
     }
     return child_table;
   

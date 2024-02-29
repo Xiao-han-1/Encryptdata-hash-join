@@ -85,30 +85,26 @@ void print_result(vector<vector<pair<string, string>>> result)
         cout << endl;
     }
 }
-vector<vector<pair<string, string>>>  Execute_hash_query::Generate_Enc_query_Fre(vector<pair<string, string>>tab,unordered_map<string, vector<string>>table_name_map,vector<string>&Enc_query,string query)
-{
-  vector<vector<pair<string,string>>> child_name;
-  for (const auto& p : tab) {
-    vector<string>tmp_tab=table_name_map[p.first];
-    vector<string>tmp_col=table_name_map[p.second];//tab存储形式orders.O_CUSTKEY
-    vector<pair<string,string>>t;
-    pair<string,string>te;
-    for(int i=0;i<tmp_tab.size();i++)
-    {
-        te.first=tmp_tab[i];
-        te.second=tmp_col[i];
-        t.push_back(te);
-    }
-    child_name.push_back(t);
-    }
-    vector<vector<pair<string, string>>> result = cartesianProduct(child_name);
-    // print_result(result);
-    return result;
-}
+// vector<vector<pair<string, string>>>  Execute_hash_query::Generate_Enc_query_Fre(vector<pair<string, string>>tab,unordered_map<string, vector<string>>table_name_map,vector<string>&Enc_query,string query)
+// {
+//     int len=table_name_map[tab[0].first].size();
+//     vector<vector<pair<string,string>>> result(len);
+//     for (int i=0;i<tab.size();i++) {
+//     pair<string, string>p=tab[i];
+//     vector<string>tmp_tab=table_name_map[p.first];
+//     vector<string>tmp_col=table_name_map[p.second];//tab存储形式orders.O_CUSTKEY
+//     vector<pair<string,string>>t;
+//     pair<string,string>te;
+//     for(int j=0;j<tmp_tab.size();j++)
+//     {
+//         te.first=tmp_tab[j];
+//         te.second=tmp_col[j];
+//         result[j].push_back(te);
+//     }
+//     }
+//     return result;
+// }
 vector<vector<pair<string, string>>>  Execute_hash_query::
-
-
-
 Generate_Enquery_HashSharding(vector<pair<string, string>>tab,unordered_map<string, vector<string>>table_name_map,vector<string>&Enc_query,string query)
 {
     string tab_name;
@@ -153,39 +149,51 @@ vector<pair<int,int>> get_map(pg_result* res)
     
     
 }
+std::vector<unsigned char> hexStringToBytes(const std::string& hex) {
+    std::vector<unsigned char> bytes;
+
+    for (unsigned int i = 0; i < hex.length(); i += 2) {
+        std::string byteString = hex.substr(i, 2);
+        unsigned char byte = (unsigned char)strtol(byteString.c_str(), NULL, 16);
+        bytes.push_back(byte);
+    }
+
+    return bytes;
+}
 //暂时只支持俩表join
 unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table,string Enc_query)
 {
     auto conn = pool.getConnection();
-    std::string query_columns = "SELECT column_name FROM information_schema.columns WHERE table_name = '" + table + "'";
-    PGresult *re_columns = PQexec(*conn, query_columns.c_str());
+    // std::string query_columns = "SELECT column_name FROM information_schema.columns WHERE table_name = '" + table + "'";
+    // PGresult *re_columns = PQexec(*conn, query_columns.c_str());
 
-    std::vector<std::string> column_names;
-    int num_columns = PQntuples(re_columns);
-    for (int i = 0; i < num_columns; ++i) {
-        column_names.push_back(PQgetvalue(re_columns, i, 0));
-    }
+    // std::vector<std::string> column_names;
+    // int num_columns = PQntuples(re_columns);
+    // for (int i = 0; i < num_columns; ++i) {
+    //     column_names.push_back(PQgetvalue(re_columns, i, 0));
+    // }
 
-    // 提取Enc_query和列名共有的列名
-    std::vector<std::string> common_columns;
-    std::istringstream iss(Enc_query);
-    std::string column;
-    while (std::getline(iss, column, ',')) {
-        if (std::find(column_names.begin(), column_names.end(), column) != column_names.end()) {
-            common_columns.push_back(column);
-        }
-    }
+    // // 提取Enc_query和列名共有的列名
+    // std::vector<std::string> common_columns;
+    // std::istringstream iss(Enc_query);
+    // std::string column;
+    // while (std::getline(iss, column, ',')) {
+    //     if (std::find(column_names.begin(), column_names.end(), column) != column_names.end()) {
+    //         common_columns.push_back(column);
+    //     }
+    // }
 
-    // 将共有列名存回Enc_query
-    Enc_query = "";
-    for (size_t i = 0; i< common_columns.size(); ++i) {
-        Enc_query += common_columns[i];
-        if (i< common_columns.size() - 1) {
-            Enc_query += ",";
-        }
-    }
-     PQclear(re_columns);
-    string query="select flag,"+Enc_query+" from "+table;
+    // // 将共有列名存回Enc_query
+    // Enc_query = "";
+    // for (size_t i = 0; i< common_columns.size(); ++i) {
+    //     Enc_query += common_columns[i];
+    //     if (i< common_columns.size() - 1) {
+    //         Enc_query += ",";
+    //     }
+    // }
+    //  PQclear(re_columns);
+     Enc_query = "*";
+    string query="select "+Enc_query+" from "+table;
     PGresult *re=PQexec(*conn,query.c_str());
     if (PQresultStatus(re) != PGRES_TUPLES_OK) {
         cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
@@ -195,7 +203,8 @@ unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table,
     // con->execute(query,re);
     int num_rows = PQntuples(re);
     int num_cols = PQnfields(re);
-    MyAES* aes=new MyAES();
+    std::vector<unsigned char> key(32, 0x01);
+    AesUfeDecryptor* ae= new AesUfeDecryptor(key);
     unordered_map<int,vector<string>> val;
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < num_rows; ++i) 
@@ -203,8 +212,8 @@ unordered_map<int,vector<string>>  Execute_hash_query::get_Aes_val(string table,
         vector<string>tmp;
          for (int j = 0; j < num_cols; ++j) {
             string ve=PQgetvalue(re, i, j);
-            ve=aes->Decrypt(ve);
-            tmp.push_back(ve);
+            string re=ae->decrypt(hexStringToBytes(ve));
+            tmp.push_back(re);
           
         }
         val[i]=tmp;
@@ -224,7 +233,7 @@ std::string replace_all(const std::string& input, const std::string& old_substri
         result.replace(pos, old_substring.length(), new_substring);
         pos += new_substring.length();
     }
-    return result;
+    return result;  
 }
 vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>> h_table,string query,vector<pair<string, string> > tab)
 {
@@ -362,7 +371,6 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     }
 
     vector<vector<int>> mp;
-    cout<<"line "<<num_rows<<endl;
     for (int i = 0; i < num_rows; ++i) 
     {
         vector<int>tmp;
@@ -386,11 +394,7 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
         vector<string>tmp;
         for(int j=0;j<len;j++)
         {
-            // unordered_map<int,vector<string>>val_tab=val[j];
-            // cout<<val_tab.size()<<endl;
             int key=mp[i][j];
-            // cout<<key<<":"<<endl;
-            // cout<<val_tab[key][0]<<endl;
             string f=val[j][key][0];
             string t="1";
             if(f==t)
@@ -447,12 +451,13 @@ void Execute_hash_query::processData_multi_table(vector<vector<string>> &final_v
     int len =data.size();
     for (int i = 0; i < len; i++)
     {
-        cout<<i<<":";
+        // cout<<i<<":"<<endl;
         vector<vector<string>> t = Hash_join(data[i],query,tab);
         final_vec.insert(final_vec.end(), t.begin(), t.end());
         // data.push_back(t);
     }
 }
+
 double Execute_hash_query::handle(string  query,string scale,double &AVG_Decrypt_time)
  {
     auto start = std::chrono::high_resolution_clock::now();
@@ -481,36 +486,11 @@ double Execute_hash_query::handle(string  query,string scale,double &AVG_Decrypt
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enquery_HashSharding(tab,table_name_map,Enc_query,query);//根据频率进行分表，生成n个子查询
 
-    // vector<thread> threads;
-     // int len = result.size();
-    // int num_threads = min(20, len);
-
-    // // 创建线程
-// int num=0;
-    // for (int i = 0; i < num_threads; i++)
-    // {
-    //     int st = i * len / num_threads;
-    //     int en = (i + 1) * len / num_threads;
-    //     if (i == num_threads - 1)
-    //     {
-    //         en = len;
-    //     }
-    //     vector<vector<pair<string, string>>> sub_vecs(result.begin() + st, result.begin() + en);
-    //     threads.push_back(thread(&Execute_hash_query::processData,sub_vecs,&num,this));
-    // }
-    // // 等待线程执行完毕
-    // for (int i = 0; i < num_threads; i++)
-    // {
-    //     threads[i].join();
-    // }
-    // vector<vector<pair<string, string>>> sub_vecs;
     vector<vector<string>> final_vec;
-    vector<string>common_columns=get_res_col_name(query);
-    final_vec.push_back(common_columns);
-    Execute_hash_query::processData_multi_table(final_vec,result,query,tab);
-    store_data(final_vec);
+    processData_multi_table(final_vec,result,query,tab);
     auto end = std::chrono::high_resolution_clock::now();  
     std::chrono::duration<double> elapsed = end - start;
+    // store_data(final_vec);
     cout<<"Row:"<<final_vec.size()<<endl;
     std::cout << "Execution time:" << elapsed.count() << " s" << std::endl;
     cout<<"Decrypt time:"<<Decrypt_time<<" s"<<endl;
