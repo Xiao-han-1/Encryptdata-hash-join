@@ -22,7 +22,7 @@ Execute_hash_query::~Execute_hash_query(){
 static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 20);
  unordered_map<string, vector<string>> stringToMap(string scale)
 {
-    string path="../copy_data/data/aes_table_name_map_"+scale+".txt";
+    string path="../copy_data/data/hash_table_name_map_"+scale+".txt";
     unordered_map<string, vector<string>> table_name_map;
     std::ifstream infile(path);
     if (!infile.is_open()) {
@@ -120,48 +120,6 @@ vector<vector<pair<string, string>>>  Execute_hash_query::Generate_Enquery_HashS
     }
     return res;
 }
-// unordered_map<string,string> Execute_hash_query::Read_map()
-// {
-//     auto conn = pool.getConnection();
-//     string query="select * from map_table";
-//     PGresult *re=PQexec(*conn,query.c_str());
-//     if (PQresultStatus(re) != PGRES_TUPLES_OK) {
-//         cerr << "查询数据失败: " << PQerrorMessage(*conn) << endl;
-//         PQclear(re);
-//         pool.releaseConnection(conn);
-//     }
-//      unordered_map<string,string> mymap;
-//     int rows = PQntuples(re);
-//     for (int i = 0; i < rows; i++) {
-//         const char* key = PQgetvalue(re, i, 0);
-//         const char* value = PQgetvalue(re, i, 1);
-//         mymap[key] = value;
-//     }
-//      PQclear(re);
-//      pool.releaseConnection(conn);
-//     // 输出map中的数据
-//     // for (const auto& kv : mymap) {
-//     //     cout << kv.first << " = " << kv.second << endl;
-//     // }
-//     return mymap;
-// }
-// vector<string>  Execute_hash_query::Get_hash_name(vector<pair<string, string>> re)
-// {
-//   unordered_map<string,string>mp=Read_map();
-//   int len=re.size();
-//   vector<string> h_table;
-//   for(int i=0;i<len;i++)
-//   {
-//     string table_name=re[i].first;
-//     string col_name=re[i].second;
-//     // string hash_table_name="Hash_"+table_name+"_"+col_name;
-//     string hash_table_name=mp[table_name];
-//     Enc_table_name[hash_table_name]=table_name;
-//     // string tmp=Get_hash_data(hash_table_name);
-//     h_table.push_back(hash_table_name);
-//   }
-//   return h_table;
-// }
 vector<pair<int,int>> get_map(pg_result* res)
 {
     int num_rows = PQntuples(res);
@@ -320,29 +278,6 @@ double Execute_hash_query::handle(string  query,string scale,double &AVG_Decrypt
     vector<string>Enc_query;
     vector<vector<pair<string, string>>> result=Generate_Enquery_HashSharding(tab,table_name_map,Enc_query,query);//根据频率进行分表，生成n^2个子查询
 
-    // vector<thread> threads;
-    // int len = result.size();
-    // int num_threads = min(20, len);
-
-    // // 创建线程
-    // int num=0;
-    // for (int i = 0; i < num_threads; i++)
-    // {
-    //     int st = i * len / num_threads;
-    //     int en = (i + 1) * len / num_threads;
-    //     if (i == num_threads - 1)
-    //     {
-    //         en = len;
-    //     }
-    //     vector<vector<pair<string, string>>> sub_vecs(result.begin() + st, result.begin() + en);
-    //     threads.push_back(thread(&Execute_hash_query::processData,sub_vecs,&num,this));
-    // }
-    // // 等待线程执行完毕
-    // for (int i = 0; i < num_threads; i++)
-    // {
-    //     threads[i].join();
-    // }
-    // vector<vector<pair<string, string>>> sub_vecs;
     vector<vector<string>> final_vec;
     Execute_hash_query::processData_one(final_vec,result);
     auto end = std::chrono::high_resolution_clock::now();

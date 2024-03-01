@@ -23,10 +23,10 @@ Execute_hash_query::Execute_hash_query(/* args */){
 Execute_hash_query::~Execute_hash_query(){
 }
 static ConnectionPool pool("dbname=hash_join user=postgres password=letmien hostaddr=127.0.0.1 port=5432", 40);
- unordered_map<string, vector<string>> stringToMap()
+ unordered_map<string, vector<string>> stringToMap(string scale)
 {
     unordered_map<string, vector<string>> table_name_map;
-    std::ifstream infile("../copy_data_multi/data/multi/aes_table_name_map.txt");
+    std::ifstream infile("../copy_data_multi/data/multi/hash_table_name_map"+scale+".txt");
     if (!infile.is_open()) {
         std::cerr << "Error: Unable to open file for reading." << std::endl;
     }
@@ -104,28 +104,22 @@ void print_result(vector<vector<pair<string, string>>> result)
 //     }
 //     return result;
 // }
-vector<vector<pair<string, string>>>  Execute_hash_query::
+vector<vector<string, string>>  Execute_hash_query::
 Generate_Enquery_HashSharding(vector<pair<string, string>>tab,unordered_map<string, vector<string>>table_name_map,vector<string>&Enc_query,string query)
 {
     string tab_name;
     string col_name;
     vector<string>tmp_tab;
-    vector<string>tmp_col;
-    pair<string,string>te;
     string str=tab[0].first+"_"+tab[0].second;
     int len=table_name_map[str].size();
-    vector<vector<pair<string,string>>>res(len);
+    vector<vector<string>>res(len);
     for (const auto& p : tab) {
     tab_name=p.first+"_"+p.second;
-    col_name=p.second;
-    tmp_tab=table_name_map[tab_name];
-    tmp_col=table_name_map[col_name];//tab存储形式orders.O_CUSTKEY
+    tmp_tab=table_name_map[tab_name];//tab存储形式orders.O_CUSTKEY
     
     for(int i=0;i<tmp_tab.size();i++)
     {
-        te.first=tmp_tab[i];
-        te.second=tmp_col[i];
-        res[i].push_back(te);
+        res[i].push_back(tmp_tab[i]);
     }
     }
     return res;
@@ -235,25 +229,25 @@ std::string replace_all(const std::string& input, const std::string& old_substri
     }
     return result;  
 }
-vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>> h_table,string query,vector<pair<string, string> > tab)
+vector<vector<string>> Execute_hash_query::Hash_join(vector<string> h_table,string query,vector<pair<string, string> > tab)
 {
     
-    vector<vector<string>>result{};
+    // vector<vector<string>>result{};
     auto conn = pool.getConnection();
     string Hash_table="";
     unordered_map<string,bool>vis_tab;
     for(int i=0;i<tab.size();i++)
     {
-        if(vis_tab.find(h_table[i].first) != vis_tab.end())
+        if(vis_tab.find(h_table[i]) != vis_tab.end())
         continue;
         if(i!=0)
         {
-          Hash_table=Hash_table+",Hash_"+h_table[i].first;
+          Hash_table=Hash_table+","+h_table[i];
           vis_tab[h_table[i].first]=true;  
         }
         
         else
-        {Hash_table=Hash_table+"Hash_"+h_table[i].first;
+        {Hash_table=Hash_table+""+h_table[i];
         vis_tab[h_table[i].first]=true; 
         }
     }
@@ -270,15 +264,15 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     {
         if(i!=0)
        {
-        Hash_table=Hash_table+" And Hash_"+h_table[i].first+".Hash_value";
+        Hash_table=Hash_table+" And "+h_table[i]+".Hash_value";
         i++;
-        Hash_table=Hash_table+"=Hash_"+h_table[i].first+".Hash_value";
+        Hash_table=Hash_table+"="+h_table[i]+".Hash_value";
        }
         else
         {
-        Hash_table=Hash_table+"Hash_"+h_table[i].first+".Hash_value";
+        Hash_table=Hash_table+""+h_table[i]+".Hash_value";
         i++;
-        Hash_table=Hash_table+"=Hash_"+h_table[i].first+".Hash_value";
+        Hash_table=Hash_table+"="+h_table[i]+".Hash_value";
        }
     }
      where_pos = query.find("WHERE");
@@ -289,46 +283,43 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     } else {
         std::cout << "WHERE not found"<< std::endl;
     }
-    vector<bool> vis(tab.size(),false);
-    for(int i=0;i<tab.size();i++)
-    {
-        if(vis[i])
-        continue;
-        for(int j=i+1;j<tab.size();j++)
-        {
-            if(!vis[j])
-            {
-                if(tab[i].first==tab[j].first && h_table[i].first!=h_table[j].first)
-                {
-                    string Enc1="Hash_"+h_table[i].first;
-                    string Enc2="Hash_"+h_table[j].first;
-                    query=query+" And "+Enc1+".row_id = "+Enc2+".row_id";
-                    vis[j]=true;
-                    // cout<<query<<endl;
-                }
+    // vector<bool> vis(tab.size(),false);
+    // for(int i=0;i<tab.size();i++)
+    // {
+    //     if(vis[i])
+    //     continue;
+    //     for(int j=i+1;j<tab.size();j++)
+    //     {
+    //         if(!vis[j])
+    //         {
+    //             if(tab[i].first==tab[j].first && h_table[i].first!=h_table[j].first)
+    //             {
+    //                 string Enc1=h_table[i];
+    //                 string Enc2=h_table[j];
+    //                 query=query+" And "+Enc1+".row_id = "+Enc2+".row_id";
+    //                 vis[j]=true;
+    //                 // cout<<query<<endl;
+    //             }
                 
-            }
+    //         }
 
-        }
-    }
+    //     }
+    // }
     //cout<<query<<endl;//同一原始表使用row_id作为关键词进行表连接进行筛选
-    unordered_map<string,bool>vis_row;
     vector<string>A_Table;
     string Row_id="";
     for(int i=0;i<tab.size();i++)
     {
-            if(vis_row.find(tab[i].first) != vis_row.end())
-                continue;
             if(i!=0){
-            Row_id=Row_id+","+"Hash_"+h_table[i].first+".row_id";
-            A_Table.push_back(h_table[i].first);
-            vis_row[tab[i].first]=true;
+            Row_id=Row_id+","+h_table[i]+".row_id";
+            A_Table.push_back(h_table[i]);
+            // vis_row[tab[i].first]=true;
             }
             else
             {
-            Row_id=Row_id+"Hash_"+h_table[i].first+".row_id";
-            A_Table.push_back(h_table[i].first);
-            vis_row[tab[i].first]=true;
+            Row_id=Row_id+""+h_table[i]+".row_id";
+            A_Table.push_back(h_table[i]);
+            // vis_row[tab[i].first]=true;
             }
     }
     query=query+";";
@@ -346,7 +337,7 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
     
     query=replace_all(query,Enc_query,Row_id);//将*替换为row_id,用于查询结果在原数据集上的定位
     transform(Enc_query.begin(), Enc_query.end(), Enc_query.begin(), ::tolower);
-     std::ofstream outfile("data/data/Multi_Table_six.txt", std::ios::app);
+     std::ofstream outfile("data/data/Multi_Table_three.txt", std::ios::app);
 
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
@@ -381,6 +372,8 @@ vector<vector<string>> Execute_hash_query::Hash_join(vector<pair<string, string>
         mp.push_back(tmp);
     }
     PQclear(res);
+    return mp;
+}
     pool.releaseConnection(conn);
     unordered_map<int,unordered_map<int,vector<string>>>val;
     for(int i=0;i< A_Table.size();i++)
@@ -446,7 +439,7 @@ void store_data(vector<vector<string>> data)
     }
     outfile.close();
 }
-void Execute_hash_query::processData_multi_table(vector<vector<string>> &final_vec,vector<vector<pair<string, string>>> data,string query,vector<pair<string, string> > tab) {
+void Execute_hash_query::processData_multi_table(vector<vector<string>> &final_vec,vector<vector<string>> data,string query,vector<pair<string, string> > tab) {
     // 在这里写处理数据的代码
     int len =data.size();
     for (int i = 0; i < len; i++)
@@ -457,13 +450,35 @@ void Execute_hash_query::processData_multi_table(vector<vector<string>> &final_v
         // data.push_back(t);
     }
 }
+void Execute_hash_query::get_result(vector<vector<string>> &final_vec,vector<vector<string>> data,string query,vector<pair<string, string> > tab) {
+    vector<string>A_Table;
+        unordered_map<int,unordered_map<int,vector<string>>>val;
+    for(int i=0;i< A_Table.size();i++)
+    {
+        val[i]=get_Aes_val(A_Table[i],Enc_query);//读取AES表对应数据
+    }
+    for(int i=0;i<tab.size();i++)
+    {
+            A_Table.push_back(tab[i].first);
+    }
+    for(int i=0;i<A_Table.size();i++)
+    {
+        for(int j=i+1;j<A_Table.size();j++)
+        {
+            if(A_Table[i]==A_Table[j])
+            {
+
+            }
+        }
+    }
+}
 
 double Execute_hash_query::handle(string  query,string scale,double &AVG_Decrypt_time)
  {
     auto start = std::chrono::high_resolution_clock::now();
     Decrypt_time=0.0;
     string str=query;
-    unordered_map<string, vector<string>> table_name_map = stringToMap();
+    unordered_map<string, vector<string>> table_name_map = stringToMap(scale);
     regex_t regex;
     regmatch_t matches[3];
     vector<pair<string, string> > tab;
@@ -484,10 +499,13 @@ double Execute_hash_query::handle(string  query,string scale,double &AVG_Decrypt
     regfree(&regex);
     // int length=tab.size();
     vector<string>Enc_query;
-    vector<vector<pair<string, string>>> result=Generate_Enquery_HashSharding(tab,table_name_map,Enc_query,query);//根据频率进行分表，生成n个子查询
+    vector<vector<string>> result=Generate_Enquery_HashSharding(tab,table_name_map,Enc_query,query);//根据频率进行分表，生成n个子查询
 
     vector<vector<string>> final_vec;
-    processData_multi_table(final_vec,result,query,tab);
+    vector<vector<string>> row_id_vec;
+    processData_multi_table(row_id_vec,result,query,tab);
+    get_result(final_id_vec,row_id_vec,query,tab);
+    
     auto end = std::chrono::high_resolution_clock::now();  
     std::chrono::duration<double> elapsed = end - start;
     // store_data(final_vec);

@@ -1,0 +1,16 @@
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:orders_O_CUSTKEY
+origin_sum:150000
+table:customer_C_CUSTKEY
+origin_sum:15000

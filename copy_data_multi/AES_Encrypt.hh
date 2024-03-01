@@ -7,7 +7,11 @@
 #include <cryptopp/osrng.h>
 #include <stdint.h>
 #include <stdlib.h>
-
+#include <openssl/bio.h>
+#include <openssl/evp.h>
+#include <openssl/buffer.h>
+#include<openssl/aes.h>
+#include<openssl/rand.h>
 #include <string>
 #include <iostream>
 #include "child_table.hh"

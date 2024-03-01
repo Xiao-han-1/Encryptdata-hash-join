@@ -245,10 +245,11 @@ vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,ve
     }
 
     for (int i=0;i<Mark_Col.size();i++) {
-        int id=i;
+        int Row_id=i;
         int flag=Mark_Col[i];
-        child_table[flag]->value.push_back(table->value[id]);
-        child_table[flag]->max_frequency=max(fre_num[Columns[id]],child_table[flag]->max_frequency);
+        child_table[flag]->row_id.push_back(Row_id);
+        child_table[flag]->value.push_back(table->value[i]);
+        child_table[flag]->max_frequency=max(fre_num[Columns[i]],child_table[flag]->max_frequency);
     }
     return child_table;
   

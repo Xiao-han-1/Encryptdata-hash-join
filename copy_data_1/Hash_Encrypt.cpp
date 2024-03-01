@@ -95,10 +95,7 @@ vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<E
 	{
 		Enc_Table* hash_table=new Enc_Table();
 		Hash_Enc_Table(child_table[i],Aes_child_Table[i],hash_table);
-        // p->hash_copy_database(hash_table,child_table[i]->table_name);
-		// hash_table->value.clear();
-		hash_child_table.push_back(hash_table);
-		
+		hash_child_table.push_back(hash_table);		
 	}
 	// delete hash_table;
 	return hash_child_table;

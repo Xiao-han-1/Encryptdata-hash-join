@@ -21,6 +21,7 @@ typedef struct table
     vector<string>name;
     vector<string>type;
     unordered_map<int,int>row_flag;
+    vector<int>row_id;
     vector<vector<string>>value;
     ~table()
     {

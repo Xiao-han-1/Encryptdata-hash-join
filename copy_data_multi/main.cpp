@@ -29,20 +29,20 @@ string mapToString(const unordered_map<string, vector<string>>& map)
     }
     return ss.str();
 }
-void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table)
+void Hash_Mapping_name(Table* table,vector<Enc_Table*> Hash_Table,string scale)
 {
-  map<string,vector<string>>table_name_map;
-  int len=Aes_Table.size();
+  unordered_map<string,vector<string>>table_name_map;
+  int len=Hash_Table.size();
   for(int i=0;i<len;i++)
   {
-    Enc_Table* t=Aes_Table[i];
-    table_name_map[table->table_name].push_back(t->aes_table_name);
-    for(int j=0;j<table->name.size();j++)
-    {
-       table_name_map[table->name[j]].push_back(t->name[j]);
-    }
+    Enc_Table* t=Hash_Table[i];
+    table_name_map[table->table_name].push_back(t->hash_table_name);
+    // for(int j=0;j<table->name.size();j++)
+    // {
+    //    table_name_map[table->name[j]].push_back(t->name[j]);
+    // }
   }
-  std::ofstream outfile("data/multi/aes_table_name_map.txt", std::ios::app);
+    std::ofstream outfile("data/multi/hash_table_name_"+scale+"_map.txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
     }
@@ -56,34 +56,34 @@ void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table)
     }
     outfile.close();
 }
-void Hash_Mapping_name(Table* table,vector<Enc_Table*> Hash_child_table)
-{
-  unordered_map<string,vector<string>>table_name_map;
-  int len=Hash_child_table.size();
-  for(int i=0;i<len;i++)
-  {
-    Enc_Table* t=Hash_child_table[i];
-    table_name_map[table->table_name].push_back(t->hash_table_name);
-    for(int j=0;j<table->name.size();j++)
-    {
-       table_name_map[table->name[j]].push_back(t->name[j]);
-    }
-  }
-  std::ofstream outfile("hash_table_name_map.txt", std::ios::app);
-    if (!outfile.is_open()) {
-        std::cerr << "Error: Unable to open file for writing." << std::endl;
-    }
-    for (auto const& pair: table_name_map) {
-        auto key = pair.first;
-        auto value = pair.second;
-        outfile << key << ":";
-        for (const auto& name : value) {
-            outfile << name << std::endl << key << ":";
-        }
-        outfile << std::endl;
-    }
-    outfile.close();
-}
+// void Hash_Mapping_name(Table* table,vector<Enc_Table*> Hash_child_table)
+// {
+//   unordered_map<string,vector<string>>table_name_map;
+//   int len=Hash_child_table.size();
+//   for(int i=0;i<len;i++)
+//   {
+//     Enc_Table* t=Hash_child_table[i];
+//     table_name_map[table->table_name].push_back(t->hash_table_name);
+//     for(int j=0;j<table->name.size();j++)
+//     {
+//        table_name_map[table->name[j]].push_back(t->name[j]);
+//     }
+//   }
+//   std::ofstream outfile("hash_table_name_map.txt", std::ios::app);
+//     if (!outfile.is_open()) {
+//         std::cerr << "Error: Unable to open file for writing." << std::endl;
+//     }
+//     for (auto const& pair: table_name_map) {
+//         auto key = pair.first;
+//         auto value = pair.second;
+//         outfile << key << ":";
+//         for (const auto& name : value) {
+//             outfile << name << std::endl << key << ":";
+//         }
+//         outfile << std::endl;
+//     }
+//     outfile.close();
+// }
 Table* store_data(string scale,string table_name,int col_id)
 {
   Table* table= new Table();
@@ -206,14 +206,14 @@ Table* store_data(string scale,string table_name,int col_id)
 void experiment(string scale,string table_name,int col_id)
 {
     vector<string>Columns;
+    std::vector<unsigned char> key(32, 0x01);
     Table* table=store_data(scale,table_name,col_id);
     int id=table->Join_col_id;
-    ofstream outfile("data/multi/aes_table_name_map.txt", std::ios::app);
+    ofstream outfile("data/multi/aes_table_name_map_"+scale+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
 
-    outfile << "Scale:"<< scale<< " s" << std::endl;
     outfile << "table:"<< table->table_name<< std::endl;
     outfile<<"origin_sum"<<":"<<table->value.size()<<endl;
     outfile.close();
@@ -222,24 +222,24 @@ void experiment(string scale,string table_name,int col_id)
     {
       Columns.push_back(table->value[i][id]);
     }
-    std::vector<unsigned char> key(32, 0x01);
+    
     pg* p=new pg();
     child_table* de = new child_table();
     extend_table* et = new extend_table();
     AesUfeEncryptor* ae=new AesUfeEncryptor(key);
     Hash_Table* ht=new Hash_Table();
+ auto start = std::chrono::high_resolution_clock::now();
+    Enc_Table* AES_Table= new Enc_Table();
+    ae->Encrypt_table(table,AES_Table);
+    p->aes_copy_database(AES_Table,table->table_name);
+
     vector<Table*>child_table=de->Table_divide(Columns,table);
-    child_table=et->Smooth_Frequency(child_table);
-    auto start = std::chrono::high_resolution_clock::now();
-    vector<Enc_Table*> Aes_Table=ae->Encrypt_child_table(child_table);
-    vector<Enc_Table*> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns);
+    child_table=et->Smooth_Frequency(child_table,scale);
+   
+    // vector<Enc_Table*> Aes_Table=ae->Encrypt_child_table(child_table);
+    vector<Enc_Table*> Hash_child_table=ht->GetHash_table(child_table,Columns);
 
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
-    } 
-
-    for(int i=0;i<Aes_Table.size();i++)
+    for(int i=0;i<Hash_child_table.size();i++)
     {
       p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
     }
@@ -247,7 +247,7 @@ void experiment(string scale,string table_name,int col_id)
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
     std::cout << "Execution time:" << elapsed.count() << " s" << std::endl;
-    ofstream out_file("data/multi/aes_table_name_map.txt", std::ios::app);
+    std::ofstream out_file("data/multi/hash_table_name_"+scale+"_map.txt", std::ios::app);
 
     if (!out_file.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
@@ -256,19 +256,16 @@ void experiment(string scale,string table_name,int col_id)
     out_file << "Execution time:"<< elapsed.count()<< " s" << std::endl;
     out_file.close();
     unordered_map<string,vector<string>> table_name_map;
-    Aes_Mapping_name(table,Aes_Table);
+    Hash_Mapping_name(table,Hash_child_table,scale);
     delete de;
     delete et; 
     delete ae;
     delete ht;
     delete p;
+    delete AES_Table;
     for(int i=0;i<child_table.size();i++)
     {
       delete child_table[i];
-    }
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      delete Aes_Table[i];
     }
     for(int i=0;i<Hash_child_table.size();i++)
     {
@@ -278,8 +275,8 @@ void experiment(string scale,string table_name,int col_id)
 }
 int main()
 {
-  // int k;
-  // cin>>k;
+  int k;
+  cin>>k;
   // experiment("1","supplier",0);
   // experiment("1","supplier",3);
   // experiment("1","nation",0);

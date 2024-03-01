@@ -60,10 +60,11 @@ void extend_table::Table_extend(Table *table)
      if(v<(table->max_frequency))
      {
         Add_dummy_row(table,k,v);
+        table->row_id.push_back(-1);
      }
    }
 }
-vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
+vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table,string scale)
 {
   int Length=child_table.size();
   int num=0,sum=0;;
@@ -74,7 +75,7 @@ vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
     sum+=child_table[i]->value.size()-num;
   }
   cout<<"sum"<<":"<<sum<<endl;
-  std::ofstream outfile("data/multi/aes_table_name_map.txt", std::ios::app);
+  std::ofstream outfile("data/multi/hash_table_name_"+scale+"_map.txt", std::ios::app);
 
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;

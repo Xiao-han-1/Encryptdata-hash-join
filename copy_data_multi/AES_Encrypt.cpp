@@ -4,11 +4,6 @@
 #include <iomanip>
 #include <random>
 #include <thread>
-#include <openssl/bio.h>
-#include <openssl/evp.h>
-#include <openssl/buffer.h>
-#include<openssl/aes.h>
-#include<openssl/rand.h>
 
 using namespace std;
 
@@ -85,20 +80,20 @@ vector<string> AesUfeEncryptor::encrypt_array(int flag,const std::vector<std::st
 
     return res;
 }
-string Encrypt_table_name(string name)
-{
-    string table_name = "table_";
-    const int length = 6; // 表名长度
-    const string char_set = "0123456789abcdefghijklmnopqrstuvwxyz"; // 表名字符集
-    const int char_set_size = char_set.size();
-    random_device rd; // 获取随机数生成器的种子
-    mt19937 gen(rd()); // 使用Mersenne Twister算法作为随机数生成器
-    uniform_int_distribution<> dis(0, char_set_size-1); // 均匀分布的整数随机数生成器
-    for(int i=0; i<length; ++i) {
-        table_name += char_set[dis(gen)]; // 从字符集中随机选择一个字符添加到表名中
-    }
-    return table_name;
-}
+// string Encrypt_table_name(string name)
+// {
+//     string table_name = "table_";
+//     const int length = 6; // 表名长度
+//     const string char_set = "0123456789abcdefghijklmnopqrstuvwxyz"; // 表名字符集
+//     const int char_set_size = char_set.size();
+//     random_device rd; // 获取随机数生成器的种子
+//     mt19937 gen(rd()); // 使用Mersenne Twister算法作为随机数生成器
+//     uniform_int_distribution<> dis(0, char_set_size-1); // 均匀分布的整数随机数生成器
+//     for(int i=0; i<length; ++i) {
+//         table_name += char_set[dis(gen)]; // 从字符集中随机选择一个字符添加到表名中
+//     }
+//     return table_name;
+// }
 string Encrypt_name(string name)
 {
     string table_name = "";
@@ -117,14 +112,14 @@ void  AesUfeEncryptor::Encrypt_table(Table* table,Enc_Table* A_table)
 {
 
     int length=table->name.size();
-	A_table->aes_table_name=Encrypt_table_name(table->table_name);
+	A_table->aes_table_name=table->table_name;
     A_table->Join_col_id=table->Join_col_id;
-    A_table->max_frequency=table->max_frequency;
-    A_table->row_flag=table->row_flag;
+    // A_table->max_frequency=table->max_frequency;
+    // A_table->row_flag=table->row_flag;
 	vector<string>table_name;
 	vector<string>type_name;
-    table_name.push_back("flag");
-    type_name.push_back("string");
+    // table_name.push_back("flag");
+    // type_name.push_back("string");
     for(int i=0;i<length;i++)
     {
         table_name.push_back(table->name[i]);
@@ -137,7 +132,7 @@ void  AesUfeEncryptor::Encrypt_table(Table* table,Enc_Table* A_table)
 	vector<string>Enc_row;
 	for(int i=0;i<table->value.size();i++)
 	{
-	  vector<string> Enc_row=encrypt_array(table->row_flag[i] ,table->value[i]);
+	  vector<string> Enc_row=encrypt_array(i ,table->value[i]);
 	  A_table->value.push_back(Enc_row);
 	}
 }

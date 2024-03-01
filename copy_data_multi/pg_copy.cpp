@@ -71,15 +71,17 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c";
     s=s+"\"\\copy "+Enc_table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     std::system(s.c_str());
-    // if (remove(filename.c_str()) != 0) {
-    //     cout << "Error deleting file" << endl;
-    // } 
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    } 
 
 }
 void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
 {
+  string query_drop = "DROP TABLE IF EXISTS " + Enc_table->aes_table_name + ";";  
+  pg::execute(query_drop);
   string query="create table ";
-  query+=Enc_table->aes_table_name+ " (flag text,";
+  query+=Enc_table->aes_table_name+ " (row_id text,";
   int len=Enc_table->name.size();
   for(int i=0;i<len-1;i++)
   {
@@ -114,8 +116,8 @@ void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c ";
     s=s+"\"\\copy "+Enc_table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     std::system(s.c_str());
-    // if (remove(filename.c_str()) != 0) {
-    //     cout << "Error deleting file" << endl;
-    // }
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    }
 
 }
