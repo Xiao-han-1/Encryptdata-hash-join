@@ -381,7 +381,7 @@ void experiment(string scale,string table_name,int col_id,int num)
    int sum=0;
     double Total_size=0;
     double Cipher_Total_size=0;
-    int k=32*num;
+    int k=32;
     cout<<k<<endl;
     cout<<scale<<endl;
     vector<string>Columns;
@@ -560,7 +560,7 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
     double Cipher_Total_size=0;
     cout<<k<<endl;
     cout<<scale<<endl;
-    cout<< "zipf:"<< zipf << std::endl;
+    cout<< "zipf:"<< stod(zipf)/10.0 << std::endl;
     vector<string>Columns;
     Table* table=store_data_zipf(scale,table_name,col_id,zipf);
     int id=table->Join_col_id;
@@ -644,26 +644,26 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
 }
 int experiment_time()
 {
-  //  experiment("0.1","orders",1,1);
-  //  experiment("0.1","customer",0,1);
-  //  experiment("0.2","orders",1,2);
-  //  experiment("0.2","customer",0,2);
-  //  experiment("0.3","orders",1,3);
-  //  experiment("0.3","customer",0,3);
-  //  experiment("0.4","orders",1,4);
-  //  experiment("0.4","customer",0,4);
-   experiment("0.5","orders",1,5);
-   experiment("0.5","customer",0,5);
-   experiment("0.6","orders",1,6);
-   experiment("0.6","customer",0,6);
-   experiment("0.7","orders",1,7);
-   experiment("0.7","customer",0,7);
-   experiment("0.8","orders",1,8);
-   experiment("0.8","customer",0,8);
-   experiment("0.9","orders",1,9);
-   experiment("0.9","customer",0,9);
-   experiment("1.0","orders",1,10);
-   experiment("1.0","customer",0,10);
+   experiment("0.01","orders",1,1);
+   experiment("0.01","customer",0,1);
+   experiment("0.02","orders",1,2);
+   experiment("0.02","customer",0,2);
+   experiment("0.03","orders",1,3);
+   experiment("0.03","customer",0,3);
+   experiment("0.04","orders",1,4);
+   experiment("0.04","customer",0,4);
+   experiment("0.05","orders",1,5);
+   experiment("0.05","customer",0,5);
+   experiment("0.06","orders",1,6);
+   experiment("0.06","customer",0,6);
+   experiment("0.07","orders",1,7);
+   experiment("0.07","customer",0,7);
+   experiment("0.08","orders",1,8);
+   experiment("0.08","customer",0,8);
+   experiment("0.09","orders",1,9);
+   experiment("0.09","customer",0,9);
+   experiment("0.1","orders",1,10);
+   experiment("0.1","customer",0,10);
    return 0;
    
 }
@@ -695,26 +695,26 @@ int experiment_K()
 int experiment_Zipf()
 {
 
-   experiment_zipf("0.1","orders",1,"1.1");
-   experiment_zipf("0.1","customer",0,"1.1");
-   experiment_zipf("0.1","orders",1,"1.2");
-   experiment_zipf("0.1","customer",0,"1.2");
-   experiment_zipf("0.1","orders",1,"1.3");
-   experiment_zipf("0.1","customer",0,"1.3");
-   experiment_zipf("0.1","orders",1,"1.4");
-   experiment_zipf("0.1","customer",0,"1.4");
-   experiment_zipf("0.1","orders",1,"1.5");
-   experiment_zipf("0.1","customer",0,"1.5");
-   experiment_zipf("0.1","orders",1,"1.6");
-   experiment_zipf("0.1","customer",0,"1.6");
-   experiment_zipf("0.1","orders",1,"1.7");
-   experiment_zipf("0.1","customer",0,"1.7");
-   experiment_zipf("0.1","orders",1,"1.8");
-   experiment_zipf("0.1","customer",0,"1.8");
-   experiment_zipf("0.1","orders",1,"1.9");
-   experiment_zipf("0.1","customer",0,"1.9");
+   experiment_zipf("0.1","orders",1,"1");
+   experiment_zipf("0.1","customer",0,"1");
    experiment_zipf("0.1","orders",1,"2");
    experiment_zipf("0.1","customer",0,"2");
+   experiment_zipf("0.1","orders",1,"3");
+   experiment_zipf("0.1","customer",0,"3");
+   experiment_zipf("0.1","orders",1,"4");
+   experiment_zipf("0.1","customer",0,"4");
+   experiment_zipf("0.1","orders",1,"5");
+   experiment_zipf("0.1","customer",0,"5");
+   experiment_zipf("0.1","orders",1,"6");
+   experiment_zipf("0.1","customer",0,"6");
+   experiment_zipf("0.1","orders",1,"7");
+   experiment_zipf("0.1","customer",0,"7");
+   experiment_zipf("0.1","orders",1,"8");
+   experiment_zipf("0.1","customer",0,"8");
+   experiment_zipf("0.1","orders",1,"9");
+   experiment_zipf("0.1","customer",0,"9");
+   experiment_zipf("0.1","orders",1,"10");
+   experiment_zipf("0.1","customer",0,"10");
    return 0;
 }
 int main()
@@ -722,6 +722,6 @@ int main()
   // experiment_K();
   int k;
   cin>>k;
-  experiment_time();
+  experiment_Zipf();
   return 0;
 }
