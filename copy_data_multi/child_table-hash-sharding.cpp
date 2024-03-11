@@ -247,6 +247,7 @@ vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,ve
     for (int i=0;i<Mark_Col.size();i++) {
         int id=i;
         int flag=Mark_Col[i];
+        child_table[flag]->row_id.push_back(id);
         child_table[flag]->value.push_back(table->value[id]);
         child_table[flag]->max_frequency=max(fre_num[Columns[id]],child_table[flag]->max_frequency);
     }
@@ -255,7 +256,7 @@ vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,ve
 
 }
 
-vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table)
+vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table,int k)
 {
 
     vector<int> Mark_Col(Columns.size());
@@ -263,7 +264,6 @@ vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table)
     unordered_map<string,int> fre_num;
     unordered_map<string,vector<int>> local_num;
     get_frequency(Columns,fre_num,local_num);
-    int k=40;
     Classification(Columns,k,Mark_Col);
     //unordered_map<string,vector<string>>name_map;quit
     vector<Table*>child_table=Devide_table_v1(Mark_Col,table,Columns,k,fre_num);

@@ -44,9 +44,9 @@ class AesUfeEncryptor {
 public:
     AesUfeEncryptor(const std::vector<unsigned char>& key);
     std::vector<unsigned char> encrypt(const std::string& plaintext);
-    vector<string> encrypt_array(int flag,const std::vector<std::string>& plaintext_array);
+    vector<string> encrypt_array(int flag,int row_id,const std::vector<std::string>& plaintext_array);
 	void  Encrypt_table(Table* table,Enc_Table* Enc_table);
-	vector<Enc_Table*>  Encrypt_child_table(vector<Table*> child_table);
+	vector<Enc_Table*>  Encrypt_child_table(vector<Table*> child_table,string scale,double &Total_size);
 
 private:
     std::vector<unsigned char> key_;

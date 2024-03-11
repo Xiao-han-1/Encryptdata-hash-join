@@ -1,0 +1,4 @@
+Scale:0.4 s
+k:128 s
+table:orders_O_CUSTKEY
+origin_sum:600000

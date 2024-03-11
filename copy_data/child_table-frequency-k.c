@@ -253,7 +253,7 @@ vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table)
     get_frequency(Columns,fre_num,local_num);
     Full_K_table(K_table,fre_num,local_num);
     
-    K_means(K_table,20);
+    K_means(K_table,40);
     //unordered_map<string,vector<string>>name_map;
     vector<Table*>child_table=Devide_table(K_table,table);
     return child_table;

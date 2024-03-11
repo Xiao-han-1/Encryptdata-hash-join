@@ -67,22 +67,29 @@ void extend_table::Table_extend(Table *table)
      }
    }
 }
-vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
+vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table,string scale)
 {
-  // vector<Table> extend_child_table;
+  // vector<Table> extend_child_table;double total_size_cipher
+  double total_size_cipher=0;
   int Length=child_table.size();
   int num=0,sum=0;;
+  size_t Total_size_cipher=0;
   for(int i=0;i<Length;i++)
   {
     num=child_table[i]->value.size();
     Table_extend(child_table[i]);
     sum+=child_table[i]->value.size()-num;
-    //  cout<<i<<":"<<child_table[i]->value.size()-num<<endl;
-    // extend_child_table.push_back(child_table[i]);
+    std::vector<std::vector<std::string>> cipher_value=child_table[i]->value;
+          for (const auto &inner_vector : cipher_value) {
+            for (const auto &str : inner_vector) {
+                    total_size_cipher += str.size();
+                }
+            }  
   }
+  double Total_size_cipher = static_cast<double>(total_size_cipher) / 1024.0/1024.0;
   cout<<"num"<<":"<<Length<<endl;
   cout<<"sum"<<":"<<sum<<endl;
-  std::ofstream outfile("experiment/result.txt", std::ios::app);
+  std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
 
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
@@ -90,6 +97,8 @@ vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
 
     outfile << "num:"<< Length<< std::endl;
     outfile << "sum:"<< sum<< std::endl;
+    outfile << "Cipher : "<< std::endl;
+    outfile << "Total storage space used by strings: "<< Total_size_cipher << " MB"<< std::endl;
 
     outfile.close();
   return child_table;

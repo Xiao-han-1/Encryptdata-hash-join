@@ -228,7 +228,7 @@ vector<Table*> child_table::Devide_table(vector<Ls> K_table,Table* table,int k)
 }
 vector<Table*> child_table::Devide_table_v1(vector<int> Mark_Col,Table* table,vector<string>Columns,int k,unordered_map<string,int> fre_num)
 {
-    vector<Table*> child_table(k);
+    vector<Table*> child_table;
     vector<vector<string>>vue=table->value;
     for(int i=0;i<k;i++)
     {
@@ -259,7 +259,7 @@ vector<Table*> child_table::Table_divide(vector<string>Columns,Table* table)
     unordered_map<string,int> fre_num;
     unordered_map<string,vector<int>> local_num;
     get_frequency(Columns,fre_num,local_num);
-    int k=40;
+    int k=100;
     Classification(Columns,k,Mark_Col);
     //unordered_map<string,vector<string>>name_map;quit
     vector<Table*>child_table=Devide_table_v1(Mark_Col,table,Columns,k,fre_num);

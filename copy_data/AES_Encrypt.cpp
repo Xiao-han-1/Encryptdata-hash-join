@@ -10,106 +10,12 @@
 
 using namespace std;
 
-AES_Encrypt::AES_Encrypt(){
-//   string key="86b8b998e3ab261cdbe6d66089c89835";
-//   string iv="5ea6105d3f28d0470314730ad42ec19d";
-//   int key_size=16;
-//   byte b_key[AES::DEFAULT_KEYLENGTH];
-//   byte b_iv[AES::DEFAULT_KEYLENGTH];
-//   hexToBytes(key,b_key);
-//   hexToBytes(iv,b_iv);
-//   this->key = b_key;
-//   this->iv = b_iv;
-//   this->key_length = 16;
+AesUfeEncryptor::AesUfeEncryptor(const std::vector<unsigned char>& key) : key_(key) {}
 
-}
-
-
-AES_Encrypt::~AES_Encrypt(){
-	// this->iv=NULL;
-	// this->iv = NULL;
-    // this->key_length = 0;
-}
-// void AES_Encrypt::GenerateKey()
-// {
-// 	AutoSeededRandomPool rnd;
-// 	byte key1[AES::DEFAULT_KEYLENGTH];
-// 	rnd.GenerateBlock(key1, AES::DEFAULT_KEYLENGTH);
-
-// 	// Generate a random IV
-// 	byte iv1[AES::BLOCKSIZE];
-// 	rnd.GenerateBlock(iv1, AES::BLOCKSIZE);
-
-// 	SetKey(key1, iv1, 16);
-// }
-
-// void AES_Encrypt::SetKey(byte * key1, byte * iv1, int length1)
-// {
-// 	this->key = key1;
-// 	this->iv = iv1;
-// 	this->key_length = length1;
-// }
-std::string base64_encode(const std::string& input) {
-    BIO *bio, *b64;
-    BUF_MEM *bufferPtr;
-
-    b64 = BIO_new(BIO_f_base64());
-    bio = BIO_new(BIO_s_mem());
-    bio = BIO_push(b64, bio);
-
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
-    BIO_write(bio, input.c_str(), input.size());
-    BIO_flush(bio);
-
-    BIO_get_mem_ptr(bio, &bufferPtr);
-    std::string output(bufferPtr->data, bufferPtr->length);
-
-    BIO_free_all(bio);
-
-    return output;
-}
-
-std::string base64_decode(const std::string& input) {
-    BIO *bio, *b64;
-    char buffer[input.size()];
-    memset(buffer, 0, input.size());
-
-    b64 = BIO_new(BIO_f_base64());
-    bio = BIO_new_mem_buf(input.c_str(), -1);
-    bio = BIO_push(b64, bio);
-
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL);
-    int len = BIO_read(bio, buffer, input.size());
-
-    BIO_free_all(bio);
-
-    return std::string(buffer, len);
-}
-
-std::string hexToString(const std::string& input)
-{
-    std::string output;
-    char c;
-
-    for (size_t i = 0; i < input.length(); i += 2)
-    {
-        c = static_cast<char>(std::stoi(input.substr(i, 2), nullptr, 16));
-        output.push_back(c);
-    }
-
-    return output;
-}
-void AES_Encrypt::hexToBytes(std::string& hex,byte* bytes) 
-{
-	int bytelen = hex.length() / 2;
-	std::string strByte;
-	unsigned int n;
-	for (int i = 0; i < bytelen; i++) 
-	{
-		strByte = hex.substr(i * 2, 2);
-		sscanf(strByte.c_str(),"%x",&n);
-		bytes[i] = n;
-	}
+std::vector<unsigned char> AesUfeEncryptor::generate_iv() {
+    std::vector<unsigned char> iv(AES_BLOCK_SIZE);
+    RAND_bytes(iv.data(), AES_BLOCK_SIZE);
+    return iv;
 }
 /*
  * Description: use key to encrypt 'plainText', return the cipher
@@ -118,22 +24,25 @@ void AES_Encrypt::hexToBytes(std::string& hex,byte* bytes)
  * OutPUt:
  * 	return the cipher
  */
-string AES_Encrypt::Encrypt(string &plainText)
-{
+std::vector<unsigned char> AesUfeEncryptor::encrypt(const std::string& plaintext) {
+    std::vector<unsigned char> iv = generate_iv();
+    std::vector<unsigned char> ciphertext(plaintext.size() + AES_BLOCK_SIZE);
 
-	string cipher;
-	CBC_Mode<AES>::Encryption aesEncryptor(key, key_length, iv);
-//	AESEncryption aesEncryptor; //加密器
-//	aesEncryptor.SetKey( key, key_length );  //设定加密密钥
-	StringSource(plainText, true,
-			new StreamTransformationFilter(aesEncryptor,
-					new StringSink(cipher)));
-	// string re=test_Decrypt(cipher);
-	// cout<<re<<endl;	
-	cipher=base64_encode(cipher);
-	// re=Decrypt(cipher);
-	// cout<<re<<endl;			
-	return cipher;
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key_.data(), iv.data());
+
+    int ciphertext_len;
+    EVP_EncryptUpdate(ctx, ciphertext.data(), &ciphertext_len, reinterpret_cast<const unsigned char*>(plaintext.data()), plaintext.size());
+
+    int final_len;
+    EVP_EncryptFinal_ex(ctx, ciphertext.data() + ciphertext_len, &final_len);
+
+    EVP_CIPHER_CTX_free(ctx);
+
+    ciphertext.resize(ciphertext_len + final_len);
+    ciphertext.insert(ciphertext.begin(), iv.begin(), iv.end());
+
+    return ciphertext;
 }
 
 string AES_Encrypt::test_Decrypt(string & cipher)
@@ -166,66 +75,31 @@ string AES_Encrypt::Decrypt(string & cipher)
 					new StringSink(recover)));
 	return recover;
 }
-
-/*
- * Description: use the key to encrypt the 'inFilename' and store the cipher in 'outFilname'
- * Input:
- *  inFilename: the file need to be encrypted!
- *  outFilename: the encrypted file
- * OutPut:
- *  if encrypt success, return true, or return false
- * Others: the function should delete the file : 'inFilename', however I note it
- */
-// bool AES_Encrypt::EncryptFile(const string & inFilename, const string & outFilename)
-// {
-// 	// check if the file 'inFilename' exists.
-// 	// if (access(inFilename.c_str(), 0) == -1)
-// 	// {
-// 	// 	cout << "The file " << inFilename << " is not exist! " << endl;
-// 	// 	return false;
-// 	// }
-// 	// file exists, the encrypt the file
-// 	CBC_Mode<AES>::Encryption aesEncryptor(key, key_length, iv);
-
-// 	FileSource(inFilename.c_str(), true,
-// 			new StreamTransformationFilter(aesEncryptor,
-// 					new FileSink(outFilename.c_str())));
-// 	// remove the file 'inFilename'
-// 	// if(remove(inFilename) == 0) cout << "remove file succeed! " << endl;
-// 	// 		else cout << "fail to remove the file " << inFilname << endl;
-// 	// use function remove(), you have to add #include <cstdio> in the .h file
-// 	return true;
-// }
-// bool AES_Encrypt::DecryptFile(const string & decFilename,
-// 		const string & recoverFilename)
-// {
-// 	// check if the file 'decFilename' exists!
-// 	// if (access(decFilename.c_str(), 0) == -1)
-// 	// {
-// 	// 	cout << "The file " << decFilename << " is not exist! " << endl;
-// 	// 	return false;
-// 	// }
-// 	// exist , then decrypt the file
-// 	CBC_Mode<AES>::Decryption aesDecryptor(key, key_length, iv);
-// 	FileSource(decFilename.c_str(), true,
-// 			new StreamTransformationFilter(aesDecryptor,
-// 					new FileSink(recoverFilename.c_str())));
-// 	return true;
-// }
-vector<string> AES_Encrypt::Encrypt_row(int flag,vector<string>row)
-{
-    vector<string> En_row;
-	string t=to_string(flag);
-    string tmp=Encrypt(t);
-	En_row.push_back(tmp);
-    int len=row.size();
-    for(int i=0;i<len;i++)
-    {
-        string t=row[i];
-        string tmp=Encrypt(t);
-        En_row.push_back(tmp);
+std::string to_hex(const std::vector<unsigned char>& data) {
+    std::stringstream ss;
+    ss<< std::hex<< std::setfill('0');
+    for (const auto& byte : data) {
+        ss<< std::setw(2)<< static_cast<int>(byte);
     }
-    return En_row;
+    return ss.str();
+}
+vector<string> AesUfeEncryptor::encrypt_array(int flag,int row_id,const std::vector<std::string>& plaintext_array) {
+    std::vector<std::vector<unsigned char>> ciphertext_array;
+    vector<string> res;
+    const string t=to_string(flag);
+    string tmp=to_hex(encrypt(t));
+    res.push_back(tmp);
+    const string id=to_string(row_id);
+    string rid=to_hex(encrypt(id));
+    res.push_back(rid);
+    for (const auto& plaintext : plaintext_array) {
+        ciphertext_array.push_back(encrypt(plaintext));
+    }
+    for (const auto& ciphertext : ciphertext_array) {
+        res.push_back(to_hex(ciphertext));
+    }
+
+    return res;
 }
 string Encrypt_table_name(string name)
 {
@@ -255,7 +129,7 @@ string Encrypt_name(string name)
     }
     return table_name;
 }
-void  AES_Encrypt::Encrypt_table(Table* table,Enc_Table* Enc_table)
+void  AesUfeEncryptor::Encrypt_table(Table* table,Enc_Table* A_table)
 {
 
     int length=table->name.size();
@@ -275,20 +149,14 @@ void  AES_Encrypt::Encrypt_table(Table* table,Enc_Table* Enc_table)
 	Enc_table->type=type_name;
 	Enc_name.clear();
 	type_name.clear();
-	// vector<vector<string>> Enc_val;
 	vector<string>Enc_row;
-	// vector<vector<string>> val=table.value;
 	for(int i=0;i<table->value.size();i++)
 	{
-    //   vector<string> row=table->value[i];
 	  vector<string> Enc_row=Encrypt_row(table->row_flag[i] ,table->value[i]);
 	  Enc_table->value.push_back(Enc_row);
 	}
-    // table->value.clear();
-	// Enc_table.value=Enc_val;
-    // Enc_val.clear();
 }
-vector<Enc_Table*>  AES_Encrypt::Encrypt_child_table(vector<Table*> child_table)
+vector<Enc_Table*>  AesUfeEncryptor::Encrypt_child_table(vector<Table*> child_table,string scale)
 {
     // pg* p=new pg();
     // Table* En_table=new Table();
@@ -310,16 +178,16 @@ vector<Enc_Table*>  AES_Encrypt::Encrypt_child_table(vector<Table*> child_table)
     }
     //   delete Atable;
     }
-    double total_size_kb = static_cast<double>(total_size) / 1024.0;
-    std::ofstream outfile("experiment/result.txt", std::ios::app);
+    double total_size_kb = static_cast<double>(total_size) / 1024.0/1024.0;
+    std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
      outfile << "AES : "<< std::endl;
-    outfile << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+    outfile << "Total storage space used by strings: "<< total_size_kb << " MB"<< std::endl;
     outfile.close();
 
-    std::cout << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+    std::cout << "Total storage space used by strings: "<< total_size_kb << " MB"<< std::endl;
 	
     return Aes_child_table;
 }

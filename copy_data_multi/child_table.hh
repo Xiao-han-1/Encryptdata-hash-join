@@ -21,6 +21,7 @@ typedef struct table
     vector<string>name;
     vector<string>type;
     unordered_map<int,int>row_flag;
+    vector<int>row_id;
     vector<vector<string>>value;
     ~table()
     {
@@ -42,6 +43,7 @@ typedef struct Enc_table
 	string hash_table_name;
     vector<string>name;
     vector<string>type;
+    vector<int>row_id;
     unordered_map<int,int>row_flag;
     vector<vector<string>>value;
 	~Enc_table()
@@ -85,6 +87,6 @@ public:
     void Classification(vector<string> Columns,int &k,vector<int>& Mark_Col);
     vector<Table*> Devide_table(vector<Ls> K_table,Table* table,int k);
     vector<Table*> Devide_table_v1(vector<int> Mark_Col,Table* table,vector<string>Columns,int k,unordered_map<string,int> fre_num);
-    vector<Table*> Table_divide(vector<string>Columns,Table* table);
+    vector<Table*> Table_divide(vector<string>Columns,Table* table,int k);
 };
 #endif

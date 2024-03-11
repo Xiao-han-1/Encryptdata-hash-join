@@ -18,7 +18,7 @@ string generate_num()
     }
     return table_name;
 }
-void extend_table::Add_dummy_row(Table* table,string k,int v)
+void extend_table::Add_dummy_row(Table* table,string k,int v,int& rid)
 {
   int num=table->max_frequency-v;
   for(int i=0;i<num;i++)
@@ -38,13 +38,14 @@ void extend_table::Add_dummy_row(Table* table,string k,int v)
     } 
     int dummy_location=table->value.size();
     table->row_flag[dummy_location]=0;
+    table->row_id.push_back(rid);
     table->value.push_back(dummy_row);
-
+    rid++;
     dummy_row.clear();
   }
 
 }
-void extend_table::Table_extend(Table *table)
+void extend_table::Table_extend(Table *table,int &rid)
 {
    unordered_map<string,int>mp;
    int col_id=table->Join_col_id;
@@ -59,29 +60,39 @@ void extend_table::Table_extend(Table *table)
     auto v=pair.second;
      if(v<(table->max_frequency))
      {
-        Add_dummy_row(table,k,v);
+        Add_dummy_row(table,k,v,rid);
      }
    }
 }
-vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table)
+vector<Table*> extend_table::Smooth_Frequency(vector<Table*> child_table,int rid,string scale,int &sum,double &total_size_cipher)
 {
   int Length=child_table.size();
-  int num=0,sum=0;;
+  int num=0;
+  size_t Total_size_cipher=0;
   for(int i=0;i<Length;i++)
   {
     num=child_table[i]->value.size();
-    Table_extend(child_table[i]);
+    Table_extend(child_table[i],rid);
     sum+=child_table[i]->value.size()-num;
+    std::vector<std::vector<std::string>> cipher_value=child_table[i]->value;
+      for (const auto &inner_vector : cipher_value) {
+        for (const auto &str : inner_vector) {
+                Total_size_cipher += str.size();
+            }
+         }  
   }
-  cout<<"sum"<<":"<<sum<<endl;
-  std::ofstream outfile("data/multi/aes_table_name_map.txt", std::ios::app);
+  total_size_cipher = static_cast<double>(Total_size_cipher) / 1024.0/1024.0;
+  // cout<<"sum"<<":"<<sum<<endl;
+  // std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
 
-    if (!outfile.is_open()) {
-        std::cerr << "Failed to open file."<< std::endl;
-    }
+  //   if (!outfile.is_open()) {
+  //       std::cerr << "Failed to open file."<< std::endl;
+  //   }
 
-    outfile << "sum:"<< sum<< std::endl;
+  //   outfile << "sum:"<< sum<< std::endl;
+  //    outfile << "Cipher : "<< std::endl;
+  //   outfile << "Total storage space used by strings: "<< total_size_cipher << " MB"<< std::endl;
 
-    outfile.close();
+  //   outfile.close();
   return child_table;
 }

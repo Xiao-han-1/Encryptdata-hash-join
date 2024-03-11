@@ -70,12 +70,15 @@ std::string to_hex(const std::vector<unsigned char>& data) {
     }
     return ss.str();
 }
-vector<string> AesUfeEncryptor::encrypt_array(int flag,const std::vector<std::string>& plaintext_array) {
+vector<string> AesUfeEncryptor::encrypt_array(int flag,int row_id,const std::vector<std::string>& plaintext_array) {
     std::vector<std::vector<unsigned char>> ciphertext_array;
     vector<string> res;
     const string t=to_string(flag);
     string tmp=to_hex(encrypt(t));
     res.push_back(tmp);
+    const string id=to_string(row_id);
+    string rid=to_hex(encrypt(id));
+    res.push_back(rid);
     for (const auto& plaintext : plaintext_array) {
         ciphertext_array.push_back(encrypt(plaintext));
     }
@@ -121,9 +124,12 @@ void  AesUfeEncryptor::Encrypt_table(Table* table,Enc_Table* A_table)
     A_table->Join_col_id=table->Join_col_id;
     A_table->max_frequency=table->max_frequency;
     A_table->row_flag=table->row_flag;
+    A_table->row_id=table->row_id;
 	vector<string>table_name;
 	vector<string>type_name;
     table_name.push_back("flag");
+    type_name.push_back("string");
+    table_name.push_back("row_id");
     type_name.push_back("string");
     for(int i=0;i<length;i++)
     {
@@ -137,20 +143,38 @@ void  AesUfeEncryptor::Encrypt_table(Table* table,Enc_Table* A_table)
 	vector<string>Enc_row;
 	for(int i=0;i<table->value.size();i++)
 	{
-	  vector<string> Enc_row=encrypt_array(table->row_flag[i] ,table->value[i]);
+	  vector<string> Enc_row=encrypt_array(table->row_flag[i] ,table->row_id[i],table->value[i]);
 	  A_table->value.push_back(Enc_row);
 	}
 }
-vector<Enc_Table*>  AesUfeEncryptor::Encrypt_child_table(vector<Table*> child_table)
+vector<Enc_Table*>  AesUfeEncryptor::Encrypt_child_table(vector<Table*> child_table,string scale,double& Total_size)
 {
+    size_t Total_size_aes=0;
 	vector<Enc_Table*> Aes_child_table;
     int length=child_table.size();
     for(int i=0;i<length;i++)
-	{
+	{      
 	  Enc_Table* Atable=new Enc_Table();
       Encrypt_table(child_table[i],Atable);
 	  Aes_child_table.push_back(Atable);
+      std::vector<std::vector<std::string>> value=Atable->value;
+      for (const auto &inner_vector : value) {
+        for (const auto &str : inner_vector) {
+                Total_size_aes += str.size();
+            }
+    }     
     }
+    double total_size_aes = static_cast<double>(Total_size_aes) / 1024.0/1024.0;
+    Total_size=Total_size+total_size_aes;
+    // std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
+    // if (!outfile.is_open()) {
+    //     std::cerr << "Failed to open file."<< std::endl;
+    // }
+    //  outfile << "AES : "<< std::endl;
+    // outfile << "Total storage space used by strings: "<< total_size_aes << " MB"<< std::endl;
+    // outfile.close();
+
+    // std::cout << "Total storage space used by strings: "<< total_size_aes << " MB"<< std::endl;
 	
     return Aes_child_table;
 }

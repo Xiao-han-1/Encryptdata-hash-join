@@ -79,7 +79,7 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
 void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
 {
   string query="create table ";
-  query+=Enc_table->aes_table_name+ " (flag text,";
+  query+=Enc_table->aes_table_name+ " (flag text,row_id text,";
   int len=Enc_table->name.size();
   for(int i=0;i<len-1;i++)
   {

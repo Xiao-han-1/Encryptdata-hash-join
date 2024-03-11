@@ -86,7 +86,7 @@ void Hash_Table::Hash_Enc_Table(Table* table,Enc_Table* aes_table,Enc_Table* h_t
 	// hash_res.clear();
 	// return h_table;
 }
-vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<Enc_Table*> &Aes_child_Table,vector<string> column)
+vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<Enc_Table*> &Aes_child_Table,vector<string> column,string scale)
 {
 	// pg* p=new pg();
 	vector<Enc_Table*> hash_child_table;
@@ -105,16 +105,16 @@ vector<Enc_Table*> Hash_Table::GetHash_table(vector<Table*> child_table,vector<E
 		}
 		
 	}
-	double total_size_kb = static_cast<double>(total_size) / 1024.0;
-    std::ofstream outfile("experiment/result.txt", std::ios::app);
+	double total_size_mb = static_cast<double>(total_size) / 1024.0/1024.0;
+    std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
      outfile << "Hash : "<< std::endl;
-    outfile << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+    outfile << "Total storage space used by strings: "<< total_size_mb << " MB"<< std::endl;
     outfile.close();
 
-    std::cout << "Total storage space used by strings: "<< total_size_kb << " KB"<< std::endl;
+    std::cout << "Total storage space used by strings: "<< total_size_mb << " MB"<< std::endl;
 	// delete hash_table;
 	return hash_child_table;
 }

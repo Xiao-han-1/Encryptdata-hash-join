@@ -12,7 +12,7 @@ BINDIR = bin
 SOURCES = $(wildcard *.cpp)
 HEADERS = $(wildcard *.hh)
 OBJECTS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SOURCES))
-Target = Hash_join
+Target = Hash_join_k
 
 .PHONY: all clean
 
