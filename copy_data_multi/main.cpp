@@ -644,14 +644,14 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
 }
 int experiment_time()
 {
-   experiment("0.1","orders",1,1);
-   experiment("0.1","customer",0,1);
-   experiment("0.2","orders",1,2);
-   experiment("0.2","customer",0,2);
-   experiment("0.3","orders",1,3);
-   experiment("0.3","customer",0,3);
-   experiment("0.4","orders",1,4);
-   experiment("0.4","customer",0,4);
+  //  experiment("0.1","orders",1,1);
+  //  experiment("0.1","customer",0,1);
+  //  experiment("0.2","orders",1,2);
+  //  experiment("0.2","customer",0,2);
+  //  experiment("0.3","orders",1,3);
+  //  experiment("0.3","customer",0,3);
+  //  experiment("0.4","orders",1,4);
+  //  experiment("0.4","customer",0,4);
    experiment("0.5","orders",1,5);
    experiment("0.5","customer",0,5);
    experiment("0.6","orders",1,6);
@@ -694,8 +694,7 @@ int experiment_K()
 }
 int experiment_Zipf()
 {
-  int k;
-  cin>>k;
+
    experiment_zipf("0.1","orders",1,"1.1");
    experiment_zipf("0.1","customer",0,"1.1");
    experiment_zipf("0.1","orders",1,"1.2");

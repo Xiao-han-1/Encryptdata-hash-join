@@ -71,9 +71,9 @@ void  pg::hash_copy_database(Enc_Table* Enc_table,string table_name)
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c";
     s=s+"\"\\copy "+Enc_table->hash_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     std::system(s.c_str());
-    // if (remove(filename.c_str()) != 0) {
-    //     cout << "Error deleting file" << endl;
-    // } 
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    } 
 
 }
 void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
@@ -114,8 +114,8 @@ void  pg::aes_copy_database(Enc_Table* Enc_table,string table_name)
     string s="/data/local/pgsql/bin/psql -d hash_join -U postgres -c ";
     s=s+"\"\\copy "+Enc_table->aes_table_name+ " FROM '"+r_path+"' WITH (FORMAT csv, DELIMITER '|')\"";
     std::system(s.c_str());
-    // if (remove(filename.c_str()) != 0) {
-    //     cout << "Error deleting file" << endl;
-    // }
+    if (remove(filename.c_str()) != 0) {
+        cout << "Error deleting file" << endl;
+    }
 
 }

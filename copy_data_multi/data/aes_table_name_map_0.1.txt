@@ -20154,3 +20154,7 @@ customer_C_CUSTKEY:table_osgm6q
 customer_C_CUSTKEY:table_fju5wz
 customer_C_CUSTKEY:table_8cnt20
 
+Scale:0.1 s
+k:32 s
+table:orders_O_CUSTKEY
+origin_sum:150000
