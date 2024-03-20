@@ -1,0 +1,8 @@
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.07
+Row:419866
+Execution time:12.6184 s
+Decrypt time:375.332 s

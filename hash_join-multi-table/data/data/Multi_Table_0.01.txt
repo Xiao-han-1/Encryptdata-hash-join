@@ -1,0 +1,46 @@
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Row:60175line
+Row:0
+Execution time:16.8164 s
+Decrypt time:12.1052 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Row:60175line
+Row:0
+Execution time:16.7349 s
+Decrypt time:12.0951 s
+AVG Decrypt time:12.1001 s
+AVG Execution time:16.7757 s
+AVG Decrypt time:3.54072 s
+AVG Execution time:0.609193 s
+AVG Decrypt time:3.46177 s
+AVG Execution time:0.579385 s
+AVG Decrypt time:3.52563 s
+AVG Execution time:0.601978 s
+AVG Decrypt time:12.6681 s
+AVG Execution time:2.89813 s
+AVG Decrypt time:12.0789 s
+AVG Execution time:9.00962 s
+AVG Decrypt time:12.049 s
+AVG Execution time:4.65335 s
+AVG Decrypt time:12.1731 s
+AVG Execution time:2.58879 s
+AVG Decrypt time:12.2194 s
+AVG Execution time:1.7662 s
+AVG Decrypt time:13.7292 s
+AVG Execution time:1.31074 s
+AVG Decrypt time:30.0627 s
+AVG Execution time:1.75743 s
+AVG Decrypt time:12.03 s
+AVG Execution time:9.03413 s
+AVG Decrypt time:12.0427 s
+AVG Execution time:4.68116 s
+AVG Decrypt time:12.19 s
+AVG Execution time:2.63278 s
+AVG Decrypt time:12.3846 s
+AVG Execution time:1.78217 s
+AVG Decrypt time:13.8193 s
+AVG Execution time:1.31523 s
+AVG Decrypt time:31.109 s
+AVG Execution time:2.09951 s

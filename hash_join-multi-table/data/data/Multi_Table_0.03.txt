@@ -1,0 +1,26 @@
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Row:180566line
+Row:0
+Execution time:52.4655 s
+Decrypt time:36.8059 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Row:180566line
+Row:0
+Execution time:52.3942 s
+Decrypt time:36.7971 s
+AVG Decrypt time:36.8015 s
+AVG Execution time:52.4298 s
+AVG Decrypt time:37.3314 s
+AVG Execution time:27.4255 s
+AVG Decrypt time:37.4767 s
+AVG Execution time:15.9772 s
+AVG Decrypt time:37.8189 s
+AVG Execution time:8.30659 s
+AVG Decrypt time:38.7045 s
+AVG Execution time:5.93628 s
+AVG Decrypt time:44.9506 s
+AVG Execution time:3.72068 s
+AVG Decrypt time:111.393 s
+AVG Execution time:5.49448 s

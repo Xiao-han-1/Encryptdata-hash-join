@@ -1,0 +1,46 @@
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.02
+Row:120515
+Execution time:9.56997 s
+Decrypt time:24.5775 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.02
+Row:120515
+Execution time:9.61422 s
+Decrypt time:24.7102 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.02
+Row:120515
+Execution time:9.66156 s
+Decrypt time:24.6917 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.02
+Row:120515
+Execution time:9.52105 s
+Decrypt time:24.8697 s
+Query:
+SELECT * FROM lineitem,supplier,nation  WHERE   lineitem.L_SUPPKEY = supplier.S_SUPPKEY AND supplier.S_NATIONKEY = nation.N_NATIONKEY;
+Scale:0.02
+Row:120515
+Execution time:9.72522 s
+Decrypt time:24.8957 s
+AVG Decrypt time:24.8191 s
+AVG Execution time:9.63594 s
+Query:
+SELECT * FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY;
+Scale:0.02
+Row:30000
+Execution time:0.906929 s
+Decrypt time:3.04128 s
+Query:
+SELECT * FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY;
+Scale:0.02
+Row:30000
+Execution time:0.912993 s
+Decrypt time:3.04161 s
+AVG Decrypt time:3.04145 s
+AVG Execution time:0.909961 s

@@ -1,0 +1,10 @@
+zipf:0
+Scale:0.1
+k:1
+table:orders_O_CUSTKEY
+origin_sum:150000
+zipf:0
+Scale:0.1
+k:1
+table:orders_O_CUSTKEY
+origin_sum:150000

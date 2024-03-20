@@ -12,7 +12,7 @@ BINDIR = bin
 SOURCES = $(wildcard *.cpp)
 HEADERS = $(wildcard *.hh)
 OBJECTS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SOURCES))
-Target = Copy_data_zipf
+Target = Copy_data_zipf_v1
 
 .PHONY: all clean
 

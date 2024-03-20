@@ -1,0 +1,30 @@
+
+
+Scale:0.1
+k:1 s
+table:customer_C_CUSTKEY
+origin_sum:15000
+
+sum:0
+Cipher : 
+Total storage space used by strings: 2.18498 MB
+Total_size:12.9685 mb
+Encrypt Execution time:2.7941 s
+C_ACCTBAL:C_ACCTBAL
+
+C_ADDRESS:C_ADDRESS
+
+C_COMMENT:C_COMMENT
+
+C_CUSTKEY:C_CUSTKEY
+
+C_MKTSEGMENT:C_MKTSEGMENT
+
+C_NAME:C_NAME
+
+C_NATIONKEY:C_NATIONKEY
+
+C_PHONE:C_PHONE
+
+customer_C_CUSTKEY:table_9rpwlu
+

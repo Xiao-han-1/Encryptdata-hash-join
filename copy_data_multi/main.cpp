@@ -42,7 +42,7 @@ void Aes_Mapping_name_k(Table* table,vector<Enc_Table*> Aes_Table,string scale,i
        table_name_map[table->name[j]].push_back(t->name[j]);
     }
   }
-    std::ofstream outfile("data/k/k_"+to_string(k)+"aes_table_name_map_.txt", std::ios::app);
+    std::ofstream outfile("data/k/"+scale+"/k_"+to_string(k)+"_aes_table_name_map_.txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
     }
@@ -56,7 +56,7 @@ void Aes_Mapping_name_k(Table* table,vector<Enc_Table*> Aes_Table,string scale,i
     }
     outfile.close();
 }
-void Aes_Mapping_name_zipf(Table* table,vector<Enc_Table*> Aes_Table,string scale,string zipf)
+void Aes_Mapping_name_zipf(Table* table,vector<Enc_Table*> Aes_Table,string scale,string zipf,int k)
 {
   map<string,vector<string>>table_name_map;
   int len=Aes_Table.size();
@@ -69,7 +69,7 @@ void Aes_Mapping_name_zipf(Table* table,vector<Enc_Table*> Aes_Table,string scal
        table_name_map[table->name[j]].push_back(t->name[j]);
     }
   }
-  std::ofstream outfile("data/zipf/zipf_"+zipf+"_aes_table_name_map_.txt", std::ios::app);
+  std::ofstream outfile("data/zipf/"+scale+"/zipf_"+zipf+"_aes_table_name_map_"+to_string(k)+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
     }
@@ -83,7 +83,7 @@ void Aes_Mapping_name_zipf(Table* table,vector<Enc_Table*> Aes_Table,string scal
     }
     outfile.close();
 }
-void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table,string scale,int k)
+void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table,string scale)
 {
   map<string,vector<string>>table_name_map;
   int len=Aes_Table.size();
@@ -96,7 +96,7 @@ void Aes_Mapping_name(Table* table,vector<Enc_Table*> Aes_Table,string scale,int
        table_name_map[table->name[j]].push_back(t->name[j]);
     }
   }
-    std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
+     std::ofstream outfile("data/multi/aes_table_name_map_"+scale+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Error: Unable to open file for writing." << std::endl;
     }
@@ -147,7 +147,7 @@ Table* store_data_zipf(string scale,string table_name,int col_id,string  zipf)
     table->table_name="orders";
     vector<string>name{"O_ORDERKEY", "O_CUSTKEY","O_ORDERSTATUS","O_TOTALPRICE" ,"O_ORDERDATE"  ,"O_ORDERPRIORITY","O_CLERK","O_SHIPPRIORITY","O_COMMENT"};
     vector<string>type{"string","string","string","string","string","string","string","string","string"};
-    filename = "../TEST/tpch-dbgen-"+scale+"/orders_"+zipf+".tbl";
+    filename = "../TEST/tpch-dbgen-"+scale+"/zipf/orders_"+zipf+".tbl";
     table->Join_col_id=col_id;
     table->table_name=table->table_name+"_"+name[table->Join_col_id];
     cout<<table->table_name<<endl;
@@ -376,7 +376,7 @@ Table* store_data(string scale,string table_name,int col_id)
   return table;
 
 }
-void experiment(string scale,string table_name,int col_id,int num)
+void experiment(string scale,string table_name,int col_id)
 {
    int sum=0;
     double Total_size=0;
@@ -387,7 +387,7 @@ void experiment(string scale,string table_name,int col_id,int num)
     vector<string>Columns;
     Table* table=store_data(scale,table_name,col_id);
     int id=table->Join_col_id;
-    std::ofstream outfile("data/aes_table_name_map_"+scale+".txt", std::ios::app);
+    std::ofstream outfile("data/multi/aes_table_name_map_"+scale+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
@@ -430,7 +430,7 @@ void experiment(string scale,string table_name,int col_id,int num)
     std::cout << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
     std::cout << "Total_size:" << Total_size << " mb" << std::endl;
     std::cout << "Encrypt Execution time:" << elapsed.count() << " s" << std::endl;
-    std::ofstream out_file("data/aes_table_name_map_"+scale+".txt", std::ios::app);
+    std::ofstream out_file("data/multi/aes_table_name_map_"+scale+".txt", std::ios::app);
 
     if (!out_file.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
@@ -443,7 +443,7 @@ void experiment(string scale,string table_name,int col_id,int num)
     out_file << "Encrypt Execution time:"<< elapsed.count()<< " s" << std::endl;
     out_file.close();
     unordered_map<string,vector<string>> table_name_map;
-    Aes_Mapping_name(table,Aes_Table,scale,k);
+    Aes_Mapping_name(table,Aes_Table,scale);
     delete de;
     delete et; 
     delete ae;
@@ -465,7 +465,8 @@ void experiment(string scale,string table_name,int col_id,int num)
 }
 void experiment_k(string scale,string table_name,int col_id,int k_num)
 {
-    int k=1<<k_num;
+   int k=32*k_num;
+    // int k=1<<k_num;
     int sum=0;
     double Total_size=0;
     double Cipher_Total_size=0;
@@ -474,7 +475,7 @@ void experiment_k(string scale,string table_name,int col_id,int k_num)
     vector<string>Columns;
     Table* table=store_data(scale,table_name,col_id);
     int id=table->Join_col_id;
-    std::ofstream outfile("data/k/k_"+to_string(k)+"aes_table_name_map_.txt", std::ios::app);
+     std::ofstream outfile("data/k/"+scale+"/k_"+to_string(k)+"_aes_table_name_map_.txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
@@ -501,15 +502,15 @@ void experiment_k(string scale,string table_name,int col_id,int k_num)
     vector<Enc_Table*> Aes_Table=ae->Encrypt_child_table(child_table,scale,Total_size);
     vector<Enc_Table*> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns,scale,Total_size);
     auto end = std::chrono::high_resolution_clock::now();
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
-    } 
+    // for(int i=0;i<Aes_Table.size();i++)
+    // {
+    //   p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
+    // } 
 
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
-    }
+    // for(int i=0;i<Aes_Table.size();i++)
+    // {
+    //   p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
+    // }
 
 
     std::chrono::duration<double> elapsed = end - start;
@@ -519,15 +520,16 @@ void experiment_k(string scale,string table_name,int col_id,int k_num)
     std::cout << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
     std::cout << "Total_size:" << Total_size << " mb" << std::endl;
     std::cout << "Encrypt Execution time:" << elapsed.count() << " s" << std::endl;
-    std::ofstream out_file("data/k/k_"+to_string(k)+"aes_table_name_map_.txt", std::ios::app);
+    std::ofstream out_file("data/k/"+scale+"/k_"+to_string(k)+"_aes_table_name_map_.txt", std::ios::app);
 
     if (!out_file.is_open()) {
-        std::cerr << "Failed to open file."<< std::endl;
+        std::cerr << "\
+        "<< std::endl;
     }
-    outfile << endl;
-    outfile << "sum:"<< sum<< std::endl;
-    outfile << "Cipher : "<< std::endl;
-    outfile << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
+    out_file << endl;
+    out_file << "sum:"<< sum<< std::endl;
+    out_file << "Cipher : "<< std::endl;
+    out_file << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
     out_file << "Total_size:" << Total_size << " mb" << std::endl;
     out_file << "Encrypt Execution time:"<< elapsed.count()<< " s" << std::endl;
     out_file.close();
@@ -554,7 +556,9 @@ void experiment_k(string scale,string table_name,int col_id,int k_num)
 }
 void experiment_zipf(string scale,string table_name,int col_id,string zipf)
 {
-    int k=1024;
+    // int k=stoi(zipf);
+    int k=32;
+    // k=max(1,k*128);
     int sum=0;
     double Total_size=0;
     double Cipher_Total_size=0;
@@ -564,7 +568,7 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
     vector<string>Columns;
     Table* table=store_data_zipf(scale,table_name,col_id,zipf);
     int id=table->Join_col_id;
-    std::ofstream outfile("data/zipf/zipf_"+zipf+"_aes_table_name_map_.txt", std::ios::app);
+    std::ofstream outfile("data/zipf/"+scale+"/zipf_"+zipf+"_aes_table_name_map_"+to_string(k)+".txt", std::ios::app);
     if (!outfile.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
@@ -591,15 +595,15 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
     vector<Enc_Table*> Aes_Table=ae->Encrypt_child_table(child_table,scale,Total_size);
     vector<Enc_Table*> Hash_child_table=ht->GetHash_table(child_table,Aes_Table,Columns,scale,Total_size);
     auto end = std::chrono::high_resolution_clock::now();
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
-    } 
+    // for(int i=0;i<Aes_Table.size();i++)
+    // {
+    //   p->aes_copy_database(Aes_Table[i],child_table[i]->table_name);
+    // } 
 
-    for(int i=0;i<Aes_Table.size();i++)
-    {
-      p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
-    }
+    // for(int i=0;i<Aes_Table.size();i++)
+    // {
+    //   p->hash_copy_database(Hash_child_table[i],child_table[i]->table_name);
+    // }
 
 
     std::chrono::duration<double> elapsed = end - start;
@@ -609,20 +613,20 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
     std::cout << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
     std::cout << "Total_size:" << Total_size << " mb" << std::endl;
     std::cout << "Encrypt Execution time:" << elapsed.count() << " s" << std::endl;
-    std::ofstream out_file("data/zipf/zipf_"+zipf+"_aes_table_name_map_.txt", std::ios::app);
+    std::ofstream out_file("data/zipf/"+scale+"/zipf_"+zipf+"_aes_table_name_map_"+to_string(k)+".txt", std::ios::app);
 
     if (!out_file.is_open()) {
         std::cerr << "Failed to open file."<< std::endl;
     }
     out_file<<endl;
-    outfile << "sum:"<< sum<< std::endl;
-    outfile << "Cipher : "<< std::endl;
-    outfile << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
+    out_file << "sum:"<< sum<< std::endl;
+    out_file << "Cipher : "<< std::endl;
+    out_file << "Total storage space used by strings: "<< Cipher_Total_size << " MB"<< std::endl;
     out_file << "Total_size:" << Total_size << " mb" << std::endl;
     out_file << "Encrypt Execution time:"<< elapsed.count()<< " s" << std::endl;
     out_file.close();
     unordered_map<string,vector<string>> table_name_map;
-    Aes_Mapping_name_zipf(table,Aes_Table,scale,zipf);
+    Aes_Mapping_name_zipf(table,Aes_Table,scale,zipf,k);
     delete de;
     delete et; 
     delete ae;
@@ -644,84 +648,146 @@ void experiment_zipf(string scale,string table_name,int col_id,string zipf)
 }
 int experiment_time()
 {
-   experiment("0.01","orders",1,1);
-   experiment("0.01","customer",0,1);
-   experiment("0.02","orders",1,2);
-   experiment("0.02","customer",0,2);
-   experiment("0.03","orders",1,3);
-   experiment("0.03","customer",0,3);
-   experiment("0.04","orders",1,4);
-   experiment("0.04","customer",0,4);
-   experiment("0.05","orders",1,5);
-   experiment("0.05","customer",0,5);
-   experiment("0.06","orders",1,6);
-   experiment("0.06","customer",0,6);
-   experiment("0.07","orders",1,7);
-   experiment("0.07","customer",0,7);
-   experiment("0.08","orders",1,8);
-   experiment("0.08","customer",0,8);
-   experiment("0.09","orders",1,9);
-   experiment("0.09","customer",0,9);
-   experiment("0.1","orders",1,10);
-   experiment("0.1","customer",0,10);
+  //  experiment("0.01","orders",1);
+  //  experiment("0.01","customer",0);
+  //  experiment("0.02","orders",1);
+  //  experiment("0.02","customer",0);
+  //  experiment("0.03","orders",1);
+  //  experiment("0.03","customer",0);
+  //  experiment("0.04","orders",1);
+  //  experiment("0.04","customer",0);
+  //  experiment("0.05","orders",1);
+  //  experiment("0.05","customer",0);
+  //  experiment("0.06","orders",1);
+  //  experiment("0.06","customer",0);
+  //  experiment("0.07","orders",1);
+  //  experiment("0.07","customer",0);
+  //  experiment("0.08","orders",1);
+  //  experiment("0.08","customer",0);
+  //  experiment("0.09","orders",1);
+  //  experiment("0.09","customer",0);
+   experiment("0.1","orders",1);
+   experiment("0.1","customer",0);
+   return 0;
+   
+}
+int experiment_multi(string scale)
+{
+  //  experiment("0.01","orders",1,1);
+  //  experiment("0.01","customer",0,1);
+  //  experiment("0.02","orders",1,2);
+  //  experiment("0.02","customer",0,2);
+  //  experiment("0.03","orders",1,3);
+  //  experiment("0.03","customer",0,3);
+  //  experiment("0.04","orders",1,4);
+  //  experiment("0.04","customer",0,4);
+  //  experiment("0.05","orders",1,5);
+  //  experiment("0.05","customer",0,5);
+  //  experiment("0.06","orders",1,6);
+  //  experiment("0.06","customer",0,6);
+  //  experiment("0.07","orders",1,7);
+  //  experiment("0.07","customer",0,7);
+  //  experiment("0.08","orders",1,8);
+  //  experiment("0.08","customer",0,8);
+  //  experiment("0.09","orders",1,9);
+  //  experiment("0.09","customer",0,9);
+   experiment(scale,"orders",1);
+   experiment(scale,"customer",0);
+   experiment(scale,"lineitem",2);
+   experiment(scale,"supplier",0);
+   experiment(scale,"supplier",3);
+   experiment(scale,"nation",0);
    return 0;
    
 }
 
-int experiment_K()
+int experiment_K(string scale)
 {
    experiment_k("0.1","orders",1,1);
    experiment_k("0.1","customer",0,1);
-   experiment_k("0.1","orders",1,2);
-   experiment_k("0.1","customer",0,2);
-   experiment_k("0.1","orders",1,3);
-   experiment_k("0.1","customer",0,3);
-   experiment_k("0.1","orders",1,4);
-   experiment_k("0.1","customer",0,4);
-   experiment_k("0.1","orders",1,5);
-   experiment_k("0.1","customer",0,5);
-   experiment_k("0.1","orders",1,6);
-   experiment_k("0.1","customer",0,6);
-   experiment_k("0.1","orders",1,7);
-   experiment_k("0.1","customer",0,7);
-   experiment_k("0.1","orders",1,8);
-   experiment_k("0.1","customer",0,8);
-   experiment_k("0.1","orders",1,9);
-   experiment_k("0.1","customer",0,9);
-   experiment_k("0.1","orders",1,10);
-   experiment_k("0.1","customer",0,10);
+   experiment_k("0.2","orders",1,2);
+   experiment_k("0.2","customer",0,2);
+   experiment_k("0.3","orders",1,3);
+   experiment_k("0.3","customer",0,3);
+   experiment_k("0.4","orders",1,4);
+   experiment_k("0.4","customer",0,4);
+   experiment_k("0.5","orders",1,5);
+   experiment_k("0.5","customer",0,5);
+   experiment_k("0.6","orders",1,6);
+   experiment_k("0.6","customer",0,6);
+   experiment_k("0.7","orders",1,7);
+   experiment_k("0.7","customer",0,7);
+   experiment_k("0.8","orders",1,8);
+   experiment_k("0.8","customer",0,8);
+   experiment_k("0.9","orders",1,9);
+   experiment_k("0.9","customer",0,9);
+   experiment_k("1.0","orders",1,10);
+   experiment_k("1.0","customer",0,10);
    return 0;
 }
-int experiment_Zipf()
+int experiment_customer(string scale)
 {
 
-   experiment_zipf("0.1","orders",1,"1");
-   experiment_zipf("0.1","customer",0,"1");
-   experiment_zipf("0.1","orders",1,"2");
-   experiment_zipf("0.1","customer",0,"2");
-   experiment_zipf("0.1","orders",1,"3");
-   experiment_zipf("0.1","customer",0,"3");
-   experiment_zipf("0.1","orders",1,"4");
-   experiment_zipf("0.1","customer",0,"4");
-   experiment_zipf("0.1","orders",1,"5");
-   experiment_zipf("0.1","customer",0,"5");
-   experiment_zipf("0.1","orders",1,"6");
-   experiment_zipf("0.1","customer",0,"6");
-   experiment_zipf("0.1","orders",1,"7");
-   experiment_zipf("0.1","customer",0,"7");
-   experiment_zipf("0.1","orders",1,"8");
-   experiment_zipf("0.1","customer",0,"8");
-   experiment_zipf("0.1","orders",1,"9");
-   experiment_zipf("0.1","customer",0,"9");
-   experiment_zipf("0.1","orders",1,"10");
-   experiment_zipf("0.1","customer",0,"10");
+   experiment_k("0.1","customer",0,1);
+   experiment_k("0.2","customer",0,1);
+   experiment_k("0.3","customer",0,1);
+   experiment_k("0.4","customer",0,1);
+   experiment_k("0.5","customer",0,1);
+   experiment_k("0.6","customer",0,1);
+   experiment_k("0.7","customer",0,1);
+   experiment_k("0.8","customer",0,1);
+   experiment_k("0.9","customer",0,1);
+   experiment_k("1.0","customer",0,1);
+
    return 0;
+}
+int experiment_Zipf(string scale)
+{
+  //  experiment_zipf(scale,"orders",1,"0");
+  //  experiment_zipf(scale,"customer",0,"0");
+   experiment_zipf(scale,"orders",1,"1");
+   experiment_zipf(scale,"customer",0,"1");
+   experiment_zipf(scale,"orders",1,"2");
+   experiment_zipf(scale,"customer",0,"2");
+   experiment_zipf(scale,"orders",1,"3");
+   experiment_zipf(scale,"customer",0,"3");
+   experiment_zipf(scale,"orders",1,"4");
+   experiment_zipf(scale,"customer",0,"4");
+   experiment_zipf(scale,"orders",1,"5");
+   experiment_zipf(scale,"customer",0,"5");
+   experiment_zipf(scale,"orders",1,"6");
+   experiment_zipf(scale,"customer",0,"6");
+   experiment_zipf(scale,"orders",1,"7");
+   experiment_zipf(scale,"customer",0,"7");
+   experiment_zipf(scale,"orders",1,"8");
+   experiment_zipf(scale,"customer",0,"8");
+   experiment_zipf(scale,"orders",1,"9");
+   experiment_zipf(scale,"customer",0,"9");
+   experiment_zipf(scale,"orders",1,"10");
+   experiment_zipf(scale,"customer",0,"10");
+   return 0;
+}
+int experiment_Multi()
+{
+  // experiment_K();
+  // experiment_multi("0.01");
+  // experiment_multi("0.02");
+  // experiment_multi("0.03");
+  // experiment_multi("0.04");
+  // experiment_multi("0.05");
+  // experiment_multi("0.06");
+  // experiment_multi("0.07");
+  // experiment_multi("0.08");
+  // experiment_multi("0.09");
+  experiment_multi("0.1");
+
+  return 0;
 }
 int main()
 {
-  // experiment_K();
-  int k;
+    int k;
   cin>>k;
-  experiment_Zipf();
+  experiment_Zipf("0.1");
   return 0;
+
 }

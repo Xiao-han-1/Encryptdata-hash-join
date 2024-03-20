@@ -1,0 +1,101 @@
+zipf:1
+Scale:0.01
+k:2
+table:orders_O_CUSTKEY
+origin_sum:15000
+
+sum:18886
+Cipher : 
+Total storage space used by strings: 2.36096 MB
+Total_size:26.1365 mb
+Encrypt Execution time:6.50719 s
+O_CLERK:O_CLERK
+O_CLERK:O_CLERK
+
+O_COMMENT:O_COMMENT
+O_COMMENT:O_COMMENT
+
+O_CUSTKEY:O_CUSTKEY
+O_CUSTKEY:O_CUSTKEY
+
+O_ORDERDATE:O_ORDERDATE
+O_ORDERDATE:O_ORDERDATE
+
+O_ORDERKEY:O_ORDERKEY
+O_ORDERKEY:O_ORDERKEY
+
+O_ORDERPRIORITY:O_ORDERPRIORITY
+O_ORDERPRIORITY:O_ORDERPRIORITY
+
+O_ORDERSTATUS:O_ORDERSTATUS
+O_ORDERSTATUS:O_ORDERSTATUS
+
+O_SHIPPRIORITY:O_SHIPPRIORITY
+O_SHIPPRIORITY:O_SHIPPRIORITY
+
+O_TOTALPRICE:O_TOTALPRICE
+O_TOTALPRICE:O_TOTALPRICE
+
+orders_O_CUSTKEY:table_xnc5vf
+orders_O_CUSTKEY:table_6x07kl
+
+zipf:1
+Scale:0.01
+k:2
+table:customer_C_CUSTKEY
+origin_sum:1500
+
+sum:0
+Cipher : 
+Total storage space used by strings: 0.216951 MB
+Total_size:1.29516 mb
+Encrypt Execution time:0.276133 s
+C_ACCTBAL:C_ACCTBAL
+C_ACCTBAL:C_ACCTBAL
+
+C_ADDRESS:C_ADDRESS
+C_ADDRESS:C_ADDRESS
+
+C_COMMENT:C_COMMENT
+C_COMMENT:C_COMMENT
+
+C_CUSTKEY:C_CUSTKEY
+C_CUSTKEY:C_CUSTKEY
+
+C_MKTSEGMENT:C_MKTSEGMENT
+C_MKTSEGMENT:C_MKTSEGMENT
+
+C_NAME:C_NAME
+C_NAME:C_NAME
+
+C_NATIONKEY:C_NATIONKEY
+C_NATIONKEY:C_NATIONKEY
+
+C_PHONE:C_PHONE
+C_PHONE:C_PHONE
+
+customer_C_CUSTKEY:table_fx0n0o
+customer_C_CUSTKEY:table_2btmqo
+
+zipf:1
+Scale:0.1
+k:64
+table:orders_O_CUSTKEY
+origin_sum:150000
+
+sum:135502
+Cipher : 
+Total storage space used by strings: 21.419 MB
+Total_size:222.319 mb
+Encrypt Execution time:58.326 s
+zipf:1
+Scale:0.1
+k:64
+table:customer_C_CUSTKEY
+origin_sum:15000
+
+sum:0
+Cipher : 
+Total storage space used by strings: 2.18498 MB
+Total_size:12.9685 mb
+Encrypt Execution time:2.90679 s

@@ -1,0 +1,14 @@
+Query:
+SELECT * FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY;
+Scale:0.05
+Row:75000line
+Execution time:55.9648 s
+Decrypt time:48.5004 s
+Query:
+SELECT * FROM orders,customer WHERE orders.O_CUSTKEY = customer.C_CUSTKEY;
+Scale:0.05
+Row:75000line
+Execution time:55.3988 s
+Decrypt time:48.5584 s
+AVG Decrypt time:48.5294 s
+AVG Execution time:55.6818 s
